@@ -8,4 +8,8 @@
 
 import Foundation
 
-// TODO: ? - build out task + convenience
+extension Task {
+    
+    // TODO: ? - build out task + convenience
+    
+}

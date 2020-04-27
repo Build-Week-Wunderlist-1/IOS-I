@@ -8,4 +8,8 @@
 
 import Foundation
 
-// TODO: Mark - implement coredata stack
+class CoreDataStack {
+ 
+    // TODO: Mark - implement coredata stack
+    
+}

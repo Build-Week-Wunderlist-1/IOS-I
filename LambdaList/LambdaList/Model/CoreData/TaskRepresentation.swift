@@ -8,4 +8,8 @@
 
 import Foundation
 
-// TODO: Mark - implement task representation
+struct TaskRepresentation: Equatable, Codable {
+    
+    // TODO: Mark - implement task representation
+    
+}

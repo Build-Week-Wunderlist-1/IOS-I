@@ -8,6 +8,8 @@
 
 import Foundation
 
-// TODO: ? - create model controller class
-
-// TODO: ? - what methods go here?
+class TaskModelController {
+ 
+    // TODO: ? - what methods go here?
+    
+}

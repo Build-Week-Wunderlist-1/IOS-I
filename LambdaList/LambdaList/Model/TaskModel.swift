@@ -8,6 +8,8 @@
 
 import Foundation
 
-// TODO: ? - create model
-
-// TODO: Mark - implement coredata xcdatamodeld
+struct Task {
+ 
+    // TODO: Mark - implement coredata xcdatamodeld
+    
+}
