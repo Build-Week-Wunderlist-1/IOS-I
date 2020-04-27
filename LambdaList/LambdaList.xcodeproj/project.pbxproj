@@ -13,7 +13,6 @@
 		1DFA43EC24578ACE002128F1 /* IncompleteTasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43EB24578ACE002128F1 /* IncompleteTasksTableViewController.swift */; };
 		1DFA43EE24578B32002128F1 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43ED24578B32002128F1 /* TaskDetailViewController.swift */; };
 		1DFA43F024578B80002128F1 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43EF24578B80002128F1 /* AddTaskViewController.swift */; };
-		1DFA43F224578BAC002128F1 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43F124578BAC002128F1 /* TaskModel.swift */; };
 		1DFA43F624579163002128F1 /* Task.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43F424579163002128F1 /* Task.xcdatamodeld */; };
 		1DFA43F82457918A002128F1 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43F72457918A002128F1 /* CoreDataStack.swift */; };
 		1DFA43FA245791C2002128F1 /* TaskRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43F9245791C2002128F1 /* TaskRepresentation.swift */; };
@@ -33,7 +32,6 @@
 		1DFA43EB24578ACE002128F1 /* IncompleteTasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncompleteTasksTableViewController.swift; sourceTree = "<group>"; };
 		1DFA43ED24578B32002128F1 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		1DFA43EF24578B80002128F1 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
-		1DFA43F124578BAC002128F1 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		1DFA43F524579163002128F1 /* Tasks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tasks.xcdatamodel; sourceTree = "<group>"; };
 		1DFA43F72457918A002128F1 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		1DFA43F9245791C2002128F1 /* TaskRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepresentation.swift; sourceTree = "<group>"; };
@@ -103,7 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				1DFA43FD245792CC002128F1 /* TaskModelController.swift */,
-				1DFA43F124578BAC002128F1 /* TaskModel.swift */,
 				1DFA43F324578C00002128F1 /* CoreData */,
 			);
 			path = Model;
@@ -223,7 +220,6 @@
 				1DFA43F024578B80002128F1 /* AddTaskViewController.swift in Sources */,
 				1DFA43F624579163002128F1 /* Task.xcdatamodeld in Sources */,
 				1DFA43EC24578ACE002128F1 /* IncompleteTasksTableViewController.swift in Sources */,
-				1DFA43F224578BAC002128F1 /* TaskModel.swift in Sources */,
 				1DFA43E824578A39002128F1 /* CompleteTasksTableViewCell.swift in Sources */,
 				1DFA43FE245792CD002128F1 /* TaskModelController.swift in Sources */,
 				1DFA43F82457918A002128F1 /* CoreDataStack.swift in Sources */,
