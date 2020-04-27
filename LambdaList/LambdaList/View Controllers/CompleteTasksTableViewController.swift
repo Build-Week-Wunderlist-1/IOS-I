@@ -22,12 +22,14 @@ class CompleteTasksTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // TODO: ? - number of sections
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // TODO: ? - number of rows
+        return 0
     }
-
+/*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: <#add identifier here#>, for: indexPath)
         // TODO: ? - add identifier above ^
@@ -36,7 +38,7 @@ class CompleteTasksTableViewController: UITableViewController {
 
         return cell
     }
-
+*/
 //    // Override to support editing the table view.
 //    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 //        if editingStyle == .delete {
