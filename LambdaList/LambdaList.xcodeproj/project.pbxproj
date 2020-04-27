@@ -17,7 +17,7 @@
 		1DFA43F82457918A002128F1 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43F72457918A002128F1 /* CoreDataStack.swift */; };
 		1DFA43FA245791C2002128F1 /* TaskRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43F9245791C2002128F1 /* TaskRepresentation.swift */; };
 		1DFA43FC2457922B002128F1 /* Task+convience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43FB2457922B002128F1 /* Task+convience.swift */; };
-		1DFA43FE245792CD002128F1 /* TaskModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43FD245792CC002128F1 /* TaskModelController.swift */; };
+		1DFA43FE245792CD002128F1 /* TaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43FD245792CC002128F1 /* TaskController.swift */; };
 		DD553F8B24575A3100FEA663 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD553F8A24575A3100FEA663 /* AppDelegate.swift */; };
 		DD553F8D24575A3100FEA663 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD553F8C24575A3100FEA663 /* SceneDelegate.swift */; };
 		DD553F9224575A3100FEA663 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD553F9024575A3100FEA663 /* Main.storyboard */; };
@@ -36,7 +36,7 @@
 		1DFA43F72457918A002128F1 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		1DFA43F9245791C2002128F1 /* TaskRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepresentation.swift; sourceTree = "<group>"; };
 		1DFA43FB2457922B002128F1 /* Task+convience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+convience.swift"; sourceTree = "<group>"; };
-		1DFA43FD245792CC002128F1 /* TaskModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModelController.swift; sourceTree = "<group>"; };
+		1DFA43FD245792CC002128F1 /* TaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskController.swift; sourceTree = "<group>"; };
 		DD553F8724575A3100FEA663 /* LambdaList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LambdaList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD553F8A24575A3100FEA663 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD553F8C24575A3100FEA663 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 		1DFA43E42457887B002128F1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1DFA43FD245792CC002128F1 /* TaskModelController.swift */,
+				1DFA43FD245792CC002128F1 /* TaskController.swift */,
 				1DFA43F324578C00002128F1 /* CoreData */,
 			);
 			path = Model;
@@ -221,7 +221,7 @@
 				1DFA43F624579163002128F1 /* Task.xcdatamodeld in Sources */,
 				1DFA43EC24578ACE002128F1 /* IncompleteTasksTableViewController.swift in Sources */,
 				1DFA43E824578A39002128F1 /* CompleteTasksTableViewCell.swift in Sources */,
-				1DFA43FE245792CD002128F1 /* TaskModelController.swift in Sources */,
+				1DFA43FE245792CD002128F1 /* TaskController.swift in Sources */,
 				1DFA43F82457918A002128F1 /* CoreDataStack.swift in Sources */,
 				DD553F8B24575A3100FEA663 /* AppDelegate.swift in Sources */,
 				1DFA43E624578A00002128F1 /* IncompleteTasksTableViewCell.swift in Sources */,
