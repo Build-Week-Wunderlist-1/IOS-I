@@ -23,6 +23,7 @@
 		DD553F9224575A3100FEA663 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD553F9024575A3100FEA663 /* Main.storyboard */; };
 		DD553F9424575A3300FEA663 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD553F9324575A3300FEA663 /* Assets.xcassets */; };
 		DD553F9724575A3300FEA663 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD553F9524575A3300FEA663 /* LaunchScreen.storyboard */; };
+		DD553FA62457AAF700FEA663 /* LoginScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD553FA52457AAF700FEA663 /* LoginScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		DD553F9324575A3300FEA663 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD553F9624575A3300FEA663 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD553F9824575A3300FEA663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD553FA52457AAF700FEA663 /* LoginScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LoginScreen.storyboard; path = ../../../../../../../Desktop/LoginScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 		1DFA43E22457883C002128F1 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				DD553FA52457AAF700FEA663 /* LoginScreen.storyboard */,
 				DD553F9024575A3100FEA663 /* Main.storyboard */,
 				DD553F9524575A3300FEA663 /* LaunchScreen.storyboard */,
 			);
@@ -205,6 +208,7 @@
 			files = (
 				DD553F9724575A3300FEA663 /* LaunchScreen.storyboard in Resources */,
 				DD553F9424575A3300FEA663 /* Assets.xcassets in Resources */,
+				DD553FA62457AAF700FEA663 /* LoginScreen.storyboard in Resources */,
 				DD553F9224575A3100FEA663 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
