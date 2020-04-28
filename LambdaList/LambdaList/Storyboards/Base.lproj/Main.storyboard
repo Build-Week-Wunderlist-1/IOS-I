@@ -28,7 +28,7 @@
         <!--Lambda List-->
         <scene sceneID="xR7-Qo-IKY">
             <objects>
-                <tableViewController id="51U-QP-nW9" sceneMemberID="viewController">
+                <tableViewController id="51U-QP-nW9" customClass="IncompleteTasksTableViewController" customModule="LambdaList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GyX-qO-Lm6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -46,7 +46,7 @@
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" rowHeight="80" id="zKX-oe-tB7">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" rowHeight="80" id="zKX-oe-tB7" customClass="IncompleteTasksTableViewCell" customModule="LambdaList" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="414" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zKX-oe-tB7" id="j79-cD-9kC">
@@ -70,6 +70,8 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="descriptionLabel" destination="a4c-Gw-A92" id="w5P-YB-Kft"/>
+                                    <outlet property="titleLabel" destination="TPQ-EP-gYI" id="6OL-XQ-1c4"/>
                                     <segue destination="JqU-NH-AG1" kind="show" id="OMN-pc-JJ6"/>
                                 </connections>
                             </tableViewCell>
@@ -83,12 +85,20 @@
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="BeT-y5-EPk">
                                 <connections>
+                                    <action selector="addTaskButtonPressed:" destination="51U-QP-nW9" id="gha-XH-Y1b"/>
                                     <segue destination="22V-2Z-dNC" kind="presentation" id="qKa-PU-34U"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Item" image="arrow.down" catalog="system" id="wvQ-dm-TIh"/>
+                            <barButtonItem title="Item" image="arrow.down" catalog="system" id="wvQ-dm-TIh">
+                                <connections>
+                                    <action selector="sortButtonPressed:" destination="51U-QP-nW9" id="8I5-w9-w1e"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchBar" destination="mvI-5P-bP0" id="EtV-Qn-nkY"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fYY-zL-s9t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -97,7 +107,7 @@
         <!--Show Details-->
         <scene sceneID="8dp-Jo-rav">
             <objects>
-                <viewController id="JqU-NH-AG1" sceneMemberID="viewController">
+                <viewController id="JqU-NH-AG1" customClass="TaskDetailViewController" customModule="LambdaList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S46-l8-wbh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -153,6 +163,13 @@
                     <navigationItem key="navigationItem" title="Show Details" id="WVB-r1-TPI">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="UFP-sG-SHS"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="dateLabel" destination="69M-Xe-PmC" id="8Ug-A4-xRH"/>
+                        <outlet property="descriptionTextView" destination="tRZ-6c-XKZ" id="J9c-Qf-VnV"/>
+                        <outlet property="editButtonPressed" destination="UFP-sG-SHS" id="j41-vT-yTS"/>
+                        <outlet property="taskStatusLabel" destination="tC0-hf-Aam" id="kmS-ZS-QRl"/>
+                        <outlet property="titleTextField" destination="tYR-tJ-iuC" id="c3r-vE-XZA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dyY-df-LsL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -161,7 +178,7 @@
         <!--Lambda List-->
         <scene sceneID="DdD-rL-jCm">
             <objects>
-                <tableViewController id="dCQ-xF-e4b" sceneMemberID="viewController">
+                <tableViewController id="dCQ-xF-e4b" customClass="CompleteTasksTableViewController" customModule="LambdaList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6aO-GL-x3s">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -179,7 +196,7 @@
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" rowHeight="80" id="V5d-9T-LTe">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" rowHeight="80" id="V5d-9T-LTe" customClass="CompleteTasksTableViewCell" customModule="LambdaList" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="414" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V5d-9T-LTe" id="0Zh-QM-sVJ">
@@ -203,6 +220,8 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="descriptionLabel" destination="XHT-q0-8gw" id="3GJ-TN-B9f"/>
+                                    <outlet property="titleLabel" destination="Ljb-uK-p0v" id="lf8-zC-EXk"/>
                                     <segue destination="JqU-NH-AG1" kind="show" id="yuz-Ki-FEM"/>
                                 </connections>
                             </tableViewCell>
@@ -216,21 +235,29 @@
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="zS8-fr-V7n">
                                 <connections>
+                                    <action selector="addTaskButtonPressed:" destination="dCQ-xF-e4b" id="ry7-yu-Y3D"/>
                                     <segue destination="22V-2Z-dNC" kind="presentation" id="Vpv-QV-Rc5"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Item" image="arrow.down" catalog="system" id="BEh-hQ-Tpc"/>
+                            <barButtonItem title="Item" image="arrow.down" catalog="system" id="BEh-hQ-Tpc">
+                                <connections>
+                                    <action selector="sortButtonPressed:" destination="dCQ-xF-e4b" id="B4o-hj-vbL"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchBar" destination="h6K-Vt-8nl" id="ho2-9Z-eXz"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Icz-tx-fIk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="634.78260869565224" y="127.90178571428571"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Task View Controller-->
         <scene sceneID="B5f-p7-axU">
             <objects>
-                <viewController id="22V-2Z-dNC" sceneMemberID="viewController">
+                <viewController id="22V-2Z-dNC" customClass="AddTaskViewController" customModule="LambdaList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qa7-iv-fVY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -266,6 +293,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1e-SW-QjP">
                                         <rect key="frame" x="0.0" y="270" width="384" height="30"/>
                                         <state key="normal" title="Create Task"/>
+                                        <connections>
+                                            <action selector="createTaskButtonPressed:" destination="22V-2Z-dNC" eventType="touchUpInside" id="NCy-FS-kcO"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -287,6 +317,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xlr-gi-QMl"/>
                     </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="Cdi-0a-q4e" id="96s-KE-iBc"/>
+                        <outlet property="descriptionTextView" destination="kAS-1k-Nh0" id="PBI-oP-z8C"/>
+                        <outlet property="titleLabel" destination="X66-jV-uGT" id="coB-mj-ztm"/>
+                        <outlet property="titleTextField" destination="LvS-M5-mhZ" id="SYR-NL-hHu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Ol-Sd-WGb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

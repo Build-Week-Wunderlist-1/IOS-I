@@ -20,8 +20,9 @@ class CompleteTasksTableViewCell: UITableViewCell {
     }
     
     // MARK: - Outlets
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     
-    // TODO: ? - connect outlets
     
     // MARK: - Lifecycle
     
