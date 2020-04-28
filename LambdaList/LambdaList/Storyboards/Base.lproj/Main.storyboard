@@ -72,7 +72,7 @@
                                 <connections>
                                     <outlet property="descriptionLabel" destination="a4c-Gw-A92" id="w5P-YB-Kft"/>
                                     <outlet property="titleLabel" destination="TPQ-EP-gYI" id="6OL-XQ-1c4"/>
-                                    <segue destination="JqU-NH-AG1" kind="show" id="OMN-pc-JJ6"/>
+                                    <segue destination="JqU-NH-AG1" kind="show" identifier="ShowTaskDetailSegue" id="OMN-pc-JJ6"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -86,7 +86,7 @@
                             <barButtonItem systemItem="add" id="BeT-y5-EPk">
                                 <connections>
                                     <action selector="addTaskButtonPressed:" destination="51U-QP-nW9" id="gha-XH-Y1b"/>
-                                    <segue destination="22V-2Z-dNC" kind="presentation" id="qKa-PU-34U"/>
+                                    <segue destination="22V-2Z-dNC" kind="presentation" identifier="AddTaskModalSegue" id="qKa-PU-34U"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Item" image="arrow.down" catalog="system" id="wvQ-dm-TIh">
@@ -222,7 +222,7 @@
                                 <connections>
                                     <outlet property="descriptionLabel" destination="XHT-q0-8gw" id="3GJ-TN-B9f"/>
                                     <outlet property="titleLabel" destination="Ljb-uK-p0v" id="lf8-zC-EXk"/>
-                                    <segue destination="JqU-NH-AG1" kind="show" id="yuz-Ki-FEM"/>
+                                    <segue destination="JqU-NH-AG1" kind="show" identifier="ShowTaskDetailSegue" id="yuz-Ki-FEM"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -236,7 +236,7 @@
                             <barButtonItem systemItem="add" id="zS8-fr-V7n">
                                 <connections>
                                     <action selector="addTaskButtonPressed:" destination="dCQ-xF-e4b" id="ry7-yu-Y3D"/>
-                                    <segue destination="22V-2Z-dNC" kind="presentation" id="Vpv-QV-Rc5"/>
+                                    <segue destination="22V-2Z-dNC" kind="presentation" identifier="AddTaskModalSegue" id="Vpv-QV-Rc5"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Item" image="arrow.down" catalog="system" id="BEh-hQ-Tpc">
@@ -364,8 +364,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Vpv-QV-Rc5"/>
-        <segue reference="yuz-Ki-FEM"/>
+        <segue reference="qKa-PU-34U"/>
+        <segue reference="OMN-pc-JJ6"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.down" catalog="system" width="120" height="128"/>
