@@ -40,16 +40,16 @@ class CompleteTasksTableViewController: UITableViewController {
         // TODO: ? - number of rows
         return 0
     }
-    /*
+    
      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(withIdentifier: "CompleteTasksTableViewCell", for: indexPath)
+     let cell = tableView.dequeueReusableCell(withIdentifier: "completeCell", for: indexPath)
      // TODO: ? - add identifier above ^
      // TODO: ? - dependency injection
      // Configure the cell...
      
      return cell
      }
-     */
+     
     //    // Override to support editing the table view.
     //    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     //        if editingStyle == .delete {

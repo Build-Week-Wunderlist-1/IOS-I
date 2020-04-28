@@ -22,34 +22,46 @@ class IncompleteTasksTableViewController: UITableViewController {
     }
     
     // MARK: - Properties
-    
+    let taskController = TaskController()
+    var incompleteTasks: [Task] = []
+        
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        incompleteTasks = taskController.getIncompleteTasks()
+    }
+    
+    
     // MARK: - Table view data source
     
+    //Setting the # of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // TODO: ? - number of sections
-        return 0
+        return 1
     }
     
+    //Setting Amount of Rows/Cells for incompleteTasks
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // TODO: ? - number of rows
-        return 0
+        return incompleteTasks.count
     }
-    /*
+    
+    //Setting the cells properties
      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(withIdentifier: "IncompleteTasksTableViewCell", for: indexPath)
-     // TODO: ? - add identifier above ^
-     // TODO: ? - dependency injection
-     // Configure the cell...
-     
-     return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: IncompleteTasksTableViewCell.identifier, for: indexPath)
+        
+        guard let myCell = cell as? IncompleteTasksTableViewCell else {
+            return cell
+        }
+        
+        myCell.task = incompleteTasks[indexPath.row]
+        
+        //myCell.task
+        return myCell
      }
-     */
+     
     //    // Override to support editing the table view.
     //    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     //        if editingStyle == .delete {

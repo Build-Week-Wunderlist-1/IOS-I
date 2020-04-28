@@ -47,7 +47,7 @@
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="90" id="zKX-oe-tB7" customClass="IncompleteTasksTableViewCell" customModule="LambdaList" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="usableCell" rowHeight="90" id="zKX-oe-tB7" customClass="IncompleteTasksTableViewCell" customModule="LambdaList" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="414" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zKX-oe-tB7" id="j79-cD-9kC">
@@ -87,6 +87,9 @@
                                                     <state key="normal" image="square" catalog="system">
                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="completeButtonPressed:" destination="zKX-oe-tB7" eventType="touchUpInside" id="PLD-Et-Z5k"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -99,6 +102,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="completeButton" destination="Jq3-ro-Mt7" id="Uvn-1n-MBd"/>
                                     <outlet property="descriptionLabel" destination="a4c-Gw-A92" id="w5P-YB-Kft"/>
                                     <outlet property="titleLabel" destination="TPQ-EP-gYI" id="6OL-XQ-1c4"/>
                                     <segue destination="JqU-NH-AG1" kind="show" identifier="ShowTaskDetailSegue" id="OMN-pc-JJ6"/>
@@ -229,7 +233,7 @@
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="90" id="V5d-9T-LTe" customClass="CompleteTasksTableViewCell" customModule="LambdaList" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="usableCell" rowHeight="90" id="V5d-9T-LTe" customClass="TaskTableViewCell">
                                 <rect key="frame" x="0.0" y="72" width="414" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V5d-9T-LTe" id="0Zh-QM-sVJ">
@@ -446,8 +450,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="qKa-PU-34U"/>
-        <segue reference="OMN-pc-JJ6"/>
+        <segue reference="Vpv-QV-Rc5"/>
+        <segue reference="yuz-Ki-FEM"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.down" catalog="system" width="120" height="128"/>
