@@ -21,11 +21,22 @@ class AddTaskViewController: UIViewController {
     
     //MARK: - Actions
     @IBAction func createTaskButtonPressed(_ sender: UIButton) {
-        guard let titleText = titleTextField?.text, let descriptionText = descriptionTextView else {
+        guard let titleText = titleTextField?.text, let descriptionText = descriptionTextView?.text else {
             return
         }
         
-        //Task(taskName: <#T##String#>, taskID: <#T##Int64#>, taskDescription: <#T##String#>)
+        let task = Task(taskName: titleText, taskDescription: descriptionText)
+        
+        //Save Locally
+        do {
+            try CoreDataStack.shared.mainContext.save()
+        } catch {
+            print("Error saving task in AddTaskViewController: \(error)")
+        }
+        
+        //TODO - Send added task to the WebServer
+        
+        dismiss(animated: true)
         
     }
     

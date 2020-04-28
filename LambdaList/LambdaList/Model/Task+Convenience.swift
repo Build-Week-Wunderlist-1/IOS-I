@@ -12,7 +12,7 @@ import CoreData
 extension Task {
     
     convenience init(taskName: String,
-                     taskID:UUID = UUID(),
+                     taskID: UUID = UUID(),
                      taskDescription: String,
                      sort: Int64 = 1,
                      createdDate: Date = Date(),
