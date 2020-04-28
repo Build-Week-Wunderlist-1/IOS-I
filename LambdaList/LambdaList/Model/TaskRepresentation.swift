@@ -10,6 +10,8 @@ import Foundation
 
 struct TaskRepresentation: Equatable, Codable {
     
-    // TODO: Mark - implement task representation
+    var taskName: String
+    var taskID: String
+    var taskDescription: String?
     
 }
