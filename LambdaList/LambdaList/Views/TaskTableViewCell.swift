@@ -26,9 +26,6 @@ class TaskTableViewCell: UITableViewCell {
         tempTask.completed = !tempTask.completed
     }
     
-    
-    // TODO: ? - add ibactions
-    
     // MARK: - Methods
     private func updateViews() {
         //Unwrapping
@@ -42,7 +39,7 @@ class TaskTableViewCell: UITableViewCell {
         updateButton(result: task.completed)
     }
     
-    //Updates Complete Button to the correct button and color
+    //Updates Complete Button to the correct Button Image and Color
     func updateButton(result: Bool) {
         if result == true {
             let image = UIImage(systemName: "checkmark.square.fill")

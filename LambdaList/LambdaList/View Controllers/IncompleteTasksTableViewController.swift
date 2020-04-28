@@ -50,9 +50,9 @@ class IncompleteTasksTableViewController: UITableViewController {
     
     //Setting the cells properties
      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: IncompleteTasksTableViewCell.identifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier, for: indexPath)
         
-        guard let myCell = cell as? IncompleteTasksTableViewCell else {
+        guard let myCell = cell as? TaskTableViewCell else {
             return cell
         }
         

@@ -47,7 +47,7 @@
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="usableCell" rowHeight="90" id="zKX-oe-tB7" customClass="IncompleteTasksTableViewCell" customModule="LambdaList" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="usableCell" rowHeight="90" id="zKX-oe-tB7" customClass="TaskTableViewCell" customModule="LambdaList" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="414" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zKX-oe-tB7" id="j79-cD-9kC">
@@ -233,7 +233,7 @@
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="usableCell" rowHeight="90" id="V5d-9T-LTe" customClass="TaskTableViewCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="usableCell" rowHeight="90" id="V5d-9T-LTe" customClass="TaskTableViewCell" customModule="LambdaList" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="414" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V5d-9T-LTe" id="0Zh-QM-sVJ">
@@ -273,6 +273,9 @@
                                                     <state key="normal" image="square" catalog="system">
                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="completeButtonPressed:" destination="V5d-9T-LTe" eventType="touchUpInside" id="F5e-B9-eDW"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -285,6 +288,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="completeButton" destination="wL4-yh-Yw5" id="Zov-P9-nye"/>
                                     <outlet property="descriptionLabel" destination="XHT-q0-8gw" id="3GJ-TN-B9f"/>
                                     <outlet property="titleLabel" destination="Ljb-uK-p0v" id="lf8-zC-EXk"/>
                                     <segue destination="JqU-NH-AG1" kind="show" identifier="ShowTaskDetailSegue" id="yuz-Ki-FEM"/>
