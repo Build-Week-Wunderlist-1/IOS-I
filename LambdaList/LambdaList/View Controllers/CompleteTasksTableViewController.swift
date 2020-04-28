@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class CompleteTasksTableViewController: UITableViewController {
+    
+    
     
     //MARK: - Outlets
     @IBOutlet weak var searchBar: UISearchBar!
@@ -24,6 +27,17 @@ class CompleteTasksTableViewController: UITableViewController {
     // MARK: - Properties
     let taskController = TaskController()
     var completeTasks: [Task] = []
+    
+    private lazy var fetchedResultsController: NSFetchedResultsController<Task> = {
+        let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "completed == %@", NSNumber(value: true))
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: false)]
+        let context = CoreDataStack.shared.mainContext
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+        try! fetchedResultsController.performFetch()
+        return fetchedResultsController
+    }()
         
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -37,14 +51,9 @@ class CompleteTasksTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    //Setting the # of sections
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     //Setting Amount of Rows/Cells for incompleteTasks
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return completeTasks.count
+        fetchedResultsController.sections![section].numberOfObjects
     }
     
     //Setting the cells properties
@@ -55,7 +64,7 @@ class CompleteTasksTableViewController: UITableViewController {
             return cell
         }
         
-        myCell.task = completeTasks[indexPath.row]
+        myCell.task = fetchedResultsController.object(at: indexPath)
         
         //myCell.task
         return myCell
@@ -104,4 +113,53 @@ class CompleteTasksTableViewController: UITableViewController {
     // MARK: - Methods
     
     
+}
+
+extension CompleteTasksTableViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange sectionInfo: NSFetchedResultsSectionInfo,
+                    atSectionIndex sectionIndex: Int,
+                    for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert:
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
+        case .delete:
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
+        default:
+            break
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            guard let newIndexPath = newIndexPath else { return }
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .update:
+            guard let indexPath = indexPath else { return }
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        case .move:
+            guard let oldIndexPath = indexPath,
+                let newIndexPath = newIndexPath else { return }
+            tableView.deleteRows(at: [oldIndexPath], with: .automatic)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .delete:
+            guard let indexPath = indexPath else { return }
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        @unknown default:
+            break
+        }
+    }
 }
