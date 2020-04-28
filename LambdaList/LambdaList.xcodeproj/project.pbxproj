@@ -103,7 +103,8 @@
 		1DFA43E42457887B002128F1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1DFA43FD245792CC002128F1 /* TaskController.swift */,
+				1DFA43FB2457922B002128F1 /* Task+convience.swift */,
+				1DFA43F9245791C2002128F1 /* TaskRepresentation.swift */,
 				1DFA43F324578C00002128F1 /* CoreData */,
 			);
 			path = Model;
@@ -114,8 +115,6 @@
 			children = (
 				1DFA43F424579163002128F1 /* Task.xcdatamodeld */,
 				1DFA43F72457918A002128F1 /* CoreDataStack.swift */,
-				1DFA43F9245791C2002128F1 /* TaskRepresentation.swift */,
-				1DFA43FB2457922B002128F1 /* Task+convience.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -140,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				1DFA43E42457887B002128F1 /* Model */,
+				1DFA43FD245792CC002128F1 /* TaskController.swift */,
 				1DFA43E32457886C002128F1 /* Views */,
 				1DFA43E12457882A002128F1 /* View Controllers */,
 				1DFA43E22457883C002128F1 /* Storyboards */,
