@@ -15,7 +15,7 @@
 		1DFA43F624579163002128F1 /* Task.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43F424579163002128F1 /* Task.xcdatamodeld */; };
 		1DFA43F82457918A002128F1 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43F72457918A002128F1 /* CoreDataStack.swift */; };
 		1DFA43FA245791C2002128F1 /* TaskRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43F9245791C2002128F1 /* TaskRepresentation.swift */; };
-		1DFA43FC2457922B002128F1 /* Task+convience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43FB2457922B002128F1 /* Task+convience.swift */; };
+		1DFA43FC2457922B002128F1 /* Task+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43FB2457922B002128F1 /* Task+Convenience.swift */; };
 		1DFA43FE245792CD002128F1 /* TaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43FD245792CC002128F1 /* TaskController.swift */; };
 		1DFA44002457B12D002128F1 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43FF2457B12D002128F1 /* LoginScreenViewController.swift */; };
 		1DFA44022457B289002128F1 /* LoginScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DFA44012457B289002128F1 /* LoginScreen.storyboard */; };
@@ -35,7 +35,7 @@
 		1DFA43F524579163002128F1 /* Tasks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tasks.xcdatamodel; sourceTree = "<group>"; };
 		1DFA43F72457918A002128F1 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		1DFA43F9245791C2002128F1 /* TaskRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepresentation.swift; sourceTree = "<group>"; };
-		1DFA43FB2457922B002128F1 /* Task+convience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+convience.swift"; sourceTree = "<group>"; };
+		1DFA43FB2457922B002128F1 /* Task+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Convenience.swift"; sourceTree = "<group>"; };
 		1DFA43FD245792CC002128F1 /* TaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskController.swift; sourceTree = "<group>"; };
 		1DFA43FF2457B12D002128F1 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		1DFA44012457B289002128F1 /* LoginScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginScreen.storyboard; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 		1DFA43E42457887B002128F1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1DFA43FB2457922B002128F1 /* Task+convience.swift */,
+				1DFA43FB2457922B002128F1 /* Task+Convenience.swift */,
 				1DFA43F9245791C2002128F1 /* TaskRepresentation.swift */,
 				1DFA43F324578C00002128F1 /* CoreData */,
 			);
@@ -229,7 +229,7 @@
 				DD553F8B24575A3100FEA663 /* AppDelegate.swift in Sources */,
 				1DFA44002457B12D002128F1 /* LoginScreenViewController.swift in Sources */,
 				1DFA43E624578A00002128F1 /* TaskTableViewCell.swift in Sources */,
-				1DFA43FC2457922B002128F1 /* Task+convience.swift in Sources */,
+				1DFA43FC2457922B002128F1 /* Task+Convenience.swift in Sources */,
 				1DFA43FA245791C2002128F1 /* TaskRepresentation.swift in Sources */,
 				1DFA43EA24578AB3002128F1 /* CompleteTasksTableViewController.swift in Sources */,
 				DD553F8D24575A3100FEA663 /* SceneDelegate.swift in Sources */,
