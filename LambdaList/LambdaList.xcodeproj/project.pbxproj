@@ -18,6 +18,7 @@
 		1DFA43FA245791C2002128F1 /* TaskRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43F9245791C2002128F1 /* TaskRepresentation.swift */; };
 		1DFA43FC2457922B002128F1 /* Task+convience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43FB2457922B002128F1 /* Task+convience.swift */; };
 		1DFA43FE245792CD002128F1 /* TaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43FD245792CC002128F1 /* TaskController.swift */; };
+		1DFA44002457B12D002128F1 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43FF2457B12D002128F1 /* LoginScreenViewController.swift */; };
 		DD553F8B24575A3100FEA663 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD553F8A24575A3100FEA663 /* AppDelegate.swift */; };
 		DD553F8D24575A3100FEA663 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD553F8C24575A3100FEA663 /* SceneDelegate.swift */; };
 		DD553F9224575A3100FEA663 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD553F9024575A3100FEA663 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 		1DFA43F9245791C2002128F1 /* TaskRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepresentation.swift; sourceTree = "<group>"; };
 		1DFA43FB2457922B002128F1 /* Task+convience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+convience.swift"; sourceTree = "<group>"; };
 		1DFA43FD245792CC002128F1 /* TaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskController.swift; sourceTree = "<group>"; };
+		1DFA43FF2457B12D002128F1 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		DD553F8724575A3100FEA663 /* LambdaList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LambdaList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD553F8A24575A3100FEA663 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD553F8C24575A3100FEA663 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 		1DFA43E12457882A002128F1 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1DFA43FF2457B12D002128F1 /* LoginScreenViewController.swift */,
 				1DFA43E924578AB2002128F1 /* CompleteTasksTableViewController.swift */,
 				1DFA43EB24578ACE002128F1 /* IncompleteTasksTableViewController.swift */,
 				1DFA43ED24578B32002128F1 /* TaskDetailViewController.swift */,
@@ -228,6 +231,7 @@
 				1DFA43FE245792CD002128F1 /* TaskController.swift in Sources */,
 				1DFA43F82457918A002128F1 /* CoreDataStack.swift in Sources */,
 				DD553F8B24575A3100FEA663 /* AppDelegate.swift in Sources */,
+				1DFA44002457B12D002128F1 /* LoginScreenViewController.swift in Sources */,
 				1DFA43E624578A00002128F1 /* IncompleteTasksTableViewCell.swift in Sources */,
 				1DFA43FC2457922B002128F1 /* Task+convience.swift in Sources */,
 				1DFA43FA245791C2002128F1 /* TaskRepresentation.swift in Sources */,
