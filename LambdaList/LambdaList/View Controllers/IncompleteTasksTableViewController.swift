@@ -9,7 +9,7 @@
 import UIKit
 
 class IncompleteTasksTableViewController: UITableViewController {
-  
+    
     //MARK: - Outlets
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -42,7 +42,7 @@ class IncompleteTasksTableViewController: UITableViewController {
     }
     /*
      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(withIdentifier: <#add identifier here#>, for: indexPath)
+     let cell = tableView.dequeueReusableCell(withIdentifier: "IncompleteTasksTableViewCell", for: indexPath)
      // TODO: ? - add identifier above ^
      // TODO: ? - dependency injection
      // Configure the cell...
@@ -80,8 +80,13 @@ class IncompleteTasksTableViewController: UITableViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // TODO: ? - Get the new view controller using segue.destination.
-        // TODO: ? - Pass the selected object to the new view controller.
+        if segue.identifier == "ShowTaskDetailSegue" {
+            // TODO: - Get the new view controller using segue.destination.
+            // TODO: - Pass the selected object to the new view controller.
+        } else if segue.identifier == "AddTaskModalSegue" {
+            // TODO: - Get the new view controller using segue.destination.
+            // TODO: - Pass the selected object to the new view controller.
+        }
     }
     
 }

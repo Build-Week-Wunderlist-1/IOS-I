@@ -12,8 +12,12 @@ class IncompleteTasksTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    // TODO: ? - add properties
-    // TODO: ? - cellForRowAt
+    // this property will get it's value from dependancy injection via cellForRowAt
+    var task: Task? {
+        didSet {
+            updateViews()
+        }
+    }
     
     // MARK: - Outlets
     @IBOutlet weak var titleLabel: UILabel!
@@ -21,15 +25,15 @@ class IncompleteTasksTableViewCell: UITableViewCell {
     
     // MARK: - Lifecycle
     
-    // TODO: ? - viewWillLoad
-    // TODO: ? - call updateViews
-    
     // MARK: - Actions
     
     // TODO: ? - add ibactions
     
     // MARK: - Methods
-
-    // TODO: ? - updateViews()
+    
+    private func updateViews() {
+//        guard let task = task else { return } // FIXME: - <-- uncomment this whole line when the TODO below is done
+        // TODO: implement updateViews based on model
+    }
     
 }
