@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import CoreData
+
+// TODO: add firebase/ rest api url
 
 class TaskController {
- 
-    // TODO: ? - what methods go here?
-    
+        
 }
