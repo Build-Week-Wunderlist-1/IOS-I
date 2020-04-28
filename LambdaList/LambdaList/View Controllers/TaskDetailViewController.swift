@@ -10,6 +10,15 @@ import UIKit
 
 class TaskDetailViewController: UIViewController {
 
+    //MARK: - Outlets
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var taskStatusLabel: UILabel!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    
+    //MARK: - Actions
+    @IBOutlet weak var editButtonPressed: UIBarButtonItem!
+    
     // MARK: - Properties
     
     // TODO: ? - dependancy injection w / didSet/ call update views

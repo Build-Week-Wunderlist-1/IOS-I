@@ -16,8 +16,8 @@ class IncompleteTasksTableViewCell: UITableViewCell {
     // TODO: ? - cellForRowAt
     
     // MARK: - Outlets
-    
-    // TODO: ? - connect outlets
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     // MARK: - Lifecycle
     

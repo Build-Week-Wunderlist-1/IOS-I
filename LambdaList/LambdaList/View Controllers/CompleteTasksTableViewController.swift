@@ -9,7 +9,18 @@
 import UIKit
 
 class CompleteTasksTableViewController: UITableViewController {
-
+    
+    //MARK: - Outlets
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    //MARK: - Actions
+    @IBAction func sortButtonPressed(_ sender: UIBarButtonItem) {
+    }
+    
+    @IBAction func addTaskButtonPressed(_ sender: UIBarButtonItem) {
+    }
+    
+    
     // MARK: - Properties
     
     // MARK: - Lifecycle
