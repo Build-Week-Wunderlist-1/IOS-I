@@ -13,5 +13,8 @@ struct TaskRepresentation: Equatable, Codable {
     var taskName: String
     var taskID: String
     var taskDescription: String?
+    var sort: Int
+    var createdDate: String
+    var completed: Bool?
     
 }
