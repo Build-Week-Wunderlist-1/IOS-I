@@ -26,7 +26,6 @@ class CompleteTasksTableViewController: UITableViewController {
     var completeTasks: [Task] = []
         
     // MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

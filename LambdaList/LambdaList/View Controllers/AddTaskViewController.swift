@@ -21,6 +21,12 @@ class AddTaskViewController: UIViewController {
     
     //MARK: - Actions
     @IBAction func createTaskButtonPressed(_ sender: UIButton) {
+        guard let titleText = titleTextField?.text, let descriptionText = descriptionTextView else {
+            return
+        }
+        
+        //Task(taskName: <#T##String#>, taskID: <#T##Int64#>, taskDescription: <#T##String#>)
+        
     }
     
     // MARK: - Lifecycle
