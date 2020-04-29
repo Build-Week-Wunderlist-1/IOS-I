@@ -13,19 +13,19 @@ class AddTaskViewController: UIViewController {
     // MARK: - Properties
     
     
-    //MARK: - Outlets
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var descriptionTextView: UITextView!
+    // MARK: - Outlets
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var titleTextField: UITextField!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var descriptionTextView: UITextView!
     
-    //MARK: - Actions
+    // MARK: - Actions
     @IBAction func createTaskButtonPressed(_ sender: UIButton) {
         guard let titleText = titleTextField?.text, let descriptionText = descriptionTextView?.text else {
             return
         }
         
-        let task = Task(taskName: titleText, taskDescription: descriptionText)
+        _ = Task(taskName: titleText, taskDescription: descriptionText)
         
         //Save Locally
         do {

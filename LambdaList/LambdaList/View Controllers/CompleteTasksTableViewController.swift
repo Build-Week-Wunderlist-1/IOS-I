@@ -10,13 +10,11 @@ import UIKit
 import CoreData
 
 class CompleteTasksTableViewController: UITableViewController {
+
+    // MARK: - Outlets
+    @IBOutlet private weak var searchBar: UISearchBar!
     
-    
-    
-    //MARK: - Outlets
-    @IBOutlet weak var searchBar: UISearchBar!
-    
-    //MARK: - Actions
+    // MARK: - Actions
     @IBAction func sortButtonPressed(_ sender: UIBarButtonItem) {
     }
     
@@ -33,9 +31,14 @@ class CompleteTasksTableViewController: UITableViewController {
         fetchRequest.predicate = NSPredicate(format: "completed == %@", NSNumber(value: true))
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: false)]
         let context = CoreDataStack.shared.mainContext
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                  managedObjectContext: context,
+                                                                  sectionNameKeyPath: nil,
+                                                                  cacheName: nil)
         fetchedResultsController.delegate = self
+        // swiftlint:disable force_try
         try! fetchedResultsController.performFetch()
+        // swiftlint:enable force_try
         return fetchedResultsController
     }()
         
@@ -45,6 +48,7 @@ class CompleteTasksTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         completeTasks = taskController.getIncompleteTasks()
     }
     

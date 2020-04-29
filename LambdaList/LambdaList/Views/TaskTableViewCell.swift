@@ -13,9 +13,9 @@ class TaskTableViewCell: UITableViewCell {
     }
     
     // MARK: - Outlets
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var completeButton: UIButton!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var completeButton: UIButton!
     
     // MARK: - Actions
     @IBAction func completeButtonPressed(_ sender: UIButton) {
@@ -23,7 +23,7 @@ class TaskTableViewCell: UITableViewCell {
             return
         }
         
-        tempTask.completed = !tempTask.completed
+        tempTask.completed.toggle()
     }
     
     // MARK: - Methods

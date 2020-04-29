@@ -12,8 +12,8 @@ import CoreData
 extension Task {
     
     convenience init(taskName: String,
-                     taskID: UUID = UUID(),
                      taskDescription: String,
+                     taskID: UUID = UUID(),
                      sort: Int64 = 1,
                      createdDate: Date = Date(),
                      completed: Bool = false,

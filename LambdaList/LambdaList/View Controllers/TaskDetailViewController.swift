@@ -10,14 +10,14 @@ import UIKit
 
 class TaskDetailViewController: UIViewController {
 
-    //MARK: - Outlets
-    @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var taskStatusLabel: UILabel!
-    @IBOutlet weak var descriptionTextView: UITextView!
+    // MARK: - Outlets
+    @IBOutlet private weak var titleTextField: UITextField!
+    @IBOutlet private weak var dateLabel: UILabel!
+    @IBOutlet private weak var taskStatusLabel: UILabel!
+    @IBOutlet private weak var descriptionTextView: UITextView!
     
-    //MARK: - Actions
-    @IBOutlet weak var editButtonPressed: UIBarButtonItem!
+    // MARK: - Actions
+    @IBOutlet private weak var editButtonPressed: UIBarButtonItem!
     
     // MARK: - Properties
     

@@ -17,7 +17,7 @@ class CoreDataStack {
     // create container
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Task")
-        container.loadPersistentStores { (_, error) in
+        container.loadPersistentStores { _, error in
             if let error = error {
                 fatalError("Failed to load persistent stores: \(error)")
             }

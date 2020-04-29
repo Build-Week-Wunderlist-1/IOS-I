@@ -13,20 +13,16 @@ import CoreData
 
 class TaskController {
         
-    //MARK: - Properties
+    // MARK: - Properties
     var tasks: [Task] = []
-    
-    
-    
-    //MARK: - Functions
+
+    // MARK: - Functions
     func getCompletedTasks() -> [Task] {
         
         var tempTasks: [Task] = []
         
-        for i in tasks {
-            if i.completed == true {
-                tempTasks.append(i)
-            }
+        for i in tasks where i.completed == true {
+            tempTasks.append(i)
         }
         
         return tempTasks
@@ -36,10 +32,8 @@ class TaskController {
         
         var tempTasks: [Task] = []
         
-        for i in tasks {
-            if i.completed == false {
-                tempTasks.append(i)
-            }
+        for i in tasks where i.completed == false {
+            tempTasks.append(i)
         }
         
         return tempTasks
