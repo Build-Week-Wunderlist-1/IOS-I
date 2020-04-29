@@ -13,6 +13,10 @@ class LoginScreenViewController: UIViewController {
     // MARK: - Properties
     
     // MARK: - Outlets
+    @IBOutlet weak var logInStatusLabel: UILabel!
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var rememberMeButton: UIButton!
     
     // MARK: - Lifecycle
     
@@ -23,7 +27,15 @@ class LoginScreenViewController: UIViewController {
     
     // MARK: - Actions
     
-    // TODO: ? - savebutton
+    @IBAction func rememberMeButtonPressed(_ sender: Any) {
+    }
+    
+    @IBAction func logInButtonPressed(_ sender: Any) {
+    }
+
+    @IBAction func signUpButtonPressed(_ sender: Any) {
+    }
+    
     
     // MARK: - Methods
 
