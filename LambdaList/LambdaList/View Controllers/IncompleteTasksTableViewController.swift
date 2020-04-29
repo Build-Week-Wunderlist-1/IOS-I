@@ -16,7 +16,7 @@ class IncompleteTasksTableViewController: UITableViewController {
     
     // MARK: - Actions
     @IBAction func sortButtonPressed(_ sender: UIBarButtonItem) {
-        
+       allowUserToSort()
     }
     
     @IBAction func addTaskButtonPressed(_ sender: UIBarButtonItem) {
@@ -26,11 +26,12 @@ class IncompleteTasksTableViewController: UITableViewController {
     let taskController = TaskController()
     var incompleteTasks: [Task] = []
     var userIsLoggedIn: Bool = false
+    var sortedByKey: String = "sort"
     
     private lazy var fetchedResultsController: NSFetchedResultsController<Task> = {
         let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "completed == %@", NSNumber(value: false))
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: sortedByKey, ascending: false)]
         let context = CoreDataStack.shared.mainContext
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                   managedObjectContext: context,
@@ -130,6 +131,40 @@ class IncompleteTasksTableViewController: UITableViewController {
         }
     }
     
+    private func allowUserToSort() {
+        // Create the alert
+               let alert = UIAlertController(title: "Sort By:",
+                                             message: "",
+                                             preferredStyle: .alert)
+               
+               // Add actions
+               alert.addAction(UIAlertAction(title: "Alphabetical", style: .default, handler: { _ in
+                   self.sortedByKey = "taskName"
+                   self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.sortedByKey, ascending: true)]
+                   try! self.fetchedResultsController.performFetch()
+                   self.tableView.reloadData()
+               }))
+               
+               alert.addAction(UIAlertAction(title: "Most Recent", style: .default, handler: { _ in
+                   self.sortedByKey = "createdDate"
+                   self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.sortedByKey, ascending: false)]
+                   try! self.fetchedResultsController.performFetch()
+                   self.tableView.reloadData()
+               }))
+               
+               alert.addAction(UIAlertAction(title: "Manual", style: .default, handler: { _ in
+                   self.sortedByKey = "sort"
+                   self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.sortedByKey, ascending: false)]
+                   try! self.fetchedResultsController.performFetch()
+                   self.tableView.reloadData()
+               }))
+               
+               alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+               
+               // Present the alert
+               self.present(alert, animated: true) { }
+    }
+    
     // MARK: - Navigation
     
     
@@ -204,4 +239,5 @@ extension IncompleteTasksTableViewController: NSFetchedResultsControllerDelegate
             break
         }
     }
+    
 }

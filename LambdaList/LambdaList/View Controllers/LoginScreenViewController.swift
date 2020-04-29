@@ -17,12 +17,15 @@ class LoginScreenViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var rememberMeButton: UIButton!
+    @IBOutlet weak var logInButton: UIButton!
+    @IBOutlet weak var signUpButton: UIButton!
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         autofillTextFields()
+        updateViews()
     }
     
     // MARK: - Actions
@@ -52,6 +55,11 @@ class LoginScreenViewController: UIViewController {
         
         usernameTextField.text = username
         passwordTextField.text = password
+    }
+    
+    private func updateViews() {
+        logInButton.layer.cornerRadius = 3
+        signUpButton.layer.cornerRadius = 3
     }
     
 }
