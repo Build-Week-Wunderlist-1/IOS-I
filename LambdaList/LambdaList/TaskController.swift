@@ -64,10 +64,11 @@ class TaskController {
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.put.rawValue
 
+        // Tell the server what it's looking at. Won't work without it since it won't "guess"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
         // swiftlint:disable line_length
-        // If I don't include this I get 400: Bad Request
-        // If I do include it, I get 500: Internal Server Eror.
-        request.allHTTPHeaderFields = ["Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJuYW1lIjoiZ2VycmlvcjAxIiwidXNlcmVtYWlsIjoiaGVyb2t1YXBwMDFAbS5nZXJyaW9yLmNvbSIsImlhdCI6MTU4ODE3NTM1OSwiZXhwIjoxNTg5Mzg0OTU5fQ.w4pVW9fQT1NmU3rletahQyGvocO_QxvAoBq5qGvD6VY"]
+        request.setValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJuYW1lIjoiZ2VycmlvcjAxIiwidXNlcmVtYWlsIjoiaGVyb2t1YXBwMDFAbS5nZXJyaW9yLmNvbSIsImlhdCI6MTU4ODE3NTM1OSwiZXhwIjoxNTg5Mzg0OTU5fQ.w4pVW9fQT1NmU3rletahQyGvocO_QxvAoBq5qGvD6VY", forHTTPHeaderField: "Authorization")
         // swiftlint:enable line_length
 
         do {
@@ -75,6 +76,7 @@ class TaskController {
                 completion(nil, NSError())
                 return
             }
+
             request.httpBody = try JSONEncoder().encode(representation)
 
         } catch {

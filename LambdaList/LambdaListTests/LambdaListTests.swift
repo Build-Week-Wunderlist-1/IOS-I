@@ -21,8 +21,8 @@ class LambdaListTests: XCTestCase {
 
     func testBackendPut() throws {
 
-        let task = Task(taskName: "Mark's First Task v3",
-                        taskDescription: "Hello, world! v3")
+        let task = Task(taskName: "Mark's First Task v4",
+                        taskDescription: "Hello, world! v4")
 
         let tc = TaskController()
 

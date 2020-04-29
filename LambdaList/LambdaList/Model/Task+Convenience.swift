@@ -16,12 +16,13 @@ extension Task {
         guard let taskName = taskName else { return nil }
 
         return TaskRepresentation(taskName: taskName,
-                                  taskID: Int(taskID),
+// FIXME:                                 taskID: Int(taskID),
                                   taskDescription: taskDescription ?? "",
-                                  sort: Int(sort),
-                                  createdDate: createdDate ?? Date(),
-                                  modifiedDate: modifiedDate ?? Date(),
-                                  completed: completed)
+                                  sort: Int(sort)
+// FIXME:                                 createdDate: createdDate ?? Date(),
+// FIXME:                                 modifiedDate: modifiedDate ?? Date(),
+// FIXME:                                 completed: completed
+        )
     }
 
     /// This is the original init before we added REST API
@@ -53,11 +54,11 @@ extension Task {
 
         self.init(taskName: taskRepresentation.taskName,
                   taskDescription: taskRepresentation.taskDescription,
-                  taskID: taskRepresentation.taskID,
+// FIXME:                  taskID: taskRepresentation.taskID,
                   sort: taskRepresentation.sort,
-                  createdDate: taskRepresentation.createdDate,
-                  modifiedDate: taskRepresentation.modifiedDate,
-                  completed: taskRepresentation.completed,
+// FIXME:                 createdDate: taskRepresentation.createdDate,
+// FIXME:                 modifiedDate: taskRepresentation.modifiedDate,
+// FIXME:                 completed: taskRepresentation.completed,
                   context: context)
     }
 }
