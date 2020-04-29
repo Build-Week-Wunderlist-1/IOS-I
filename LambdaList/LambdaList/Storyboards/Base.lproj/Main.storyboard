@@ -20,6 +20,7 @@
                     <connections>
                         <segue destination="2rc-oe-X6R" kind="relationship" relationship="viewControllers" id="lsY-Qj-t9W"/>
                         <segue destination="5Db-f8-uAV" kind="relationship" relationship="viewControllers" id="x1N-vd-l2Q"/>
+                        <segue destination="irB-18-J1T" kind="presentation" identifier="LoginScreenSegue" id="a5u-Pq-jm3"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ro8-9Y-uKc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -429,6 +430,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rjx-t5-qli" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-284" y="128"/>
+        </scene>
+        <!--LoginScreen-->
+        <scene sceneID="tt6-mL-Qyp">
+            <objects>
+                <viewControllerPlaceholder storyboardName="LoginScreen" id="irB-18-J1T" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vpu-8D-zlv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1149" y="-1004"/>
         </scene>
         <!--Incomplete Tasks-->
         <scene sceneID="Li4-Hy-3c9">
