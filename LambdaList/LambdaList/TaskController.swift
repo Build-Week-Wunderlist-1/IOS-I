@@ -77,7 +77,11 @@ class TaskController {
                 return
             }
 
-            request.httpBody = try JSONEncoder().encode(representation)
+            let encoder = JSONEncoder()
+            // This will convert Date (really an Int) into a date string at encode time.
+            encoder.dateEncodingStrategy = .iso8601
+
+            request.httpBody = try encoder.encode(representation)
 
         } catch {
             NSLog("Error encoding/saving task: \(error)")

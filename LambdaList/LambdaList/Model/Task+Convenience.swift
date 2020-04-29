@@ -12,14 +12,15 @@ import CoreData
 /// Because we choose Codegen: "class definition" in Tasks.xcdaatamodeld, Task gets generated behind the scenes
 extension Task {
 
+    /// This is what gets called when you prepare to send to the backend.
     var taskRepresentation: TaskRepresentation? {
         guard let taskName = taskName else { return nil }
 
         return TaskRepresentation(taskName: taskName,
 // FIXME:                                 taskID: Int(taskID),
                                   taskDescription: taskDescription ?? "",
-                                  sort: Int(sort)
-// FIXME:                                 createdDate: createdDate ?? Date(),
+                                  sort: Int(sort),
+                                  createdDate: createdDate ?? Date()
 // FIXME:                                 modifiedDate: modifiedDate ?? Date(),
 // FIXME:                                 completed: completed
         )
