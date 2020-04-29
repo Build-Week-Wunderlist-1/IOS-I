@@ -6,7 +6,7 @@
         <attribute name="modifiedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="sort" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="taskDescription" optional="YES" attributeType="String"/>
-        <attribute name="taskID" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="taskID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="taskName" attributeType="String"/>
     </entity>
     <elements>
