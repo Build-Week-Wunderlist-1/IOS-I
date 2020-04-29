@@ -75,15 +75,26 @@ class IncompleteTasksTableViewController: UITableViewController {
         return myCell
      }
      
-    //    // Override to support editing the table view.
-    //    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    //        if editingStyle == .delete {
-    //            // Delete the row from the data source
-    //            tableView.deleteRows(at: [indexPath], with: .fade)
-    //        } else if editingStyle == .insert {
-    //            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    //        }
-    //    }
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            guard let tasks = fetchedResultsController.fetchedObjects else {
+                 return
+            }
+            
+            //TODO: Delete Task From Server
+            
+            let task = tasks[indexPath.row]
+            CoreDataStack.shared.mainContext.delete(task)
+            
+            do {
+                try CoreDataStack.shared.mainContext.save()
+            } catch {
+                print("Error Saving Delete")
+            }
+        }
+    }
     
     /*
      // Override to support rearranging the table view.
