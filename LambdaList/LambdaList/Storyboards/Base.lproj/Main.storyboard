@@ -20,7 +20,6 @@
                     <connections>
                         <segue destination="2rc-oe-X6R" kind="relationship" relationship="viewControllers" id="lsY-Qj-t9W"/>
                         <segue destination="5Db-f8-uAV" kind="relationship" relationship="viewControllers" id="x1N-vd-l2Q"/>
-                        <segue destination="irB-18-J1T" kind="presentation" identifier="LoginScreenSegue" id="a5u-Pq-jm3"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ro8-9Y-uKc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -141,6 +140,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="mvI-5P-bP0" id="EtV-Qn-nkY"/>
+                        <segue destination="irB-18-J1T" kind="presentation" identifier="LoginScreenSegue" id="g2K-1u-aas"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fYY-zL-s9t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -453,10 +453,12 @@
         <!--LoginScreen-->
         <scene sceneID="tt6-mL-Qyp">
             <objects>
-                <viewControllerPlaceholder storyboardName="LoginScreen" id="irB-18-J1T" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="LoginScreen" id="irB-18-J1T" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ZhP-ug-UEe"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vpu-8D-zlv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1149" y="-1004"/>
+            <point key="canvasLocation" x="1158" y="-1161"/>
         </scene>
         <!--Incomplete Tasks-->
         <scene sceneID="Li4-Hy-3c9">
@@ -482,8 +484,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Vpv-QV-Rc5"/>
-        <segue reference="3ur-6u-EfA"/>
+        <segue reference="qKa-PU-34U"/>
+        <segue reference="Ge3-NO-YXE"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.down" catalog="system" width="120" height="128"/>

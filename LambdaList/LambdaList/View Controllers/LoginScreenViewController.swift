@@ -22,21 +22,36 @@ class LoginScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        autofillTextFields()
     }
     
     // MARK: - Actions
     
     @IBAction func rememberMeButtonPressed(_ sender: Any) {
+        // save to user defaults
+        UserDefaults.standard.set(usernameTextField.text, forKey: "username")
+        UserDefaults.standard.set(passwordTextField.text, forKey: "password")
+        
+        rememberMeButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
     }
     
     @IBAction func logInButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 
     @IBAction func signUpButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
     
     // MARK: - Methods
 
+    private func autofillTextFields() {
+        guard let username = UserDefaults.standard.object(forKey: "username") as? String,
+            let password = UserDefaults.standard.object(forKey: "password") as? String else { return }
+        
+        usernameTextField.text = username
+        passwordTextField.text = password
+    }
+    
 }

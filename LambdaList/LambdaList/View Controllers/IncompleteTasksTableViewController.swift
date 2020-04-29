@@ -25,6 +25,7 @@ class IncompleteTasksTableViewController: UITableViewController {
     // MARK: - Properties
     let taskController = TaskController()
     var incompleteTasks: [Task] = []
+    var userIsLoggedIn: Bool = false
     
     private lazy var fetchedResultsController: NSFetchedResultsController<Task> = {
         let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
@@ -46,11 +47,18 @@ class IncompleteTasksTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        letUserLoginInIfNecessary()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        incompleteTasks = taskController.getIncompleteTasks()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
     }
     
     
@@ -110,6 +118,17 @@ class IncompleteTasksTableViewController: UITableViewController {
      return true
      }
      */
+    
+    // MARK: - Methods
+    
+    private func letUserLoginInIfNecessary() {
+        // TODO: check to see if user is logged in or not first. below is temporary code
+        if userIsLoggedIn == false {
+           userIsLoggedIn = true
+            
+        performSegue(withIdentifier: "LoginScreenSegue", sender: self) // <-- this is sending the user to loginScreen on launch
+        }
+    }
     
     // MARK: - Navigation
     
