@@ -10,11 +10,12 @@ import Foundation
 
 struct TaskRepresentation: Equatable, Codable {
     
+    /// match exactly or else the JSON from backend server will not decode into this struct properly (omissions OK)
     var taskName: String
-    var taskID: String
-    var taskDescription: String?
+    var taskID: Int
+    var taskDescription: String
     var sort: Int
-    var createdDate: String
-    var completed: Bool?
-    
+    var createdDate: Date
+    var modifiedDate: Date
+    var completed: Bool
 }
