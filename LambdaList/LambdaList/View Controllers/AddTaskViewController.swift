@@ -9,7 +9,7 @@
 import UIKit
 
 class AddTaskViewController: UIViewController {
-
+    
     // MARK: - Properties
     
     
@@ -21,9 +21,9 @@ class AddTaskViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func createTaskButtonPressed(_ sender: UIButton) {
-        guard let titleText = titleTextField?.text, let descriptionText = descriptionTextView?.text else {
-            return
-        }
+        guard let titleText = titleTextField?.text,
+            let descriptionText = descriptionTextView?.text,
+            !titleText.isEmpty else { return }
         
         _ = Task(taskName: titleText, taskDescription: descriptionText)
         
@@ -48,5 +48,5 @@ class AddTaskViewController: UIViewController {
     }
     
     // MARK: - Methods
-
+    
 }
