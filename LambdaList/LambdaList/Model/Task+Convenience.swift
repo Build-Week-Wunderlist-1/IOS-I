@@ -20,8 +20,8 @@ extension Task {
 // FIXME:                                 taskID: Int(taskID),
                                   taskDescription: taskDescription ?? "",
                                   sort: Int(sort),
-                                  createdDate: createdDate ?? Date()
-// FIXME:                                 modifiedDate: modifiedDate ?? Date(),
+                                  createdDate: createdDate ?? Date(),
+                                  modifiedDate: modifiedDate ?? Date()
 // FIXME:                                 completed: completed
         )
     }
@@ -57,8 +57,8 @@ extension Task {
                   taskDescription: taskRepresentation.taskDescription,
 // FIXME:                  taskID: taskRepresentation.taskID,
                   sort: taskRepresentation.sort,
-// FIXME:                 createdDate: taskRepresentation.createdDate,
-// FIXME:                 modifiedDate: taskRepresentation.modifiedDate,
+                  createdDate: taskRepresentation.createdDate,
+                  modifiedDate: taskRepresentation.modifiedDate,
 // FIXME:                 completed: taskRepresentation.completed,
                   context: context)
     }

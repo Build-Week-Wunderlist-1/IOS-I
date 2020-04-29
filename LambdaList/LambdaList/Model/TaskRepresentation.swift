@@ -16,8 +16,8 @@ struct TaskRepresentation: Equatable, Codable {
 // FIXME:       case taskID = "id"
         case taskDescription
         case sort = "sortField"
-       case createdDate = "creationDate"
-// FIXME:       case modifiedDate
+        case createdDate = "creationDate"
+        case modifiedDate
 // FIXME:       case completed
     }
 
@@ -27,6 +27,6 @@ struct TaskRepresentation: Equatable, Codable {
     var taskDescription: String
     var sort: Int
     var createdDate: Date
-// FIXME:   var modifiedDate: Date
+    var modifiedDate: Date
 // FIXME:   var completed: Bool
 }
