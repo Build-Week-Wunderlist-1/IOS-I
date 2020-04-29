@@ -19,6 +19,8 @@
 		1DFA43FE245792CD002128F1 /* TaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43FD245792CC002128F1 /* TaskController.swift */; };
 		1DFA44002457B12D002128F1 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA43FF2457B12D002128F1 /* LoginScreenViewController.swift */; };
 		1DFA44022457B289002128F1 /* LoginScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DFA44012457B289002128F1 /* LoginScreen.storyboard */; };
+		92151C69245A1CBD0038E223 /* LambdaListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92151C68245A1CBD0038E223 /* LambdaListTests.swift */; };
+		92151C77245A1CC50038E223 /* LambdaListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92151C76245A1CC50038E223 /* LambdaListUITests.swift */; };
 		DD553F8B24575A3100FEA663 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD553F8A24575A3100FEA663 /* AppDelegate.swift */; };
 		DD553F8D24575A3100FEA663 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD553F8C24575A3100FEA663 /* SceneDelegate.swift */; };
 		DD553F9224575A3100FEA663 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD553F9024575A3100FEA663 /* Main.storyboard */; };
@@ -26,6 +28,23 @@
 		DD553F9724575A3300FEA663 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD553F9524575A3300FEA663 /* LaunchScreen.storyboard */; };
 		DD6996022459F8F40013392C /* PopOverTableView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6996012459F8F40013392C /* PopOverTableView.storyboard */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		92151C6B245A1CBD0038E223 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DD553F7F24575A3100FEA663 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DD553F8624575A3100FEA663;
+			remoteInfo = LambdaList;
+		};
+		92151C79245A1CC50038E223 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DD553F7F24575A3100FEA663 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DD553F8624575A3100FEA663;
+			remoteInfo = LambdaList;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1DFA43E524578A00002128F1 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
@@ -40,6 +59,12 @@
 		1DFA43FD245792CC002128F1 /* TaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskController.swift; sourceTree = "<group>"; };
 		1DFA43FF2457B12D002128F1 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		1DFA44012457B289002128F1 /* LoginScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginScreen.storyboard; sourceTree = "<group>"; };
+		92151C66245A1CBD0038E223 /* LambdaListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LambdaListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92151C68245A1CBD0038E223 /* LambdaListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LambdaListTests.swift; sourceTree = "<group>"; };
+		92151C6A245A1CBD0038E223 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92151C74245A1CC50038E223 /* LambdaListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LambdaListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92151C76245A1CC50038E223 /* LambdaListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LambdaListUITests.swift; sourceTree = "<group>"; };
+		92151C78245A1CC50038E223 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD553F8724575A3100FEA663 /* LambdaList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LambdaList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD553F8A24575A3100FEA663 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD553F8C24575A3100FEA663 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +76,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		92151C63245A1CBD0038E223 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92151C71245A1CC50038E223 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DD553F8424575A3100FEA663 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -122,10 +161,30 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		92151C67245A1CBD0038E223 /* LambdaListTests */ = {
+			isa = PBXGroup;
+			children = (
+				92151C68245A1CBD0038E223 /* LambdaListTests.swift */,
+				92151C6A245A1CBD0038E223 /* Info.plist */,
+			);
+			path = LambdaListTests;
+			sourceTree = "<group>";
+		};
+		92151C75245A1CC50038E223 /* LambdaListUITests */ = {
+			isa = PBXGroup;
+			children = (
+				92151C76245A1CC50038E223 /* LambdaListUITests.swift */,
+				92151C78245A1CC50038E223 /* Info.plist */,
+			);
+			path = LambdaListUITests;
+			sourceTree = "<group>";
+		};
 		DD553F7E24575A3100FEA663 = {
 			isa = PBXGroup;
 			children = (
 				DD553F8924575A3100FEA663 /* LambdaList */,
+				92151C67245A1CBD0038E223 /* LambdaListTests */,
+				92151C75245A1CC50038E223 /* LambdaListUITests */,
 				DD553F8824575A3100FEA663 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -134,6 +193,8 @@
 			isa = PBXGroup;
 			children = (
 				DD553F8724575A3100FEA663 /* LambdaList.app */,
+				92151C66245A1CBD0038E223 /* LambdaListTests.xctest */,
+				92151C74245A1CC50038E223 /* LambdaListUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -154,6 +215,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		92151C65245A1CBD0038E223 /* LambdaListTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92151C6D245A1CBD0038E223 /* Build configuration list for PBXNativeTarget "LambdaListTests" */;
+			buildPhases = (
+				92151C62245A1CBD0038E223 /* Sources */,
+				92151C63245A1CBD0038E223 /* Frameworks */,
+				92151C64245A1CBD0038E223 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				92151C6C245A1CBD0038E223 /* PBXTargetDependency */,
+			);
+			name = LambdaListTests;
+			productName = LambdaListTests;
+			productReference = 92151C66245A1CBD0038E223 /* LambdaListTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		92151C73245A1CC50038E223 /* LambdaListUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92151C7B245A1CC50038E223 /* Build configuration list for PBXNativeTarget "LambdaListUITests" */;
+			buildPhases = (
+				92151C70245A1CC50038E223 /* Sources */,
+				92151C71245A1CC50038E223 /* Frameworks */,
+				92151C72245A1CC50038E223 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				92151C7A245A1CC50038E223 /* PBXTargetDependency */,
+			);
+			name = LambdaListUITests;
+			productName = LambdaListUITests;
+			productReference = 92151C74245A1CC50038E223 /* LambdaListUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		DD553F8624575A3100FEA663 /* LambdaList */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DD553F9B24575A3300FEA663 /* Build configuration list for PBXNativeTarget "LambdaList" */;
@@ -182,6 +279,14 @@
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "iOS BW";
 				TargetAttributes = {
+					92151C65245A1CBD0038E223 = {
+						CreatedOnToolsVersion = 11.4.1;
+						TestTargetID = DD553F8624575A3100FEA663;
+					};
+					92151C73245A1CC50038E223 = {
+						CreatedOnToolsVersion = 11.4.1;
+						TestTargetID = DD553F8624575A3100FEA663;
+					};
 					DD553F8624575A3100FEA663 = {
 						CreatedOnToolsVersion = 11.4.1;
 					};
@@ -201,11 +306,27 @@
 			projectRoot = "";
 			targets = (
 				DD553F8624575A3100FEA663 /* LambdaList */,
+				92151C65245A1CBD0038E223 /* LambdaListTests */,
+				92151C73245A1CC50038E223 /* LambdaListUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		92151C64245A1CBD0038E223 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92151C72245A1CC50038E223 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DD553F8524575A3100FEA663 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -241,6 +362,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		92151C62245A1CBD0038E223 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92151C69245A1CBD0038E223 /* LambdaListTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92151C70245A1CC50038E223 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92151C77245A1CC50038E223 /* LambdaListUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DD553F8324575A3100FEA663 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -263,6 +400,19 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		92151C6C245A1CBD0038E223 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DD553F8624575A3100FEA663 /* LambdaList */;
+			targetProxy = 92151C6B245A1CBD0038E223 /* PBXContainerItemProxy */;
+		};
+		92151C7A245A1CC50038E223 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DD553F8624575A3100FEA663 /* LambdaList */;
+			targetProxy = 92151C79245A1CC50038E223 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		DD553F9024575A3100FEA663 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -283,6 +433,84 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		92151C6E245A1CBD0038E223 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4ZDYKHFRDV;
+				INFOPLIST_FILE = LambdaListTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gerrior.LambdaListTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LambdaList.app/LambdaList";
+			};
+			name = Debug;
+		};
+		92151C6F245A1CBD0038E223 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4ZDYKHFRDV;
+				INFOPLIST_FILE = LambdaListTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gerrior.LambdaListTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LambdaList.app/LambdaList";
+			};
+			name = Release;
+		};
+		92151C7C245A1CC50038E223 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4ZDYKHFRDV;
+				INFOPLIST_FILE = LambdaListUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gerrior.LambdaListUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LambdaList;
+			};
+			name = Debug;
+		};
+		92151C7D245A1CC50038E223 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4ZDYKHFRDV;
+				INFOPLIST_FILE = LambdaListUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gerrior.LambdaListUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LambdaList;
+			};
+			name = Release;
+		};
 		DD553F9924575A3300FEA663 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -434,6 +662,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		92151C6D245A1CBD0038E223 /* Build configuration list for PBXNativeTarget "LambdaListTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92151C6E245A1CBD0038E223 /* Debug */,
+				92151C6F245A1CBD0038E223 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92151C7B245A1CC50038E223 /* Build configuration list for PBXNativeTarget "LambdaListUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92151C7C245A1CC50038E223 /* Debug */,
+				92151C7D245A1CC50038E223 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DD553F8224575A3100FEA663 /* Build configuration list for PBXProject "LambdaList" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
