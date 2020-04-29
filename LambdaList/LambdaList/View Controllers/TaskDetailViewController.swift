@@ -69,6 +69,7 @@ class TaskDetailViewController: UIViewController {
         
         let dateFormatter: DateFormatter = {
             let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = .autoupdatingCurrent
             dateFormatter.dateFormat = "MMM d, h:mm a"
             return dateFormatter
         }()
