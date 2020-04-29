@@ -197,14 +197,17 @@
                         <viewLayoutGuide key="safeArea" id="eas-tT-Kuh"/>
                     </view>
                     <navigationItem key="navigationItem" title="Show Details" id="WVB-r1-TPI">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="UFP-sG-SHS">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="UFP-sG-SHS">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="editButtonPressed:" destination="JqU-NH-AG1" id="jqH-0Q-siB"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="dateLabel" destination="69M-Xe-PmC" id="8Ug-A4-xRH"/>
                         <outlet property="descriptionTextView" destination="tRZ-6c-XKZ" id="J9c-Qf-VnV"/>
-                        <outlet property="editButtonPressed" destination="UFP-sG-SHS" id="j41-vT-yTS"/>
+                        <outlet property="editButton" destination="UFP-sG-SHS" id="ejS-VT-g6S"/>
                         <outlet property="taskStatusLabel" destination="tC0-hf-Aam" id="kmS-ZS-QRl"/>
                         <outlet property="titleTextField" destination="tYR-tJ-iuC" id="c3r-vE-XZA"/>
                     </connections>

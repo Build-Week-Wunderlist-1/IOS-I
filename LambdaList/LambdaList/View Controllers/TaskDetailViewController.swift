@@ -16,18 +16,47 @@ class TaskDetailViewController: UIViewController {
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var taskStatusLabel: UILabel!
     @IBOutlet private weak var descriptionTextView: UITextView!
+    @IBOutlet weak var editButton: UIBarButtonItem!
     
     // MARK: - Actions
-    @IBOutlet private weak var editButtonPressed: UIBarButtonItem!
+    @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
+        
+        //If editing task properties
+        //Then Allow editing
+        if editTask == true {
+            editTask = false
+            titleTextField.isUserInteractionEnabled = false
+            descriptionTextView.isUserInteractionEnabled = false
+            editButton?.title = "Edit"
+            
+            task?.taskName = titleTextField.text
+            task?.taskDescription = descriptionTextView.text
+            
+            //Save Changes to CoreData
+            do {
+                try CoreDataStack.shared.mainContext.save()
+            } catch {
+                print("Error Saving changes to CoreData: \(error)")
+            }
+            
+        } else {
+            editTask = true
+            titleTextField.isUserInteractionEnabled = true
+            descriptionTextView.isUserInteractionEnabled = true
+            editButton?.title = "Done"
+        }
+    }
+    
     
     // MARK: - Properties
     var task: Task?
-    
-    // TODO: ? - dependancy injection w / didSet/ call update views
+    var editTask = false
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleTextField.isUserInteractionEnabled = false
+        descriptionTextView.isUserInteractionEnabled = false
         updateViews()
     }
     
