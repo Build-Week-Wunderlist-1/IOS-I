@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import LambdaList
 
 class LambdaListTests: XCTestCase {
 
@@ -18,9 +19,28 @@ class LambdaListTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testBackendPut() throws {
+
+        let task = Task(taskName: "Mark's First Task v3",
+                        taskDescription: "Hello, world! v3")
+
+        let tc = TaskController()
+
+        tc.put(task: task) { urlResponse, error  in
+            if let error = error {
+                print("⚠️ testBackendPut Error: \(error)")
+                XCTAssert(false, "testBackendPut error")
+            } else if let urlResponse = urlResponse as? HTTPURLResponse {
+                if urlResponse.statusCode != 200 {
+                    print("⚠️ testBackendPut statusCode: \(urlResponse.statusCode)")
+                    XCTAssert(false, "testBackendPut urlResponse")
+                }
+            } else {
+                print("testBackendPut successful!")
+            }
+        }
+
+        sleep(10000) // FIXME: Not the correct way to do this.
     }
 
     func testPerformanceExample() throws {
