@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class TaskDetailViewController: UIViewController {
 
@@ -20,18 +21,33 @@ class TaskDetailViewController: UIViewController {
     @IBOutlet private weak var editButtonPressed: UIBarButtonItem!
     
     // MARK: - Properties
+    var task: Task?
     
     // TODO: ? - dependancy injection w / didSet/ call update views
     
     // MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // TODO: ? - Do any additional setup after loading the view.
+        updateViews()
     }
     
     // MARK: - Methods
-    
-    // TODO: ? - updateViews
+    func updateViews() {
+        guard let tempTask = task, let taskName = tempTask.taskName, let taskDescription = tempTask.taskDescription, let dateCreated = tempTask.createdDate else {
+            print("Something in task is nil")
+            return
+        }
+        
+        //Setting Properties
+        titleTextField.text = taskName
+        descriptionTextView.text = taskDescription
+        dateLabel.text = dateCreated.description
+        
+        if tempTask.completed == true {
+            taskStatusLabel.text = "Status: Complete"
+        } else {
+            taskStatusLabel.text = "Status: Incomplete"
+        }
+    }
 
 }
