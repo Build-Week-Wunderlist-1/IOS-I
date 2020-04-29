@@ -16,6 +16,7 @@ class CompleteTasksTableViewController: UITableViewController {
     
     // MARK: - Actions
     @IBAction func sortButtonPressed(_ sender: UIBarButtonItem) {
+        allowUserToSort()
     }
     
     @IBAction func addTaskButtonPressed(_ sender: UIBarButtonItem) {
@@ -25,6 +26,7 @@ class CompleteTasksTableViewController: UITableViewController {
     // MARK: - Properties
     let taskController = TaskController()
     var completeTasks: [Task] = []
+    var sortedByKey: String = "sort"
     
     private lazy var fetchedResultsController: NSFetchedResultsController<Task> = {
         let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
@@ -138,6 +140,39 @@ class CompleteTasksTableViewController: UITableViewController {
     
     // MARK: - Methods
     
+    private func allowUserToSort() {
+        // Create the alert
+               let alert = UIAlertController(title: "Sort By:",
+                                             message: "",
+                                             preferredStyle: .alert)
+               
+               // Add actions
+               alert.addAction(UIAlertAction(title: "Alphabetical", style: .default, handler: { _ in
+                   self.sortedByKey = "taskName"
+                   self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.sortedByKey, ascending: true)]
+                   try! self.fetchedResultsController.performFetch()
+                   self.tableView.reloadData()
+               }))
+               
+               alert.addAction(UIAlertAction(title: "Most Recent", style: .default, handler: { _ in
+                   self.sortedByKey = "createdDate"
+                   self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.sortedByKey, ascending: false)]
+                   try! self.fetchedResultsController.performFetch()
+                   self.tableView.reloadData()
+               }))
+               
+               alert.addAction(UIAlertAction(title: "Manual", style: .default, handler: { _ in
+                   self.sortedByKey = "sort"
+                   self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.sortedByKey, ascending: false)]
+                   try! self.fetchedResultsController.performFetch()
+                   self.tableView.reloadData()
+               }))
+               
+               alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+               
+               // Present the alert
+               self.present(alert, animated: true) { }
+    }
     
 }
 
