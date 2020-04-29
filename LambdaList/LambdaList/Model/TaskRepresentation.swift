@@ -14,7 +14,8 @@ struct TaskRepresentation: Equatable, Codable {
     var taskID: String
     var taskDescription: String?
     var sort: Int
-    var createdDate: String
+    var createdDate: Date
+    var modifiedDate: Date
     var completed: Bool?
     
 }
