@@ -47,7 +47,7 @@ class TaskDetailViewController: UIViewController {
         //Setting Properties
         titleTextField.text = taskName
         descriptionTextView.text = taskDescription
-        dateLabel.text = dateFormatter.string(from: dateCreated)
+        dateLabel.text = "Date Created: " + dateFormatter.string(from: dateCreated)
         
         if tempTask.completed == true {
             taskStatusLabel.text = "Status: Complete"
