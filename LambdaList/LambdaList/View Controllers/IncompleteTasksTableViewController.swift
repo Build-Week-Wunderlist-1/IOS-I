@@ -36,7 +36,7 @@ class IncompleteTasksTableViewController: UITableViewController {
         try! fetchedResultsController.performFetch()
         return fetchedResultsController
     }()
-        
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -44,7 +44,7 @@ class IncompleteTasksTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        incompleteTasks = taskController.getIncompleteTasks()
+        //        incompleteTasks = taskController.getIncompleteTasks()
     }
     
     
@@ -56,7 +56,7 @@ class IncompleteTasksTableViewController: UITableViewController {
     }
     
     //Setting the cells properties
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier, for: indexPath)
         
         guard let myCell = cell as? TaskTableViewCell else {
@@ -67,8 +67,8 @@ class IncompleteTasksTableViewController: UITableViewController {
         
         //myCell.task
         return myCell
-     }
-     
+    }
+    
     //    // Override to support editing the table view.
     //    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     //        if editingStyle == .delete {
@@ -99,9 +99,11 @@ class IncompleteTasksTableViewController: UITableViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowTaskDetailSegue" {
-            // TODO: - Get the new view controller using segue.destination.
-            // TODO: - Pass the selected object to the new view controller.
+        if segue.identifier == "ShowTaskDetailSegue1" {
+            guard let taskDetailViewController = segue.destination as? TaskDetailViewController,
+                let indexPath = tableView.indexPathForSelectedRow else { return }
+            
+            taskDetailViewController.task = fetchedResultsController.object(at: indexPath)
         } else if segue.identifier == "AddTaskModalSegue" {
             // TODO: - Get the new view controller using segue.destination.
             // TODO: - Pass the selected object to the new view controller.

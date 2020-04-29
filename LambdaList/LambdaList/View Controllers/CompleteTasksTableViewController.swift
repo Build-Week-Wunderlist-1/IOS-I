@@ -38,7 +38,7 @@ class CompleteTasksTableViewController: UITableViewController {
         try! fetchedResultsController.performFetch()
         return fetchedResultsController
     }()
-        
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,7 @@ class CompleteTasksTableViewController: UITableViewController {
     }
     
     //Setting the cells properties
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier, for: indexPath)
         
         guard let myCell = cell as? TaskTableViewCell else {
@@ -68,7 +68,7 @@ class CompleteTasksTableViewController: UITableViewController {
         
         //myCell.task
         return myCell
-     }
+    }
     
     //    // Override to support editing the table view.
     //    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -100,9 +100,11 @@ class CompleteTasksTableViewController: UITableViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowTaskDetailSegue" {
-            // TODO: ? - Get the new view controller using segue.destination.
-            // TODO: ? - Pass the selected object to the new view controller.
+        if segue.identifier == "ShowTaskDetailSegue2" {
+            guard let taskDetailViewController = segue.destination as? TaskDetailViewController,
+                let indexPath = tableView.indexPathForSelectedRow else { return }
+            
+            taskDetailViewController.task = fetchedResultsController.object(at: indexPath)
         } else if segue.identifier == "AddTaskModalSegue" {
             // TODO: ? - Get the new view controller using segue.destination.
             // TODO: ? - Pass the selected object to the new view controller.

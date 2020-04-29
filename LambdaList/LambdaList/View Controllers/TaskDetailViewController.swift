@@ -21,7 +21,11 @@ class TaskDetailViewController: UIViewController {
     
     // MARK: - Properties
     
-    // TODO: ? - dependancy injection w / didSet/ call update views
+    var task: Task? {
+        didSet {
+            updateViews()
+        }
+    }
     
     // MARK: - Lifecycle
     
@@ -32,6 +36,20 @@ class TaskDetailViewController: UIViewController {
     
     // MARK: - Methods
     
-    // TODO: ? - updateViews
+    private func updateViews() {
+        
+        let dateFormatter: DateFormatter = {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM dd yyyy"
+            return dateFormatter
+        }()
+        
+        guard let task = task else { return }
+        
+        titleTextField.text = task.taskName
+        dateLabel.text = dateFormatter.string(from: task.createdDate!)
+        taskStatusLabel.text?.append(task.completed == true ? " Complete" : " Incomplete")
+        descriptionTextView.text = task.taskDescription ?? ""
+    }
 
 }
