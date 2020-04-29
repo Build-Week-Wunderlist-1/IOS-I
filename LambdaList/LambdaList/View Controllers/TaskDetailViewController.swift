@@ -38,10 +38,16 @@ class TaskDetailViewController: UIViewController {
             return
         }
         
+        let dateFormatter: DateFormatter = {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM d, h:mm a"
+            return dateFormatter
+        }()
+        
         //Setting Properties
         titleTextField.text = taskName
         descriptionTextView.text = taskDescription
-        dateLabel.text = dateCreated.description
+        dateLabel.text = dateFormatter.string(from: dateCreated)
         
         if tempTask.completed == true {
             taskStatusLabel.text = "Status: Complete"
