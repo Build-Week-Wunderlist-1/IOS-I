@@ -106,11 +106,22 @@ class IncompleteTasksTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowTaskDetailSegue" {
-            // TODO: - Get the new view controller using segue.destination.
-            // TODO: - Pass the selected object to the new view controller.
+            
+            //Get Tasks
+            let tasks = fetchedResultsController.fetchedObjects
+            
+            //Unwrapping
+            guard let destination = segue.destination as? TaskDetailViewController, let row = tableView.indexPathForSelectedRow?.row, let tempTasks = tasks else {
+                return
+            }
+            
+            destination.task = tempTasks[row]
+            
+            // TODO: ? - Get the new view controller using segue.destination.
+            // TODO: ? - Pass the selected object to the new view controller.
         } else if segue.identifier == "AddTaskModalSegue" {
-            // TODO: - Get the new view controller using segue.destination.
-            // TODO: - Pass the selected object to the new view controller.
+            // TODO: ? - Get the new view controller using segue.destination.
+            // TODO: ? - Pass the selected object to the new view controller.
         }
     }
     

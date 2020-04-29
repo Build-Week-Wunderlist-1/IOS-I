@@ -35,7 +35,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="Wyc-jg-5bt">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mvI-5P-bP0">
@@ -48,7 +48,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="usableCell" rowHeight="90" id="zKX-oe-tB7" customClass="TaskTableViewCell" customModule="LambdaList" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="414" height="90"/>
+                                <rect key="frame" x="0.0" y="78" width="414" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zKX-oe-tB7" id="j79-cD-9kC">
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="90"/>
@@ -105,7 +105,7 @@
                                     <outlet property="completeButton" destination="Jq3-ro-Mt7" id="Uvn-1n-MBd"/>
                                     <outlet property="descriptionLabel" destination="a4c-Gw-A92" id="w5P-YB-Kft"/>
                                     <outlet property="titleLabel" destination="TPQ-EP-gYI" id="6OL-XQ-1c4"/>
-                                    <segue destination="JqU-NH-AG1" kind="show" identifier="ShowTaskDetailSegue" id="OMN-pc-JJ6"/>
+                                    <segue destination="JqU-NH-AG1" kind="show" identifier="ShowTaskDetailSegue" id="Ge3-NO-YXE"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -150,26 +150,26 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ERe-IX-aGN">
                                 <rect key="frame" x="15" y="148" width="384" height="243"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Title:" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tYR-tJ-iuC">
-                                        <rect key="frame" x="0.0" y="0.0" width="384" height="36"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title:" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tYR-tJ-iuC">
+                                        <rect key="frame" x="0.0" y="0.0" width="384" height="28"/>
                                         <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Created/Edited:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="69M-Xe-PmC">
-                                        <rect key="frame" x="0.0" y="48" width="384" height="21.5"/>
+                                        <rect key="frame" x="0.0" y="40" width="384" height="21.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completion Status:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tC0-hf-Aam">
-                                        <rect key="frame" x="0.0" y="81.5" width="384" height="21.5"/>
+                                        <rect key="frame" x="0.0" y="73.5" width="384" height="21.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Description Here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tRZ-6c-XKZ">
-                                        <rect key="frame" x="0.0" y="115" width="384" height="128"/>
+                                        <rect key="frame" x="0.0" y="107" width="384" height="136"/>
                                         <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
@@ -221,7 +221,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="kp4-zP-3EE">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h6K-Vt-8nl">
@@ -234,7 +234,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="usableCell" rowHeight="90" id="V5d-9T-LTe" customClass="TaskTableViewCell" customModule="LambdaList" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="414" height="90"/>
+                                <rect key="frame" x="0.0" y="78" width="414" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V5d-9T-LTe" id="0Zh-QM-sVJ">
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="90"/>
@@ -291,7 +291,7 @@
                                     <outlet property="completeButton" destination="wL4-yh-Yw5" id="Zov-P9-nye"/>
                                     <outlet property="descriptionLabel" destination="XHT-q0-8gw" id="3GJ-TN-B9f"/>
                                     <outlet property="titleLabel" destination="Ljb-uK-p0v" id="lf8-zC-EXk"/>
-                                    <segue destination="JqU-NH-AG1" kind="show" identifier="ShowTaskDetailSegue" id="yuz-Ki-FEM"/>
+                                    <segue destination="JqU-NH-AG1" kind="show" identifier="ShowTaskDetailSegue" id="3ur-6u-EfA"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -455,7 +455,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Vpv-QV-Rc5"/>
-        <segue reference="yuz-Ki-FEM"/>
+        <segue reference="3ur-6u-EfA"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.down" catalog="system" width="120" height="128"/>

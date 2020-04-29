@@ -50,6 +50,12 @@ class TaskTableViewCell: UITableViewCell {
             completeButton.setImage(image, for: .normal)
             completeButton.tintColor = .gray
         }
+        
+        do {
+           try CoreDataStack.shared.mainContext.save()
+        } catch {
+            print("Error Saving CoreData")
+        }
     }
     
     
