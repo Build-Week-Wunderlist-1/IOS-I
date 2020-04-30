@@ -262,10 +262,13 @@ class TaskController {
                 return
             }
 
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+
             // Unwrap the data returned in the closure.
             do {
                 var tasks: [TaskRepresentation] = []
-                tasks = Array(try JSONDecoder().decode([TaskRepresentation].self, from: data))
+                tasks = Array(try decoder.decode([TaskRepresentation].self, from: data))
                 print("tasks count = \(tasks)")
                 //try self.updateEntries(with: taskRepresentation)
                 completion(nil, nil)
