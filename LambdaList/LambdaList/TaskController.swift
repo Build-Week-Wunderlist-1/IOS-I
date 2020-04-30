@@ -28,8 +28,9 @@ class TaskController {
     // MARK: - Properities
     typealias CompletionHandler = (URLResponse?, Error?) -> Void
     let baseURL = URL(string: "https://lambdawunderlist.herokuapp.com/")!
-
     var tasks: [Task] = []
+    var bearer: Bearer?
+    
 
     // MARK: - Functions
     func getCompletedTasks() -> [Task] {
@@ -121,10 +122,64 @@ class TaskController {
             print("Error Encoding User Object: \(error)")
         }
     }
+    
+    func userSignin(user: User, completion: @escaping CompletionHandler = { _, _ in }) {
+        
+        //Unwrap URL
+        let signinURL = baseURL.appendingPathComponent("api/auth/login/")
+        var request = postRequest(url: signinURL)
+        
+        do {
+            
+            //Encoding Data
+            let jsonData = try JSONEncoder().encode(user)
+            request.httpBody = jsonData
+            
+            //Sending Data to Server
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+               
+                //Error Checking
+                if let error = error {
+                    print("Error sending data when Signing Up: \(error)")
+                    completion(nil, error)
+                }
+
+                //Check response status code
+                guard let response = response as? HTTPURLResponse else {
+                    print("Bad Response when Signing Up")
+                    completion(nil, nil)
+                    return
+                }
+
+                print(response.statusCode)
+
+                //Check data
+                guard let data = data else {
+                    print("Data was not received")
+                    completion(nil, nil)
+                    return
+                }
+                
+                //Try Unwrapping Data
+                do {
+                    self.bearer = try JSONDecoder().decode(Bearer.self, from: data)
+                    completion(nil, nil)
+                } catch {
+                    print("Error unwrapping data received in signin: \(error)")
+                }
+            }
+            
+        } catch {
+            print("Error Encoding User in Signin: \(error)")
+        }
+        
+        
+    }
 
     // Read
     // Update
     func put(task: Task, completion: @escaping CompletionHandler = { _, _ in }) {
+        // FIXME: Pull this value from UserDefaults
         let userId = "4"
         let taskId = "4" // task.taskID
 
@@ -139,6 +194,7 @@ class TaskController {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         // swiftlint:disable line_length
+        // FIXME: Pull this value from UserDefaults
         request.setValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJuYW1lIjoiZ2VycmlvcjAxIiwidXNlcmVtYWlsIjoiaGVyb2t1YXBwMDFAbS5nZXJyaW9yLmNvbSIsImlhdCI6MTU4ODE3NTM1OSwiZXhwIjoxNTg5Mzg0OTU5fQ.w4pVW9fQT1NmU3rletahQyGvocO_QxvAoBq5qGvD6VY", forHTTPHeaderField: "Authorization")
         // swiftlint:enable line_length
 
