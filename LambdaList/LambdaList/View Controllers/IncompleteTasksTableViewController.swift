@@ -131,21 +131,27 @@ class IncompleteTasksTableViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "Alphabetical", style: .default, handler: { _ in
             self.sortedByKey = "taskName"
             self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.sortedByKey, ascending: true)]
+            // swiftlint:disable force_try
             try! self.fetchedResultsController.performFetch()
+            // swiftlint:enable force_try
             self.tableView.reloadData()
         }))
         
         alert.addAction(UIAlertAction(title: "Most Recent", style: .default, handler: { _ in
             self.sortedByKey = "createdDate"
             self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.sortedByKey, ascending: false)]
+            // swiftlint:disable force_try
             try! self.fetchedResultsController.performFetch()
+            // swiftlint:enable force_try
             self.tableView.reloadData()
         }))
         
         alert.addAction(UIAlertAction(title: "Manual", style: .default, handler: { _ in
             self.sortedByKey = "sort"
             self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.sortedByKey, ascending: true)]
+            // swiftlint:disable force_try
             try! self.fetchedResultsController.performFetch()
+            // swiftlint:enable force_try
             self.tableView.reloadData()
         }))
         
