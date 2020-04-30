@@ -66,6 +66,32 @@ class LambdaListTests: XCTestCase {
         sleep(10000) // FIXME: Not the correct way to do this.
     }
 
+    func testBackendDelete() throws {
+
+        let task = Task(taskName: "Mark's First Task v8",
+                        taskDescription: "Hello, world! v8",
+                        completed: true)
+        task.taskID = 4
+        print(task.taskID)
+        let tc = TaskController()
+
+        tc.delete(task: task) { urlResponse, error  in
+            if let error = error {
+                print("⚠️ testBackendDelete Error: \(error)")
+                XCTAssert(false, "testBackendDelete error")
+            } else if let urlResponse = urlResponse as? HTTPURLResponse {
+                if urlResponse.statusCode != 200 {
+                    print("⚠️ testBackendDelete statusCode: \(urlResponse.statusCode)")
+                    XCTAssert(false, "testBackendDelete urlResponse")
+                }
+            } else {
+                print("testBackendDelete successful!")
+            }
+        }
+
+        sleep(10000) // FIXME: Not the correct way to do this.
+    }
+
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         measure {

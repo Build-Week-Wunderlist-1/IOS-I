@@ -238,5 +238,45 @@ class TaskController {
     }
 
     // Delete
+    func delete(task: Task, completion: @escaping CompletionHandler = { _, _ in }) {
+        if task.taskID <= 0 {
+            print("task.taskID == \(task.taskID). DELETE failed.")
+        }
 
+        // FIXME: Pull this value from UserDefaults
+        let userId = "4"
+        let taskId = "\(task.taskID)"
+
+        var requestURL = baseURL.appendingPathComponent("api/lists")
+        requestURL = requestURL.appendingPathComponent(userId)
+        requestURL = requestURL.appendingPathComponent(taskId)
+
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.delete.rawValue
+
+        // Tell the server what it's looking at. Won't work without it since it won't "guess"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        // swiftlint:disable line_length
+        // FIXME: Pull this value from UserDefaults
+        request.setValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJuYW1lIjoiZ2VycmlvcjAxIiwidXNlcmVtYWlsIjoiaGVyb2t1YXBwMDFAbS5nZXJyaW9yLmNvbSIsImlhdCI6MTU4ODE3NTM1OSwiZXhwIjoxNTg5Mzg0OTU5fQ.w4pVW9fQT1NmU3rletahQyGvocO_QxvAoBq5qGvD6VY", forHTTPHeaderField: "Authorization")
+        // swiftlint:enable line_length
+
+        URLSession.shared.dataTask(with: request) { _, urlResponse, error in
+            if let error = error {
+                NSLog("Error DELETEing task to server \(error)")
+                completion(nil, error)
+                return
+            }
+
+            if let urlResponse = urlResponse {
+                NSLog("urlResponse DELETEing task to server \(urlResponse)")
+                completion(urlResponse, nil)
+                return
+            }
+
+            completion(nil, nil)
+        }.resume()
+        print("DELETE initiated.")
+    }
 }
