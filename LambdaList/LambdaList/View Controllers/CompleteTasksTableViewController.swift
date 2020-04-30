@@ -23,12 +23,16 @@ class CompleteTasksTableViewController: UITableViewController {
     }
     
     @IBAction func refresh(_ sender: UIRefreshControl) {
-        // TODO: taskController.fetchTasksFromServer { _ in
-        DispatchQueue.main.async {
-            self.refreshControl?.endRefreshing()
+        if let userID = UserDefaults.standard.object(forKey: "userId") as? Int,
+            let token = UserDefaults.standard.object(forKey: "token") as? String {
+            
+            taskController.get(userId: String(userID), authToken: token) { _,_  in
+                DispatchQueue.main.async {
+                    self.refreshControl?.endRefreshing()
+                }
+            }
         }
-    }
-//}
+}
 
 
 // MARK: - Properties
