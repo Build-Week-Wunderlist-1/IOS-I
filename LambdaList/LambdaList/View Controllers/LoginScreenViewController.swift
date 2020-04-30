@@ -17,11 +17,7 @@ class LoginScreenViewController: UIViewController {
     }
     
     // MARK: - Properties
-    var loginType: LoginType = .login {
-        didSet {
-            updateViews()
-        }
-    }
+    var loginType: LoginType = .login
     
     var taskController = TaskController()
     
@@ -32,6 +28,7 @@ class LoginScreenViewController: UIViewController {
     @IBOutlet private weak var rememberMeButton: UIButton!
     @IBOutlet private weak var logInButton: UIButton!
     @IBOutlet private weak var emailTextField: UITextField!
+    @IBOutlet weak var emailLabel: UILabel!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -90,11 +87,15 @@ class LoginScreenViewController: UIViewController {
         if sender.selectedSegmentIndex == 0 {
             loginType = .login
             emailTextField.isUserInteractionEnabled = false
+            emailTextField.isHidden = true
             logInButton.setTitle("Log In", for: .normal)
+            emailLabel.isHidden = true
         } else {
             loginType = .signup
             emailTextField.isUserInteractionEnabled = true
+            emailTextField.isHidden = false
             logInButton.setTitle("Sign Up", for: .normal)
+            emailLabel.isHidden = false
         }
     }
     
@@ -120,12 +121,14 @@ class LoginScreenViewController: UIViewController {
     
     private func updateViews() {
         logInButton.layer.cornerRadius = 3
-        //signUpButton.layer.cornerRadius = 3
         
-        //Lock user interaction
-        if loginType == .login {
-            
-        }
+        //Assign login type
+        //Lock Email TextField if not signing up
+        loginType = .login
+        emailTextField.isUserInteractionEnabled = false
+        emailTextField.isHidden = true
+        logInButton.setTitle("Log In", for: .normal)
+        emailLabel.isHidden = true
     }
     
 }

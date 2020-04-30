@@ -166,6 +166,7 @@
                         <viewLayoutGuide key="safeArea" id="u3v-nS-Wuv"/>
                     </view>
                     <connections>
+                        <outlet property="emailLabel" destination="oR8-H2-9TC" id="BtU-BC-pMh"/>
                         <outlet property="emailTextField" destination="767-KM-5Jw" id="v5Q-C3-3Uy"/>
                         <outlet property="logInButton" destination="DKS-eo-4to" id="5Md-Wu-Vqa"/>
                         <outlet property="logInStatusLabel" destination="EwI-0u-vSZ" id="wmT-hy-HKK"/>
