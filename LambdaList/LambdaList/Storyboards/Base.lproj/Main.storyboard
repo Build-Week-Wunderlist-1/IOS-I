@@ -146,7 +146,7 @@
                     </refreshControl>
                     <connections>
                         <outlet property="searchBar" destination="mvI-5P-bP0" id="EtV-Qn-nkY"/>
-                        <segue destination="irB-18-J1T" kind="presentation" identifier="LoginScreenSegue" id="g2K-1u-aas"/>
+                        <segue destination="irB-18-J1T" kind="presentation" identifier="LoginScreenSegue" modalPresentationStyle="fullScreen" id="g2K-1u-aas"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fYY-zL-s9t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

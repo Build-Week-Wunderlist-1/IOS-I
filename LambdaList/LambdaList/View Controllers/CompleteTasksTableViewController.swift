@@ -305,7 +305,7 @@ extension CompleteTasksTableViewController: UISearchBarDelegate {
         }
         
         if searchBar.text == "" {
-            let predicate = NSPredicate(format: "completed == %@", NSNumber(value: false))
+            let predicate = NSPredicate(format: "completed == %@", NSNumber(value: true))
             
             
             fetchedResultsController.fetchRequest.predicate = predicate
