@@ -89,7 +89,8 @@ class IncompleteTasksTableViewController: UITableViewController {
         guard let myCell = cell as? TaskTableViewCell else {
             return cell
         }
-        
+
+        myCell.taskController = taskController
         myCell.task = fetchedResultsController.object(at: indexPath)
         
         //myCell.task

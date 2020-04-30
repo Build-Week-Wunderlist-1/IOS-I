@@ -5,6 +5,7 @@ class TaskTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     static var identifier = "usableCell"
+    var taskController: TaskController?
 
     var task: Task? {
         didSet {
@@ -24,7 +25,9 @@ class TaskTableViewCell: UITableViewCell {
         }
         
         tempTask.completed.toggle()
-        
+        taskController?.updateTask(tempTask)
+
+        // FIXME: Can't we just call updateButton?
         if tempTask.completed == false {
             completeButton.setImage(UIImage(systemName: "square"), for: .normal)
         } else {
@@ -57,12 +60,6 @@ class TaskTableViewCell: UITableViewCell {
             let image = UIImage(systemName: "square")
             completeButton.setImage(image, for: .normal)
             completeButton.tintColor = .gray
-        }
-        
-        do {
-           try CoreDataStack.shared.mainContext.save()
-        } catch {
-            print("Error Saving CoreData")
         }
     }
     
