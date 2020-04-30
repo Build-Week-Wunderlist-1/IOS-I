@@ -47,9 +47,11 @@ class IncompleteTasksTableViewController: UITableViewController {
                                                                   sectionNameKeyPath: nil,
                                                                   cacheName: nil)
         fetchedResultsController.delegate = self
-        // swiftlint:disable force_try
-        try! fetchedResultsController.performFetch()
-        // swiftlint:enable force_try
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            print("Error Fetching -> IncompleteTasksTableView in fetchedResultsController: \(error)")
+        }
         return fetchedResultsController
     }()
     
@@ -157,33 +159,41 @@ class IncompleteTasksTableViewController: UITableViewController {
         // Add actions
         alert.addAction(UIAlertAction(title: "A-Z", style: .default, handler: { _ in
             self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "taskName", ascending: true)]
-            // swiftlint:disable force_try
-            try! self.fetchedResultsController.performFetch()
-            // swiftlint:enable force_try
+            do {
+                try self.fetchedResultsController.performFetch()
+            } catch {
+                print("Error Fetching -> IncompleteTableView in allowSort function: \(error)")
+            }
             self.tableView.reloadData()
         }))
         
         alert.addAction(UIAlertAction(title: "Z-A", style: .default, handler: { _ in
             self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "taskName", ascending: false)]
-            // swiftlint:disable force_try
-            try! self.fetchedResultsController.performFetch()
-            // swiftlint:enable force_try
+            do {
+                 try self.fetchedResultsController.performFetch()
+             } catch {
+                 print("Error Fetching -> IncompleteTableView in allowSort function: \(error)")
+             }
             self.tableView.reloadData()
         }))
         
         alert.addAction(UIAlertAction(title: "Newest First", style: .default, handler: { _ in
             self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: false)]
-            // swiftlint:disable force_try
-            try! self.fetchedResultsController.performFetch()
-            // swiftlint:enable force_try
+            do {
+                 try self.fetchedResultsController.performFetch()
+             } catch {
+                 print("Error Fetching -> IncompleteTableView in allowSort function: \(error)")
+             }
             self.tableView.reloadData()
         }))
         
         alert.addAction(UIAlertAction(title: "Oldest First", style: .default, handler: { _ in
             self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: true)]
-            // swiftlint:disable force_try
-            try! self.fetchedResultsController.performFetch()
-            // swiftlint:enable force_try
+            do {
+                 try self.fetchedResultsController.performFetch()
+             } catch {
+                 print("Error Fetching -> IncompleteTableView in allowSort function: \(error)")
+             }
             self.tableView.reloadData()
         }))
         
