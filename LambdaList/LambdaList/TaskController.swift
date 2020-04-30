@@ -195,7 +195,6 @@ class TaskController {
         }
 
         if let bearer = TaskController.self.bearer {
-            delete(task: task, userId: "\(bearer.userId)", authToken: bearer.token)
             post(task: task, userId: "\(bearer.userId)", authToken: bearer.token)
         }
     }
@@ -314,7 +313,14 @@ class TaskController {
     }
 
     // Update
-    func put(task: Task, userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
+    func updateTask(_ task: Task) {
+
+        if let bearer = TaskController.self.bearer {
+            put(task: task, userId: "\(bearer.userId)", authToken: bearer.token)
+        }
+    }
+
+    private func put(task: Task, userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
         if task.taskID <= 0 {
             print("task.taskID == \(task.taskID). PUT failed. Should this be a create?")
         }
