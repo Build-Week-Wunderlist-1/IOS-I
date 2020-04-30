@@ -354,7 +354,21 @@ class TaskController {
     }
 
     // Delete
-    func delete(task: Task, userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
+    func deleteTask(_ task: Task) {
+        CoreDataStack.shared.mainContext.delete(task)
+
+        do {
+            try CoreDataStack.shared.mainContext.save()
+        } catch {
+            print("Error Saving Delete")
+        }
+
+        if let bearer = TaskController.self.bearer {
+            delete(task: task, userId: "\(bearer.userId)", authToken: bearer.token)
+        }
+    }
+    
+    private func delete(task: Task, userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
         if task.taskID <= 0 {
             print("task.taskID == \(task.taskID). DELETE failed.")
         }
