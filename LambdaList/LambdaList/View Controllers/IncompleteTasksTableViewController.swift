@@ -247,8 +247,6 @@ class IncompleteTasksTableViewController: UITableViewController {
             destination.task = tempTasks[row]
             
         } else if segue.identifier == "AddTaskModalSegue" {
-            // TODO: ? - Get the new view controller using segue.destination.
-            // TODO: ? - Pass the selected object to the new view controller.
         }
     }
     
