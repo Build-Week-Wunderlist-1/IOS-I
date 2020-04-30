@@ -23,19 +23,23 @@ class IncompleteTasksTableViewController: UITableViewController {
     }
     
     @IBAction func refresh(_ sender: UIRefreshControl) {
-        // TODO: taskController.fetchTasksFromServer { _ in
-        DispatchQueue.main.async {
-            self.refreshControl?.endRefreshing()
+        if let userID = UserDefaults.standard.object(forKey: "userId") as? Int,
+            let token = UserDefaults.standard.object(forKey: "token") as? String {
+            
+            taskController.get(userId: String(userID), authToken: token) { _,_  in
+                DispatchQueue.main.async {
+                    self.refreshControl?.endRefreshing()
+                }
+            }
         }
     }
-//}
     
     
     // MARK: - Properties
     let taskController = TaskController()
     var incompleteTasks: [Task] = []
     var userIsLoggedIn: Bool = false
-//    var sortedByKey: String = "sort"
+    //    var sortedByKey: String = "sort"
     
     private lazy var fetchedResultsController: NSFetchedResultsController<Task> = {
         let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
@@ -60,7 +64,7 @@ class IncompleteTasksTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         letUserLoginInIfNecessary()
-//        updateViews()
+        //        updateViews()
         searchBar.delegate = self
     }
     
@@ -107,32 +111,32 @@ class IncompleteTasksTableViewController: UITableViewController {
         }
     }
     
-//    // Override to support conditional rearranging of the table view.
-//    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-//        // Return false if you do not want the item to be re-orderable.
-//        return true
-//    }
-//
-//    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//
-//        var objects = fetchedResultsController.fetchedObjects!
-//
-//        fetchedResultsController.delegate = nil
-//
-//        let object = objects[sourceIndexPath.row]
-//        objects.remove(at: sourceIndexPath.row)
-//        objects.insert(object, at: destinationIndexPath.row)
-//
-//        var i: Int64 = 1
-//        for object in objects {
-//            object.sort = i
-//            i += 1
-//        }
-//
-//        try! CoreDataStack.shared.mainContext.save()
-//
-//        fetchedResultsController.delegate = self
-//    }
+    //    // Override to support conditional rearranging of the table view.
+    //    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    //        // Return false if you do not want the item to be re-orderable.
+    //        return true
+    //    }
+    //
+    //    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    //
+    //        var objects = fetchedResultsController.fetchedObjects!
+    //
+    //        fetchedResultsController.delegate = nil
+    //
+    //        let object = objects[sourceIndexPath.row]
+    //        objects.remove(at: sourceIndexPath.row)
+    //        objects.insert(object, at: destinationIndexPath.row)
+    //
+    //        var i: Int64 = 1
+    //        for object in objects {
+    //            object.sort = i
+    //            i += 1
+    //        }
+    //
+    //        try! CoreDataStack.shared.mainContext.save()
+    //
+    //        fetchedResultsController.delegate = self
+    //    }
     
     // MARK: - Methods
     private func letUserLoginInIfNecessary() {
@@ -165,38 +169,38 @@ class IncompleteTasksTableViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "Z-A", style: .default, handler: { _ in
             self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "taskName", ascending: false)]
             do {
-                 try self.fetchedResultsController.performFetch()
-             } catch {
-                 print("Error Fetching -> IncompleteTableView in allowSort function: \(error)")
-             }
+                try self.fetchedResultsController.performFetch()
+            } catch {
+                print("Error Fetching -> IncompleteTableView in allowSort function: \(error)")
+            }
             self.tableView.reloadData()
         }))
         
         alert.addAction(UIAlertAction(title: "Newest First", style: .default, handler: { _ in
             self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: false)]
             do {
-                 try self.fetchedResultsController.performFetch()
-             } catch {
-                 print("Error Fetching -> IncompleteTableView in allowSort function: \(error)")
-             }
+                try self.fetchedResultsController.performFetch()
+            } catch {
+                print("Error Fetching -> IncompleteTableView in allowSort function: \(error)")
+            }
             self.tableView.reloadData()
         }))
         
         alert.addAction(UIAlertAction(title: "Oldest First", style: .default, handler: { _ in
             self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: true)]
             do {
-                 try self.fetchedResultsController.performFetch()
-             } catch {
-                 print("Error Fetching -> IncompleteTableView in allowSort function: \(error)")
-             }
+                try self.fetchedResultsController.performFetch()
+            } catch {
+                print("Error Fetching -> IncompleteTableView in allowSort function: \(error)")
+            }
             self.tableView.reloadData()
         }))
         
-//        alert.addAction(UIAlertAction(title: "Manual", style: .default, handler: { _ in
-//            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: true)]
-//            try! self.fetchedResultsController.performFetch()
-//            self.tableView.reloadData()
-//        }))
+        //        alert.addAction(UIAlertAction(title: "Manual", style: .default, handler: { _ in
+        //            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: true)]
+        //            try! self.fetchedResultsController.performFetch()
+        //            self.tableView.reloadData()
+        //        }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
@@ -204,23 +208,23 @@ class IncompleteTasksTableViewController: UITableViewController {
         self.present(alert, animated: true) { }
     }
     
-//    private func updateViews() {
-//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(showEditing(sender:)))
-//    }
-//
-//    @objc func showEditing(sender: UIBarButtonItem)
-//    {
-//        if(self.tableView.isEditing == true)
-//        {
-//            self.tableView.isEditing = false
-//            self.navigationItem.leftBarButtonItem?.title = "Edit"
-//        }
-//        else
-//        {
-//            self.tableView.isEditing = true
-//            self.navigationItem.leftBarButtonItem?.title = "Done"
-//        }
-//    }
+    //    private func updateViews() {
+    //        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(showEditing(sender:)))
+    //    }
+    //
+    //    @objc func showEditing(sender: UIBarButtonItem)
+    //    {
+    //        if(self.tableView.isEditing == true)
+    //        {
+    //            self.tableView.isEditing = false
+    //            self.navigationItem.leftBarButtonItem?.title = "Edit"
+    //        }
+    //        else
+    //        {
+    //            self.tableView.isEditing = true
+    //            self.navigationItem.leftBarButtonItem?.title = "Done"
+    //        }
+    //    }
     
     // MARK: - Navigation
     
@@ -236,7 +240,7 @@ class IncompleteTasksTableViewController: UITableViewController {
             guard let destination = segue.destination as? TaskDetailViewController,
                 let row = tableView.indexPathForSelectedRow?.row,
                 let tempTasks = tasks else {
-                return
+                    return
             }
             
             destination.task = tempTasks[row]
@@ -317,18 +321,18 @@ extension IncompleteTasksTableViewController: UISearchBarDelegate {
         }
         
         if searchBar.text == "" {
-                let predicate = NSPredicate(format: "completed == %@", NSNumber(value: false))
-
-                
-                fetchedResultsController.fetchRequest.predicate = predicate
-                
-                do {
-                    try fetchedResultsController.performFetch()
-                    tableView.reloadData()
-                } catch let err as NSError {
-                    print(err)
-                }
+            let predicate = NSPredicate(format: "completed == %@", NSNumber(value: false))
+            
+            
+            fetchedResultsController.fetchRequest.predicate = predicate
+            
+            do {
+                try fetchedResultsController.performFetch()
+                tableView.reloadData()
+            } catch let err as NSError {
+                print(err)
             }
         }
+    }
     
 }

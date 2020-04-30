@@ -29,10 +29,10 @@ class AddTaskViewController: UIViewController {
         let task = Task(taskName: titleText, taskDescription: descriptionText)
         
         // Save to server
-        if let userID = UserDefaults.standard.object(forKey: "userId") as? String,
+        if let userID = UserDefaults.standard.object(forKey: "userId") as? Int,
             let authToken = UserDefaults.standard.object(forKey: "token") as? String {
             
-            taskController?.put(task: task, userId: userID, authToken: authToken) //TODO - Send added task to the WebServer
+            taskController?.put(task: task, userId: String(userID), authToken: authToken) //TODO - Send added task to the WebServer
         }
         
         //Save Locally
