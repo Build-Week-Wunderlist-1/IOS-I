@@ -43,8 +43,8 @@ class LambdaListTests: XCTestCase {
     // Task Create
     func testBackendPost() throws {
 
-        let task = Task(taskName: "Mark's First Task v10",
-                        taskDescription: "Hello, world! v10",
+        let task = Task(taskName: "Mark's First Task v12",
+                        taskDescription: "Hello, world! v12",
                         completed: true)
 
         let tc = TaskController()
@@ -69,10 +69,10 @@ class LambdaListTests: XCTestCase {
     // Task Update
     func testBackendPut() throws {
 
-        let task = Task(taskName: "Mark's First Task v10.1",
-                        taskDescription: "Hello, world! v10.1",
+        let task = Task(taskName: "Mark's First Task v12.1",
+                        taskDescription: "Hello, world! v12.1",
                         completed: true)
-        task.taskID = 7
+        task.taskID = 9
         print(task.taskID)
         let tc = TaskController()
 
