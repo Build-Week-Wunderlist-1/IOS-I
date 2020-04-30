@@ -39,6 +39,18 @@ class TaskController {
             }
         }
     }
+    
+    static var getBearer: Bearer? {
+        get {
+            let token = UserDefaults.standard.value(forKey: "token") as? String
+            let userId = UserDefaults.standard.value(forKey: "userId") as? Int
+            guard let tempToken = token, let tempUserId = userId else {
+                return nil
+            }
+            
+            return Bearer(token: tempToken, userId: tempUserId)
+        }
+    }
 
     // MARK: - Functions
     func getCompletedTasks() -> [Task] {
