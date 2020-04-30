@@ -26,10 +26,13 @@ class LambdaListTests: XCTestCase {
     }
 
     func testBackendRegister() {
+        let semiphore = expectation(description: "Completed testBackendRegister")
+
         let tempUser = User(username: "Cameron01", password: "Collins", email: "dummyemail01@yahoo.com")
 
         let tc = TaskController()
         tc.userRegister(user: tempUser) { urlResponse, error  in
+            semiphore.fulfill()
             if let error = error {
                 print("⚠️ testBackendRegister Error: \(error)")
                 XCTAssert(false, "testBackendRegister error")
@@ -43,15 +46,22 @@ class LambdaListTests: XCTestCase {
             }
         }
 
-        sleep(10000) // FIXME: Not the correct way to do this.
+        wait(for: [semiphore], timeout: 5) // blocking sync wait
+
+        // Assertion only happens after the time out, or web request completes
+        // isInverted: Indicates that the expectation is not intended to happen
+        // By adding bang (!) before it, we're testing that it indeed happened!
+        XCTAssertTrue(!semiphore.isInverted, "⚠️ Registering with backend failed.")
     }
 
     // Get List of Tasks
     func testBackendGet() throws {
+        let semiphore = expectation(description: "Completed testBackendGet")
 
         let tc = TaskController()
 
         tc.get(userId: fixedUserId, authToken: fixedAuthToken) { urlResponse, error  in
+            semiphore.fulfill()
             if error != nil {
                 // Error is printed by get
                 print("⚠️ testBackendGet Error: ^^^")
@@ -66,11 +76,17 @@ class LambdaListTests: XCTestCase {
             }
         }
 
-        sleep(10000) // FIXME: Not the correct way to do this.
+        wait(for: [semiphore], timeout: 5) // blocking sync wait
+
+        // Assertion only happens after the time out, or web request completes
+        // isInverted: Indicates that the expectation is not intended to happen
+        // By adding bang (!) before it, we're testing that it indeed happened!
+        XCTAssertTrue(!semiphore.isInverted, "⚠️ Registering with backend failed.")
     }
 
     // Task Create
     func testBackendPost() throws {
+        let semiphore = expectation(description: "Completed testBackendPost")
 
         let task = Task(taskName: "Mark's First Task v12",
                         taskDescription: "Hello, world! v12",
@@ -79,6 +95,7 @@ class LambdaListTests: XCTestCase {
         let tc = TaskController()
 
         tc.post(task: task, userId: fixedUserId, authToken: fixedAuthToken) { urlResponse, error  in
+            semiphore.fulfill()
             if let error = error {
                 print("⚠️ testBackendPost Error: \(error)")
                 XCTAssert(false, "testBackendPost error")
@@ -92,11 +109,17 @@ class LambdaListTests: XCTestCase {
             }
         }
 
-        sleep(10000) // FIXME: Not the correct way to do this.
+        wait(for: [semiphore], timeout: 20) // blocking sync wait
+
+        // Assertion only happens after the time out, or web request completes
+        // isInverted: Indicates that the expectation is not intended to happen
+        // By adding bang (!) before it, we're testing that it indeed happened!
+        XCTAssertTrue(!semiphore.isInverted, "⚠️ Registering with backend failed.")
     }
 
     // Task Update
     func testBackendPut() throws {
+        let semiphore = expectation(description: "Completed testBackendPut")
 
         let task = Task(taskName: "Mark's First Task v12.1",
                         taskDescription: "Hello, world! v12.1",
@@ -106,6 +129,7 @@ class LambdaListTests: XCTestCase {
         let tc = TaskController()
 
         tc.put(task: task, userId: fixedUserId, authToken: fixedAuthToken) { urlResponse, error  in
+            semiphore.fulfill()
             if let error = error {
                 print("⚠️ testBackendPut Error: \(error)")
                 XCTAssert(false, "testBackendPut error")
@@ -119,10 +143,16 @@ class LambdaListTests: XCTestCase {
             }
         }
 
-        sleep(10000) // FIXME: Not the correct way to do this.
+        wait(for: [semiphore], timeout: 5) // blocking sync wait
+
+        // Assertion only happens after the time out, or web request completes
+        // isInverted: Indicates that the expectation is not intended to happen
+        // By adding bang (!) before it, we're testing that it indeed happened!
+        XCTAssertTrue(!semiphore.isInverted, "⚠️ Registering with backend failed.")
     }
 
     func testBackendDelete() throws {
+        let semiphore = expectation(description: "Completed testBackendDelete")
 
         let task = Task(taskName: "Mark's First Task v8",
                         taskDescription: "Hello, world! v8",
@@ -132,6 +162,7 @@ class LambdaListTests: XCTestCase {
         let tc = TaskController()
 
         tc.delete(task: task, userId: fixedUserId, authToken: fixedAuthToken) { urlResponse, error  in
+            semiphore.fulfill()
             if let error = error {
                 print("⚠️ testBackendDelete Error: \(error)")
                 XCTAssert(false, "testBackendDelete error")
@@ -145,7 +176,12 @@ class LambdaListTests: XCTestCase {
             }
         }
 
-        sleep(10000) // FIXME: Not the correct way to do this.
+        wait(for: [semiphore], timeout: 5) // blocking sync wait
+
+        // Assertion only happens after the time out, or web request completes
+        // isInverted: Indicates that the expectation is not intended to happen
+        // By adding bang (!) before it, we're testing that it indeed happened!
+        XCTAssertTrue(!semiphore.isInverted, "⚠️ Registering with backend failed.")
     }
 
     func testPerformanceExample() throws {
