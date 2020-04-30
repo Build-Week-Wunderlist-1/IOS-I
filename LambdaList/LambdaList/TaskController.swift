@@ -185,6 +185,7 @@ class TaskController {
         
     }
 
+    // Create
     func post(task: Task, userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
         if task.taskID > 0 {
             print("task.taskID == \(task.taskID). POST failed. Should this be an update?")
@@ -201,7 +202,7 @@ class TaskController {
         request.setValue(authToken, forHTTPHeaderField: "Authorization")
 
         do {
-            guard let representation = task.taskRepresentation else {
+            guard let representation = task.createUpdateTaskRepresentation else {
                 completion(nil, NSError())
                 return
             }
@@ -318,7 +319,7 @@ class TaskController {
         request.setValue(authToken, forHTTPHeaderField: "Authorization")
 
         do {
-            guard let representation = task.taskRepresentation else {
+            guard let representation = task.createUpdateTaskRepresentation else {
                 completion(nil, NSError())
                 return
             }

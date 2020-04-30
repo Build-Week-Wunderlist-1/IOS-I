@@ -101,7 +101,7 @@ class LambdaListTests: XCTestCase {
         let task = Task(taskName: "Mark's First Task v12.1",
                         taskDescription: "Hello, world! v12.1",
                         completed: true)
-        task.taskID = 43
+        task.taskID = 44
         print(task.taskID)
         let tc = TaskController()
 
@@ -127,7 +127,7 @@ class LambdaListTests: XCTestCase {
         let task = Task(taskName: "Mark's First Task v8",
                         taskDescription: "Hello, world! v8",
                         completed: true)
-        task.taskID = 43
+        task.taskID = 44
         print(task.taskID)
         let tc = TaskController()
 

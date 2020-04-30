@@ -16,12 +16,25 @@ extension Task {
     var taskRepresentation: TaskRepresentation? {
         guard let taskName = taskName else { return nil }
 
-        return TaskRepresentation(taskName: taskName,
+        return TaskRepresentation(taskID: Int(sort),
+                                  taskName: taskName,
                                   taskDescription: taskDescription ?? "",
                                   sort: Int(sort),
                                   createdDate: createdDate ?? Date(),
                                   modifiedDate: modifiedDate ?? Date(),
                                   completed: completed
+        )
+    }
+
+    var createUpdateTaskRepresentation: CreateUpdateTaskRepresentation? {
+        guard let taskName = taskName else { return nil }
+
+        return CreateUpdateTaskRepresentation(taskName: taskName,
+                                              taskDescription: taskDescription ?? "",
+                                              sort: Int(sort),
+                                              createdDate: createdDate ?? Date(),
+                                              modifiedDate: modifiedDate ?? Date(),
+                                              completed: completed
         )
     }
 
@@ -54,10 +67,23 @@ extension Task {
 
         self.init(taskName: taskRepresentation.taskName,
                   taskDescription: taskRepresentation.taskDescription,
+                  taskID: taskRepresentation.taskID,
                   sort: taskRepresentation.sort,
                   createdDate: taskRepresentation.createdDate,
                   modifiedDate: taskRepresentation.modifiedDate,
                   completed: taskRepresentation.completed,
+                  context: context)
+    }
+
+    @discardableResult convenience init?(cutr: CreateUpdateTaskRepresentation,
+                                         context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+
+        self.init(taskName: cutr.taskName,
+                  taskDescription: cutr.taskDescription,
+                  sort: cutr.sort,
+                  createdDate: cutr.createdDate,
+                  modifiedDate: cutr.modifiedDate,
+                  completed: cutr.completed,
                   context: context)
     }
 }
