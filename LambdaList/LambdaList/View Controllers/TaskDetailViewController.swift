@@ -16,7 +16,7 @@ class TaskDetailViewController: UIViewController {
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var taskStatusLabel: UILabel!
     @IBOutlet private weak var descriptionTextView: UITextView!
-    @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet private weak var editButton: UIBarButtonItem!
     
     // MARK: - Actions
     @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
@@ -62,7 +62,9 @@ class TaskDetailViewController: UIViewController {
     
     // MARK: - Methods
     func updateViews() {
-        guard let tempTask = task, let taskName = tempTask.taskName, let taskDescription = tempTask.taskDescription, let dateCreated = tempTask.createdDate else {
+        guard let tempTask = task, let taskName = tempTask.taskName,
+            let taskDescription = tempTask.taskDescription,
+            let dateCreated = tempTask.createdDate else {
             print("Something in task is nil")
             return
         }
