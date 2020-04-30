@@ -10,7 +10,8 @@ import UIKit
 import CoreData
 
 class TaskDetailViewController: UIViewController {
-
+    
+    
     // MARK: - Outlets
     @IBOutlet private weak var titleTextField: UITextField!
     @IBOutlet private weak var dateLabel: UILabel!
@@ -25,22 +26,32 @@ class TaskDetailViewController: UIViewController {
         //Then Allow editing
         if editTask == true {
             editTask = false
+            previousTitle = titleTextField.text
+            previousDescription = descriptionTextView.text
             titleTextField.isUserInteractionEnabled = false
             descriptionTextView.isUserInteractionEnabled = false
             editButton?.title = "Edit"
+            titleTextField.backgroundColor = .clear
+            descriptionTextView.backgroundColor = .clear
             
             task?.taskName = titleTextField.text
             task?.taskDescription = descriptionTextView.text
             
-            //Save Changes to CoreData
-            do {
-                try CoreDataStack.shared.mainContext.save()
-            } catch {
-                print("Error Saving changes to CoreData: \(error)")
+            //Did the user change the task?
+            if previousTitle != titleTextField.text || previousDescription != descriptionTextView.text {
+                
+                //Save Changes to CoreData
+                do {
+                    try CoreDataStack.shared.mainContext.save()
+                } catch {
+                    print("Error Saving changes to CoreData: \(error)")
+                }
             }
-            
+                
         } else {
             editTask = true
+            titleTextField.backgroundColor = .systemGray5
+            descriptionTextView.backgroundColor = .systemGray5
             titleTextField.isUserInteractionEnabled = true
             descriptionTextView.isUserInteractionEnabled = true
             editButton?.title = "Done"
@@ -51,6 +62,8 @@ class TaskDetailViewController: UIViewController {
     // MARK: - Properties
     var task: Task?
     var editTask = false
+    var previousTitle: String?
+    var previousDescription: String?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -62,6 +75,9 @@ class TaskDetailViewController: UIViewController {
     
     // MARK: - Methods
     func updateViews() {
+        titleTextField.backgroundColor = .clear
+        descriptionTextView.backgroundColor = .clear
+        
         guard let tempTask = task, let taskName = tempTask.taskName,
             let taskDescription = tempTask.taskDescription,
             let dateCreated = tempTask.createdDate else {
