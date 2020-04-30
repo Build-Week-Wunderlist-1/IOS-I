@@ -235,7 +235,7 @@ class TaskController {
     }
 
     // Read
-    func get(authToken: String, userId: String, completion: @escaping CompletionHandler = { _, _ in }) {
+    func get(userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
 
         var requestURL = baseURL.appendingPathComponent("api/lists")
         requestURL = requestURL.appendingPathComponent(userId)
