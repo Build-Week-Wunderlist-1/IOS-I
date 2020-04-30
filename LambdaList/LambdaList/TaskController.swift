@@ -248,17 +248,31 @@ class TaskController {
         request.setValue(authToken, forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { data, _, error in
+            // Did the call complete without error?
             if let error = error {
-                NSLog("Error GETing task to server \(error)")
+                NSLog("Error fetching entries: \(error)")
                 completion(nil, error)
                 return
             }
 
+            // Did we get anything?
+            guard let data = data else {
+                NSLog("No data returned by data task")
+                completion(nil, NSError()) // Convert to ResultType
+                return
+            }
+
+            // Unwrap the data returned in the closure.
             do {
-//                let decodedObject = try JSONDecoder.decode([Task].self, from: data)
-//                completion(decodedObject, nil)
+                var tasks: [TaskRepresentation] = []
+                tasks = Array(try JSONDecoder().decode([TaskRepresentation].self, from: data))
+                print("tasks count = \(tasks)")
+                //try self.updateEntries(with: taskRepresentation)
+                completion(nil, nil)
+
             } catch {
-                print("JSONDecoder.decode failed.")
+                NSLog("Error decoding data from backend: \(error)")
+                completion(nil, error)
             }
         }.resume()
         print("GET initiated.")

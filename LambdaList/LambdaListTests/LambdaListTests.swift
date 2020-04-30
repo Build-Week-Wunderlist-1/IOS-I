@@ -51,13 +51,15 @@ class LambdaListTests: XCTestCase {
 
         let tc = TaskController()
 
-        tc.get(userId: fixedUserId, authToken: fixedAuthToken) { data, error  in
+        tc.get(userId: fixedUserId, authToken: fixedAuthToken) { urlResponse, error  in
             if let error = error {
                 print("⚠️ testBackendGet Error: \(error)")
                 XCTAssert(false, "testBackendPost error")
-            } else if let data = data as? [Task] {
-                print("⚠️ testBackendGet tasks count: \(data.count)")
-                XCTAssert(false, "testBackendPost urlResponse")
+            } else if let urlResponse = urlResponse as? HTTPURLResponse {
+                if urlResponse.statusCode != 200 {
+                    print("⚠️ testBackendGet statusCode: \(urlResponse.statusCode)")
+                    XCTAssert(false, "testBackendGet urlResponse")
+                }
             } else {
                 print("testBackendGet successful!")
             }
@@ -69,8 +71,8 @@ class LambdaListTests: XCTestCase {
     // Task Create
     func testBackendPost() throws {
 
-        let task = Task(taskName: "Mark's First Task v10",
-                        taskDescription: "Hello, world! v10",
+        let task = Task(taskName: "Mark's First Task v11",
+                        taskDescription: "Hello, world! v11",
                         completed: true)
 
         let tc = TaskController()
@@ -124,7 +126,7 @@ class LambdaListTests: XCTestCase {
         let task = Task(taskName: "Mark's First Task v8",
                         taskDescription: "Hello, world! v8",
                         completed: true)
-        task.taskID = 7
+        task.taskID = 10
         print(task.taskID)
         let tc = TaskController()
 
