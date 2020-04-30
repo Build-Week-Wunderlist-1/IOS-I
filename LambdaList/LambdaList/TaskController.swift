@@ -16,6 +16,12 @@ enum HTTPMethod: String {
     case delete = "DELETE" // Delete
 }
 
+struct User: Codable {
+    var username: String
+    var password: String
+    var email: String?
+}
+
 class TaskController {
         
     // MARK: - Properties
@@ -51,6 +57,71 @@ class TaskController {
     // MARK: - CRUD
 
     // Create
+    func postRequest(url: URL) -> URLRequest {
+        var request = URLRequest(url: url)
+
+        //Setting HTTPMethod to POST
+        request.httpMethod = HTTPMethod.post.rawValue
+
+        //Header Method
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        return request
+    }
+
+    func userRegister(user: User, completion: @escaping CompletionHandler = { _, _ in }) {
+        //Unwrap URL
+        let signupURL = baseURL.appendingPathComponent("api/auth/register/")
+
+        //Setting up Post Request URL
+        var request = postRequest(url: signupURL)
+
+        do {
+            //Encoding User Object and getting ready to send it
+            let jsonData = try JSONEncoder().encode(user)
+            request.httpBody = jsonData
+
+            //Sending Data To Server
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+
+                //Error Checking
+                if let error = error {
+                    print("Error sending data when Signing Up: \(error)")
+                    completion(nil, error)
+                }
+
+                //Check response status code
+                guard let response = response as? HTTPURLResponse else {
+                    print("Bad Response when Signing Up")
+                    completion(nil, nil)
+                    return
+                }
+
+                print(response.statusCode)
+
+                //Check data
+                guard let data = data else {
+                    print("Data was not received")
+                    completion(nil, nil)
+                    return
+                }
+
+                print("Data: \(data)")
+                //                //Decode Data
+                //                do {
+                //                    self.bearer = try self.jsonDecoder.decode(Bearer.self, from: data)
+                //                    print(self.bearer?.token)
+                //                } catch {
+                //                    print("Error decoding data from signup: \(error)")
+                //                }
+                completion(nil, nil)
+
+            }.resume()
+
+        } catch {
+            print("Error Encoding User Object: \(error)")
+        }
+    }
+
     // Read
     // Update
     func put(task: Task, completion: @escaping CompletionHandler = { _, _ in }) {

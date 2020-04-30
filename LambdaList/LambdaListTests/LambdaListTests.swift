@@ -19,6 +19,27 @@ class LambdaListTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    func testBackendRegister() {
+        let tempUser = User(username: "Cameron01", password: "Collins", email: "dummyemail01@yahoo.com")
+
+        let tc = TaskController()
+        tc.userRegister(user: tempUser) { urlResponse, error  in
+            if let error = error {
+                print("⚠️ testBackendRegister Error: \(error)")
+                XCTAssert(false, "testBackendRegister error")
+            } else if let urlResponse = urlResponse as? HTTPURLResponse {
+                if urlResponse.statusCode != 200 {
+                    print("⚠️ testBackendRegister statusCode: \(urlResponse.statusCode)")
+                    XCTAssert(false, "testBackendRegister urlResponse")
+                }
+            } else {
+                print("testBackendRegister successful!")
+            }
+        }
+
+        sleep(10000) // FIXME: Not the correct way to do this.
+    }
+
     func testBackendPut() throws {
 
         let task = Task(taskName: "Mark's First Task v6",
