@@ -95,17 +95,10 @@ override func tableView(_ tableView: UITableView, commit editingStyle: UITableVi
         guard let tasks = fetchedResultsController.fetchedObjects else {
             return
         }
-        
-        //TODO: Delete Task From Server
-        
+
         let task = tasks[indexPath.row]
-        CoreDataStack.shared.mainContext.delete(task)
-        
-        do {
-            try CoreDataStack.shared.mainContext.save()
-        } catch {
-            print("Error Saving Delete")
-        }
+
+        taskController.deleteTask(task)
     }
 }
 

@@ -186,7 +186,21 @@ class TaskController {
     }
 
     // Create
-    func post(task: Task, userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
+    func createTask(_ task: Task) {
+        //Save Locally
+        do {
+            try CoreDataStack.shared.mainContext.save()
+        } catch {
+            print("Error saving task in createTask: \(error)")
+        }
+
+        if let bearer = TaskController.self.bearer {
+            delete(task: task, userId: "\(bearer.userId)", authToken: bearer.token)
+            post(task: task, userId: "\(bearer.userId)", authToken: bearer.token)
+        }
+    }
+
+    private func post(task: Task, userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
         if task.taskID > 0 {
             print("task.taskID == \(task.taskID). POST failed. Should this be an update?")
         }
