@@ -338,6 +338,13 @@ class TaskController {
     // Update
     func updateTask(_ task: Task) {
 
+        //Save Changes to CoreData
+        do {
+            try CoreDataStack.shared.mainContext.save()
+        } catch {
+            print("Error Saving changes to CoreData: \(error)")
+        }
+
         if let bearer = TaskController.self.getBearer {
             put(task: task, userId: "\(bearer.userId)", authToken: bearer.token)
         }

@@ -149,7 +149,8 @@ class CompleteTasksTableViewController: UITableViewController {
                 let tempTasks = tasks else {
                     return
             }
-            
+
+            destination.taskController = taskController
             destination.task = tempTasks[row]
             
         } else if segue.identifier == "AddTaskModalSegue" {

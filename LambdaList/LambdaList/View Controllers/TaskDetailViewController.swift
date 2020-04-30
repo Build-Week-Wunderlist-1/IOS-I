@@ -39,12 +39,11 @@ class TaskDetailViewController: UIViewController {
             
             //Did the user change the task?
             if previousTitle != titleTextField.text || previousDescription != descriptionTextView.text {
-                
-                //Save Changes to CoreData
-                do {
-                    try CoreDataStack.shared.mainContext.save()
-                } catch {
-                    print("Error Saving changes to CoreData: \(error)")
+
+                if let task = task,
+                    let taskController = taskController {
+
+                    taskController.updateTask(task)
                 }
             }
                 
@@ -64,6 +63,7 @@ class TaskDetailViewController: UIViewController {
     var editTask = false
     var previousTitle: String?
     var previousDescription: String?
+    var taskController: TaskController?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
