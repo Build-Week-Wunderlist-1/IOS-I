@@ -184,7 +184,7 @@ class TaskController {
         
     }
 
-    func post(task: Task, completion: @escaping CompletionHandler = { _, _ in }) {
+    func post(task: Task, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
         if task.taskID > 0 {
             print("task.taskID == \(task.taskID). POST failed. Should this be an update?")
         }
@@ -200,11 +200,7 @@ class TaskController {
 
         // Tell the server what it's looking at. Won't work without it since it won't "guess"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        // swiftlint:disable line_length
-        // FIXME: Pull this value from UserDefaults
-        request.setValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJuYW1lIjoiZ2VycmlvcjAxIiwidXNlcmVtYWlsIjoiaGVyb2t1YXBwMDFAbS5nZXJyaW9yLmNvbSIsImlhdCI6MTU4ODE3NTM1OSwiZXhwIjoxNTg5Mzg0OTU5fQ.w4pVW9fQT1NmU3rletahQyGvocO_QxvAoBq5qGvD6VY", forHTTPHeaderField: "Authorization")
-        // swiftlint:enable line_length
+        request.setValue(authToken, forHTTPHeaderField: "Authorization")
 
         do {
             guard let representation = task.taskRepresentation else {
@@ -242,7 +238,7 @@ class TaskController {
     }
 
     // Read
-    func get(completion: @escaping CompletionHandler = { _, _ in }) {
+    func get(authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
 
         // FIXME: Pull this value from UserDefaults
         let userId = "4"
@@ -255,11 +251,7 @@ class TaskController {
 
         // Tell the server what it's looking at. Won't work without it since it won't "guess"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        // swiftlint:disable line_length
-        // FIXME: Pull this value from UserDefaults
-        request.setValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJuYW1lIjoiZ2VycmlvcjAxIiwidXNlcmVtYWlsIjoiaGVyb2t1YXBwMDFAbS5nZXJyaW9yLmNvbSIsImlhdCI6MTU4ODE3NTM1OSwiZXhwIjoxNTg5Mzg0OTU5fQ.w4pVW9fQT1NmU3rletahQyGvocO_QxvAoBq5qGvD6VY", forHTTPHeaderField: "Authorization")
-        // swiftlint:enable line_length
+        request.setValue(authToken, forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
@@ -279,7 +271,7 @@ class TaskController {
     }
 
     // Update
-    func put(task: Task, completion: @escaping CompletionHandler = { _, _ in }) {
+    func put(task: Task, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
         if task.taskID <= 0 {
             print("task.taskID == \(task.taskID). PUT failed. Should this be a create?")
         }
@@ -297,11 +289,7 @@ class TaskController {
 
         // Tell the server what it's looking at. Won't work without it since it won't "guess"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        // swiftlint:disable line_length
-        // FIXME: Pull this value from UserDefaults
-        request.setValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJuYW1lIjoiZ2VycmlvcjAxIiwidXNlcmVtYWlsIjoiaGVyb2t1YXBwMDFAbS5nZXJyaW9yLmNvbSIsImlhdCI6MTU4ODE3NTM1OSwiZXhwIjoxNTg5Mzg0OTU5fQ.w4pVW9fQT1NmU3rletahQyGvocO_QxvAoBq5qGvD6VY", forHTTPHeaderField: "Authorization")
-        // swiftlint:enable line_length
+        request.setValue(authToken, forHTTPHeaderField: "Authorization")
 
         do {
             guard let representation = task.taskRepresentation else {
@@ -339,7 +327,7 @@ class TaskController {
     }
 
     // Delete
-    func delete(task: Task, completion: @escaping CompletionHandler = { _, _ in }) {
+    func delete(task: Task, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
         if task.taskID <= 0 {
             print("task.taskID == \(task.taskID). DELETE failed.")
         }
@@ -357,11 +345,7 @@ class TaskController {
 
         // Tell the server what it's looking at. Won't work without it since it won't "guess"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        // swiftlint:disable line_length
-        // FIXME: Pull this value from UserDefaults
-        request.setValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJuYW1lIjoiZ2VycmlvcjAxIiwidXNlcmVtYWlsIjoiaGVyb2t1YXBwMDFAbS5nZXJyaW9yLmNvbSIsImlhdCI6MTU4ODE3NTM1OSwiZXhwIjoxNTg5Mzg0OTU5fQ.w4pVW9fQT1NmU3rletahQyGvocO_QxvAoBq5qGvD6VY", forHTTPHeaderField: "Authorization")
-        // swiftlint:enable line_length
+        request.setValue(authToken, forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { _, urlResponse, error in
             if let error = error {
