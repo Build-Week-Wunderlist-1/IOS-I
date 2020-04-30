@@ -206,14 +206,8 @@ class TaskController {
             print("Error saving task in createTask: \(error)")
         }
 
-        if let bearer = TaskController.self.bearer {
+        if let bearer = TaskController.self.getBearer {
             post(task: task, userId: "\(bearer.userId)", authToken: bearer.token)
-        } else {
-            if let userID = UserDefaults.standard.object(forKey: "userId") as? Int,
-                let authToken = UserDefaults.standard.object(forKey: "token") as? String {
-
-                post(task: task, userId: "\(userID)", authToken: authToken)
-            }
         }
     }
 
@@ -333,7 +327,7 @@ class TaskController {
     // Update
     func updateTask(_ task: Task) {
 
-        if let bearer = TaskController.self.bearer {
+        if let bearer = TaskController.self.getBearer {
             put(task: task, userId: "\(bearer.userId)", authToken: bearer.token)
         }
     }
@@ -401,7 +395,7 @@ class TaskController {
             print("Error Saving Delete")
         }
 
-        if let bearer = TaskController.self.bearer {
+        if let bearer = TaskController.self.getBearer {
             delete(task: task, userId: "\(bearer.userId)", authToken: bearer.token)
         }
     }
