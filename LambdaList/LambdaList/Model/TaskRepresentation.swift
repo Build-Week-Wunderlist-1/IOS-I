@@ -26,5 +26,5 @@ struct TaskRepresentation: Equatable, Codable {
     var sort: Int
     var createdDate: Date
     var modifiedDate: Date
-    var completed: Int
+    var completed: Bool
 }
