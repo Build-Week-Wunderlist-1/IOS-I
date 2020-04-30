@@ -262,7 +262,12 @@ class TaskController {
     }
 
     // Read
-
+    func loadTasks() {
+        if let bearer = TaskController.self.getBearer {
+            get(userId: "\(bearer.userId)", authToken: bearer.token)
+        }
+    }
+    
     func get(userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
 
         var requestURL = baseURL.appendingPathComponent("api/lists")
