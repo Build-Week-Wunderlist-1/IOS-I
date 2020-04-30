@@ -31,7 +31,11 @@ class TaskController {
     var tasks: [Task] = []
     static var bearer: Bearer? {
         didSet {
-            print(bearer)
+            if let bearer = bearer {
+                print(bearer)
+            } else {
+                print("bearer was set to nil")
+            }
         }
     }
 
