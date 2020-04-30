@@ -29,8 +29,11 @@ class TaskController {
     typealias CompletionHandler = (URLResponse?, Error?) -> Void
     let baseURL = URL(string: "https://lambdawunderlist.herokuapp.com/")!
     var tasks: [Task] = []
-    var bearer: Bearer?
-    
+    static var bearer: Bearer? {
+        didSet {
+            print(bearer)
+        }
+    }
 
     // MARK: - Functions
     func getCompletedTasks() -> [Task] {
@@ -162,12 +165,13 @@ class TaskController {
                 
                 //Try Unwrapping Data
                 do {
-                    self.bearer = try JSONDecoder().decode(Bearer.self, from: data)
+                    TaskController.self.bearer = try JSONDecoder().decode(Bearer.self, from: data)
+                
                     completion(nil, nil)
                 } catch {
                     print("Error unwrapping data received in signin: \(error)")
                 }
-            }
+            }.resume()
             
         } catch {
             print("Error Encoding User in Signin: \(error)")
