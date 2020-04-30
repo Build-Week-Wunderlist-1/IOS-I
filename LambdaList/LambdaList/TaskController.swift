@@ -85,7 +85,7 @@ class TaskController {
             request.httpBody = jsonData
 
             //Sending Data To Server
-            URLSession.shared.dataTask(with: request) { (data, response, error) in
+            URLSession.shared.dataTask(with: request) { data, response, error in
 
                 //Error Checking
                 if let error = error {
@@ -139,7 +139,7 @@ class TaskController {
             request.httpBody = jsonData
             
             //Sending Data to Server
-            URLSession.shared.dataTask(with: request) { (data, response, error) in
+            URLSession.shared.dataTask(with: request) { data, response, error in
                
                 //Error Checking
                 if let error = error {

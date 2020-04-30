@@ -25,9 +25,12 @@ class TaskTableViewCell: UITableViewCell {
         
         tempTask.completed.toggle()
         
-        tempTask.completed == false ?
-            completeButton.setImage(UIImage(systemName: "square"), for: .normal) : completeButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
-        
+        if tempTask.completed == false {
+            completeButton.setImage(UIImage(systemName: "square"), for: .normal)
+        } else {
+            completeButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+        }
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { }
     }
     

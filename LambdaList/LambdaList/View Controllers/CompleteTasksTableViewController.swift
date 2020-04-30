@@ -198,9 +198,7 @@ class CompleteTasksTableViewController: UITableViewController {
         //               alert.addAction(UIAlertAction(title: "Manual", style: .default, handler: { _ in
         //                   self.sortedByKey = "sort"
         //                   self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: false)]
-        //                   // swiftlint:disable force_try
         //                   try! self.fetchedResultsController.performFetch()
-        //                   // swiftlint:enable force_try
         //                   self.tableView.reloadData()
         //               }))
         

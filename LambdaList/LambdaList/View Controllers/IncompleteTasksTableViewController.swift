@@ -180,9 +180,7 @@ class IncompleteTasksTableViewController: UITableViewController {
         
 //        alert.addAction(UIAlertAction(title: "Manual", style: .default, handler: { _ in
 //            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: true)]
-//            // swiftlint:disable force_try
 //            try! self.fetchedResultsController.performFetch()
-//            // swiftlint:enable force_try
 //            self.tableView.reloadData()
 //        }))
         
@@ -221,7 +219,9 @@ class IncompleteTasksTableViewController: UITableViewController {
             let tasks = fetchedResultsController.fetchedObjects
             
             //Unwrapping
-            guard let destination = segue.destination as? TaskDetailViewController, let row = tableView.indexPathForSelectedRow?.row, let tempTasks = tasks else {
+            guard let destination = segue.destination as? TaskDetailViewController,
+                let row = tableView.indexPathForSelectedRow?.row,
+                let tempTasks = tasks else {
                 return
             }
             

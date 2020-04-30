@@ -26,12 +26,12 @@ class LoginScreenViewController: UIViewController {
     var taskController = TaskController()
     
     // MARK: - Outlets
-    @IBOutlet weak var logInStatusLabel: UILabel!
-    @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var rememberMeButton: UIButton!
-    @IBOutlet weak var logInButton: UIButton!
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet private weak var logInStatusLabel: UILabel!
+    @IBOutlet private weak var usernameTextField: UITextField!
+    @IBOutlet private weak var passwordTextField: UITextField!
+    @IBOutlet private weak var rememberMeButton: UIButton!
+    @IBOutlet private weak var logInButton: UIButton!
+    @IBOutlet private weak var emailTextField: UITextField!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
