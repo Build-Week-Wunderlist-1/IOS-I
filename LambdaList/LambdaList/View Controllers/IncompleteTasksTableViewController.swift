@@ -298,7 +298,7 @@ extension IncompleteTasksTableViewController: UISearchBarDelegate {
             do {
                 try fetchedResultsController.performFetch()
                 tableView.reloadData()
-            } catch let err {
+            } catch let err as NSError {
                 print(err)
             }
             
@@ -313,7 +313,7 @@ extension IncompleteTasksTableViewController: UISearchBarDelegate {
                 do {
                     try fetchedResultsController.performFetch()
                     tableView.reloadData()
-                } catch let err {
+                } catch let err as NSError {
                     print(err)
                 }
             }
