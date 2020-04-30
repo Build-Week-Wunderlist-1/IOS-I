@@ -243,7 +243,7 @@ class TaskController {
             completion(nil, error)
         }
 
-        URLSession.shared.dataTask(with: request) { _, urlResponse, error in
+        URLSession.shared.dataTask(with: request) { data, urlResponse, error in
             if let error = error {
                 NSLog("Error POSTing task to server \(error)")
                 completion(nil, error)
@@ -257,7 +257,10 @@ class TaskController {
                 return
             }
 
-            // FIXME: Grab the taskID from the returned object.
+            if let data = data {
+                // FIXME: Grab the taskID from the returned object.
+                print(data)
+            }
 
             completion(nil, nil)
         }.resume()
