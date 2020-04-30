@@ -45,6 +45,7 @@ class LoginScreenViewController: UIViewController {
         // save to user defaults
         UserDefaults.standard.set(usernameTextField.text, forKey: "username")
         UserDefaults.standard.set(passwordTextField.text, forKey: "password")
+        UserDefaults.standard.set(emailTextField.text, forKey: "email")
         
         //Toggle Button Images
         if rememberMeButton.currentImage == UIImage(systemName: "checkmark.square.fill") {
@@ -95,8 +96,10 @@ class LoginScreenViewController: UIViewController {
     // MARK: - Methods
     private func autofillTextFields() {
         guard let username = UserDefaults.standard.object(forKey: "username") as? String,
-            let password = UserDefaults.standard.object(forKey: "password") as? String else { return }
+            let password = UserDefaults.standard.object(forKey: "password") as? String,
+            let email = UserDefaults.standard.object(forKey: "email") as? String else { return }
         
+        emailTextField.text = email
         usernameTextField.text = username
         passwordTextField.text = password
     }
