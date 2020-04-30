@@ -40,11 +40,31 @@ class LambdaListTests: XCTestCase {
         sleep(10000) // FIXME: Not the correct way to do this.
     }
 
+    // Get List of Tasks
+    func testBackendGet() throws {
+
+        let tc = TaskController()
+
+        tc.get() { data, error  in
+            if let error = error {
+                print("⚠️ testBackendGet Error: \(error)")
+                XCTAssert(false, "testBackendPost error")
+            } else if let data = data as? [Task] {
+                print("⚠️ testBackendGet tasks count: \(data.count)")
+                XCTAssert(false, "testBackendPost urlResponse")
+            } else {
+                print("testBackendGet successful!")
+            }
+        }
+
+        sleep(10000) // FIXME: Not the correct way to do this.
+    }
+
     // Task Create
     func testBackendPost() throws {
 
-        let task = Task(taskName: "Mark's First Task v12",
-                        taskDescription: "Hello, world! v12",
+        let task = Task(taskName: "Mark's First Task v10",
+                        taskDescription: "Hello, world! v10",
                         completed: true)
 
         let tc = TaskController()
@@ -69,10 +89,10 @@ class LambdaListTests: XCTestCase {
     // Task Update
     func testBackendPut() throws {
 
-        let task = Task(taskName: "Mark's First Task v12.1",
-                        taskDescription: "Hello, world! v12.1",
+        let task = Task(taskName: "Mark's First Task v10.1",
+                        taskDescription: "Hello, world! v10.1",
                         completed: true)
-        task.taskID = 9
+        task.taskID = 10
         print(task.taskID)
         let tc = TaskController()
 
@@ -98,7 +118,7 @@ class LambdaListTests: XCTestCase {
         let task = Task(taskName: "Mark's First Task v8",
                         taskDescription: "Hello, world! v8",
                         completed: true)
-        task.taskID = 4
+        task.taskID = 7
         print(task.taskID)
         let tc = TaskController()
 
