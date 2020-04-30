@@ -91,7 +91,7 @@ class LoginScreenViewController: UIViewController {
     func UnlockView() {
         let userId = UserDefaults.standard.value(forKey: "userId")
         let token = UserDefaults.standard.value(forKey: "token")
-        
+                
         if userId != nil && token != nil {
             dismiss(animated: true, completion: nil)
         }

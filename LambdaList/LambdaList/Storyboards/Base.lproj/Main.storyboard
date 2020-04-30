@@ -122,6 +122,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Lambda List" id="CEe-Pk-dPi">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="8xa-Af-AmE">
+                            <connections>
+                                <segue destination="irB-18-J1T" kind="presentation" identifier="LogoutSegue" modalPresentationStyle="fullScreen" id="7HR-Dv-ibc"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="BeT-y5-EPk">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -139,6 +144,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="uGL-V4-dZp">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <action selector="refresh:" destination="51U-QP-nW9" eventType="valueChanged" id="7Dr-q2-VIW"/>
@@ -327,6 +333,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Lambda List" id="3he-P1-Udr">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Uh6-en-P5I">
+                            <connections>
+                                <segue destination="irB-18-J1T" kind="presentation" identifier="LogoutSegue" modalPresentationStyle="fullScreen" id="qz5-QJ-10H"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="zS8-fr-V7n">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -344,6 +355,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="7sx-0o-EfV">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <action selector="refresh:" destination="dCQ-xF-e4b" eventType="valueChanged" id="86c-cV-4ea"/>
@@ -496,8 +508,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Vpv-QV-Rc5"/>
-        <segue reference="3ur-6u-EfA"/>
+        <segue reference="g2K-1u-aas"/>
+        <segue reference="qKa-PU-34U"/>
+        <segue reference="Ge3-NO-YXE"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.down" catalog="system" width="120" height="128"/>

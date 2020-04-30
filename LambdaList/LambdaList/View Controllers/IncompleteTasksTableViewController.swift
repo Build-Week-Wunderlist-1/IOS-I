@@ -104,7 +104,7 @@ class IncompleteTasksTableViewController: UITableViewController {
             }
             
             let task = tasks[indexPath.row]
-
+            
             taskController.deleteTask(task)
         }
     }
@@ -243,10 +243,13 @@ class IncompleteTasksTableViewController: UITableViewController {
             
             destination.task = tempTasks[row]
             
-            } else if segue.identifier == "AddTaskModalSegue" {
-                guard let addTaskViewController = segue.destination as? AddTaskViewController else { return }
-                addTaskViewController.taskController = taskController
-            }
+        } else if segue.identifier == "AddTaskModalSegue" {
+            guard let addTaskViewController = segue.destination as? AddTaskViewController else { return }
+            addTaskViewController.taskController = taskController
+        } else if segue.identifier == "LogoutSegue" {
+            UserDefaults.standard.removeObject(forKey: "userId")
+            UserDefaults.standard.removeObject(forKey: "token")
+        }
     }
     
 }
