@@ -211,7 +211,10 @@ class TaskController {
         }
     }
 
-    private func post(task: Task, userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
+    func post(task: Task,
+              userId: String,
+              authToken: String,
+              completion: @escaping CompletionHandler = { _, _ in }) {
         if task.taskID > 0 {
             print("task.taskID == \(task.taskID). POST failed. Should this be an update?")
         }
@@ -370,7 +373,7 @@ class TaskController {
         }
     }
 
-    private func put(task: Task, userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
+    func put(task: Task, userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
         if task.taskID <= 0 {
             print("task.taskID == \(task.taskID). PUT failed. Should this be a create?")
         }
@@ -439,7 +442,7 @@ class TaskController {
         }
     }
     
-    private func delete(task: Task, userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
+    func delete(task: Task, userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
         if task.taskID <= 0 {
             print("task.taskID == \(task.taskID). DELETE failed.")
             return
