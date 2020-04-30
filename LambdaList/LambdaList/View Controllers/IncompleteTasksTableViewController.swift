@@ -31,7 +31,7 @@ class IncompleteTasksTableViewController: UITableViewController {
     private lazy var fetchedResultsController: NSFetchedResultsController<Task> = {
         let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "completed == %@", NSNumber(value: false))
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: true)]
         let context = CoreDataStack.shared.mainContext
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                   managedObjectContext: context,
@@ -50,6 +50,7 @@ class IncompleteTasksTableViewController: UITableViewController {
         super.viewDidLoad()
         letUserLoginInIfNecessary()
         updateViews()
+        searchBar.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -164,7 +165,7 @@ class IncompleteTasksTableViewController: UITableViewController {
         }))
         
         alert.addAction(UIAlertAction(title: "Manual", style: .default, handler: { _ in
-            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: false)]
+            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: true)]
             // swiftlint:disable force_try
             try! self.fetchedResultsController.performFetch()
             // swiftlint:enable force_try
@@ -265,6 +266,28 @@ extension IncompleteTasksTableViewController: NSFetchedResultsControllerDelegate
             tableView.deleteRows(at: [indexPath], with: .automatic)
         @unknown default:
             break
+        }
+    }
+    
+}
+
+extension IncompleteTasksTableViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchTerm = searchBar.text,
+            !searchTerm.isEmpty {
+            
+            let predicate = NSPredicate(format: "(taskName contains[cd] %@)", searchTerm)
+
+            fetchedResultsController.fetchRequest.predicate = predicate
+            
+            do {
+                try fetchedResultsController.performFetch()
+                tableView.reloadData()
+            } catch let err {
+                print(err)
+            }
+
         }
     }
     
