@@ -25,7 +25,7 @@ struct User: Codable {
 class TaskController {
         
     // MARK: - Properties
-    // MARK: - Properities
+
     typealias CompletionHandler = (URLResponse?, Error?) -> Void
     let baseURL = URL(string: "https://lambdawunderlist.herokuapp.com/")!
     var tasks: [Task] = []

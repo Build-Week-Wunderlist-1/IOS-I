@@ -154,12 +154,8 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         }
         
         destination.task = tempTasks[row]
-        
-        // TODO: ? - Get the new view controller using segue.destination.
-        // TODO: ? - Pass the selected object to the new view controller.
+
     } else if segue.identifier == "AddTaskModalSegue" {
-        // TODO: ? - Get the new view controller using segue.destination.
-        // TODO: ? - Pass the selected object to the new view controller.
     }
 }
 
