@@ -16,13 +16,16 @@ extension Task {
     var taskRepresentation: TaskRepresentation? {
         guard let taskName = taskName else { return nil }
 
+        // Backend uses Int for Bool. Convert to Int
+        let completedAsInt = completed == true ? 1 : 0
+
         return TaskRepresentation(taskName: taskName,
 // FIXME:                                 taskID: Int(taskID),
                                   taskDescription: taskDescription ?? "",
                                   sort: Int(sort),
                                   createdDate: createdDate ?? Date(),
-                                  modifiedDate: modifiedDate ?? Date()
-// FIXME:                                 completed: completed
+                                  modifiedDate: modifiedDate ?? Date(),
+                                  completed: completedAsInt
         )
     }
 
@@ -53,13 +56,16 @@ extension Task {
     @discardableResult convenience init?(taskRepresentation: TaskRepresentation,
                                          context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
 
+        // Server is going to give us an Int; convert to Bool
+        let completed = taskRepresentation.completed == 0 ? false : true
+
         self.init(taskName: taskRepresentation.taskName,
                   taskDescription: taskRepresentation.taskDescription,
 // FIXME:                  taskID: taskRepresentation.taskID,
                   sort: taskRepresentation.sort,
                   createdDate: taskRepresentation.createdDate,
                   modifiedDate: taskRepresentation.modifiedDate,
-// FIXME:                 completed: taskRepresentation.completed,
+                  completed: completed,
                   context: context)
     }
 }

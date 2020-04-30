@@ -18,7 +18,7 @@ struct TaskRepresentation: Equatable, Codable {
         case sort = "sortField"
         case createdDate = "creationDate"
         case modifiedDate
-// FIXME:       case completed
+        case completed
     }
 
     /// match exactly or else the JSON from backend server will not decode into this struct properly (omissions OK)
@@ -28,5 +28,5 @@ struct TaskRepresentation: Equatable, Codable {
     var sort: Int
     var createdDate: Date
     var modifiedDate: Date
-// FIXME:   var completed: Bool
+    var completed: Int
 }
