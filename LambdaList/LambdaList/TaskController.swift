@@ -258,15 +258,35 @@ class TaskController {
             }
 
             if let data = data {
-                // FIXME: Grab the taskID from the returned object.
-                print(data)
+                //Decoding Task Object and Assigning it a ID
+                do {
+                    let tempTask = try JSONDecoder().decode([String: [PostTaskRepresentation]].self, from: data)
+                    let otherTask = Array(tempTask.values.map{ $0 })
+                    
+                    print(otherTask[0][0].id)
+                    
+                    task.taskID = Int64(otherTask[0][0].id)
+                    
+                    do {
+                        try CoreDataStack.shared.mainContext.save()
+                        print("Saving Successful")
+                    } catch {
+                        print("Error saving changes in post: \(error)")
+                    }
+                    
+                    print("New Task ID: \(task.taskID)")
+                    
+                } catch {
+                    print("Error decoding in Post to PostTaskRepresentation Object: \(error)")
+                }
             }
-
             completion(nil, nil)
         }.resume()
+        
         print("put initiated.")
     }
-
+    
+    
     // Read
     func loadTasks() {
         if let bearer = TaskController.self.getBearer {

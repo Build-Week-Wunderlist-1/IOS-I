@@ -8,6 +8,17 @@
 
 import Foundation
 
+
+
+struct PostTaskRepresentation: Codable {
+    let id: Int
+    let taskName, taskDescription: String
+    let sortField: Int
+    let creationDate, modifiedDate: String
+    let completed: Bool
+}
+
+
 struct TaskRepresentation: Equatable, Codable {
 
     /// This is about conforming to the data that we are reading in. So case name doesn't have to match fullname
