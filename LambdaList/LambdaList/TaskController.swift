@@ -32,7 +32,8 @@ class TaskController {
     static var bearer: Bearer? {
         didSet {
             if let bearer = bearer {
-                print(bearer)
+                UserDefaults.standard.setValue(bearer.token, forKey: "token")
+                UserDefaults.standard.setValue(bearer.userId, forKey: "userId")
             } else {
                 print("bearer was set to nil")
             }

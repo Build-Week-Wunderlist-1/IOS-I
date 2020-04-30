@@ -40,6 +40,11 @@ class LoginScreenViewController: UIViewController {
         updateViews()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UnlockView()
+    }
+    
     // MARK: - Actions
     @IBAction func rememberMeButtonPressed(_ sender: Any) {
         // save to user defaults
@@ -90,6 +95,15 @@ class LoginScreenViewController: UIViewController {
             loginType = .signup
             emailTextField.isUserInteractionEnabled = true
             logInButton.setTitle("Sign Up", for: .normal)
+        }
+    }
+    
+    func UnlockView() {
+        let userId = UserDefaults.standard.value(forKey: "userId")
+        let token = UserDefaults.standard.value(forKey: "token")
+        
+        if userId != nil && token != nil {
+            dismiss(animated: true, completion: nil)
         }
     }
     
