@@ -250,11 +250,14 @@ class TaskController {
                 return
             }
 
-            if let urlResponse = urlResponse {
+            if let urlResponse = urlResponse as? HTTPURLResponse,
+                urlResponse.statusCode != 201 {
                 NSLog("urlResponse POSTing task to server \(urlResponse)")
                 completion(urlResponse, nil)
                 return
             }
+
+            // FIXME: Grab the taskID from the returned object.
 
             completion(nil, nil)
         }.resume()
@@ -262,7 +265,12 @@ class TaskController {
     }
 
     // Read
-
+    func loadTasks() {
+        if let bearer = TaskController.self.getBearer {
+            get(userId: "\(bearer.userId)", authToken: bearer.token)
+        }
+    }
+    
     func get(userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
 
         var requestURL = baseURL.appendingPathComponent("api/lists")
@@ -374,7 +382,8 @@ class TaskController {
                 return
             }
 
-            if let urlResponse = urlResponse {
+            if let urlResponse = urlResponse as? HTTPURLResponse,
+                urlResponse.statusCode != 200 {
                 NSLog("urlResponse PUTing task to server \(urlResponse)")
                 completion(urlResponse, nil)
                 return
@@ -403,6 +412,7 @@ class TaskController {
     private func delete(task: Task, userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
         if task.taskID <= 0 {
             print("task.taskID == \(task.taskID). DELETE failed.")
+            return
         }
 
         let taskId = "\(task.taskID)"
@@ -425,7 +435,8 @@ class TaskController {
                 return
             }
 
-            if let urlResponse = urlResponse {
+            if let urlResponse = urlResponse as? HTTPURLResponse,
+                urlResponse.statusCode != 200 {
                 NSLog("urlResponse DELETEing task to server \(urlResponse)")
                 completion(urlResponse, nil)
                 return
