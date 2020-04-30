@@ -153,6 +153,8 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         destination.task = tempTasks[row]
 
     } else if segue.identifier == "AddTaskModalSegue" {
+        guard let addTaskViewController = segue.destination as? AddTaskViewController else { return }
+        addTaskViewController.taskController = taskController
     }
 }
 
