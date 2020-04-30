@@ -26,7 +26,7 @@ class IncompleteTasksTableViewController: UITableViewController {
     let taskController = TaskController()
     var incompleteTasks: [Task] = []
     var userIsLoggedIn: Bool = false
-    var sortedByKey: String = "sort"
+//    var sortedByKey: String = "sort"
     
     private lazy var fetchedResultsController: NSFetchedResultsController<Task> = {
         let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
@@ -49,7 +49,7 @@ class IncompleteTasksTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         letUserLoginInIfNecessary()
-        updateViews()
+//        updateViews()
         searchBar.delegate = self
     }
     
@@ -101,34 +101,32 @@ class IncompleteTasksTableViewController: UITableViewController {
         }
     }
     
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
-        var objects = fetchedResultsController.fetchedObjects!
-        
-        fetchedResultsController.delegate = nil
-        
-        let object = objects[sourceIndexPath.row]
-        objects.remove(at: sourceIndexPath.row)
-        objects.insert(object, at: destinationIndexPath.row)
-        
-        var i: Int64 = 1
-        for object in objects {
-            object.sort = i
-            i += 1
-        }
-        
-        // swiftlint:disable force_try
-        try! CoreDataStack.shared.mainContext.save()
-        // swiftlint:enable force_try
-
-        fetchedResultsController.delegate = self
-    }
+//    // Override to support conditional rearranging of the table view.
+//    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+//        // Return false if you do not want the item to be re-orderable.
+//        return true
+//    }
+//
+//    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//
+//        var objects = fetchedResultsController.fetchedObjects!
+//
+//        fetchedResultsController.delegate = nil
+//
+//        let object = objects[sourceIndexPath.row]
+//        objects.remove(at: sourceIndexPath.row)
+//        objects.insert(object, at: destinationIndexPath.row)
+//
+//        var i: Int64 = 1
+//        for object in objects {
+//            object.sort = i
+//            i += 1
+//        }
+//
+//        try! CoreDataStack.shared.mainContext.save()
+//
+//        fetchedResultsController.delegate = self
+//    }
     
     // MARK: - Methods
     private func letUserLoginInIfNecessary() {
@@ -148,31 +146,45 @@ class IncompleteTasksTableViewController: UITableViewController {
                                       preferredStyle: .alert)
         
         // Add actions
-        alert.addAction(UIAlertAction(title: "Alphabetical", style: .default, handler: { _ in
-            self.sortedByKey = "taskName"
-            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.sortedByKey, ascending: true)]
+        alert.addAction(UIAlertAction(title: "A-Z", style: .default, handler: { _ in
+            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "taskName", ascending: true)]
             // swiftlint:disable force_try
             try! self.fetchedResultsController.performFetch()
             // swiftlint:enable force_try
             self.tableView.reloadData()
         }))
         
-        alert.addAction(UIAlertAction(title: "Most Recent", style: .default, handler: { _ in
-            self.sortedByKey = "createdDate"
-            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.sortedByKey, ascending: false)]
+        alert.addAction(UIAlertAction(title: "Z-A", style: .default, handler: { _ in
+            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "taskName", ascending: false)]
             // swiftlint:disable force_try
             try! self.fetchedResultsController.performFetch()
             // swiftlint:enable force_try
             self.tableView.reloadData()
         }))
         
-        alert.addAction(UIAlertAction(title: "Manual", style: .default, handler: { _ in
-            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: true)]
+        alert.addAction(UIAlertAction(title: "Newest First", style: .default, handler: { _ in
+            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: false)]
             // swiftlint:disable force_try
             try! self.fetchedResultsController.performFetch()
             // swiftlint:enable force_try
             self.tableView.reloadData()
         }))
+        
+        alert.addAction(UIAlertAction(title: "Oldest First", style: .default, handler: { _ in
+            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: true)]
+            // swiftlint:disable force_try
+            try! self.fetchedResultsController.performFetch()
+            // swiftlint:enable force_try
+            self.tableView.reloadData()
+        }))
+        
+//        alert.addAction(UIAlertAction(title: "Manual", style: .default, handler: { _ in
+//            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: true)]
+//            // swiftlint:disable force_try
+//            try! self.fetchedResultsController.performFetch()
+//            // swiftlint:enable force_try
+//            self.tableView.reloadData()
+//        }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
@@ -180,23 +192,23 @@ class IncompleteTasksTableViewController: UITableViewController {
         self.present(alert, animated: true) { }
     }
     
-    private func updateViews() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(showEditing(sender:)))
-    }
-    
-    @objc func showEditing(sender: UIBarButtonItem)
-    {
-        if(self.tableView.isEditing == true)
-        {
-            self.tableView.isEditing = false
-            self.navigationItem.leftBarButtonItem?.title = "Edit"
-        }
-        else
-        {
-            self.tableView.isEditing = true
-            self.navigationItem.leftBarButtonItem?.title = "Done"
-        }
-    }
+//    private func updateViews() {
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(showEditing(sender:)))
+//    }
+//
+//    @objc func showEditing(sender: UIBarButtonItem)
+//    {
+//        if(self.tableView.isEditing == true)
+//        {
+//            self.tableView.isEditing = false
+//            self.navigationItem.leftBarButtonItem?.title = "Edit"
+//        }
+//        else
+//        {
+//            self.tableView.isEditing = true
+//            self.navigationItem.leftBarButtonItem?.title = "Done"
+//        }
+//    }
     
     // MARK: - Navigation
     
