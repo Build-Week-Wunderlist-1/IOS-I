@@ -129,13 +129,13 @@ class IncompleteTasksTableViewController: UITableViewController {
     }
     
     // MARK: - Methods
-    
     private func letUserLoginInIfNecessary() {
         // TODO: check to see if user is logged in or not first. below is temporary code
         if userIsLoggedIn == false {
             userIsLoggedIn = true
             
-            performSegue(withIdentifier: "LoginScreenSegue", sender: self) // <-- this is sending the user to loginScreen on launch
+            performSegue(withIdentifier: "LoginScreenSegue", sender: self)
+           // <-- this is sending the user to loginScreen on launch
         }
     }
     
