@@ -50,12 +50,8 @@ class LoginScreenViewController: UIViewController {
         UserDefaults.standard.set(passwordTextField.text, forKey: "password")
         UserDefaults.standard.set(emailTextField.text, forKey: "email")
         
-        //Toggle Button Images
-        if rememberMeButton.currentImage == UIImage(systemName: "checkmark.square.fill") {
-            rememberMeButton.setImage(UIImage(systemName: "square"), for: .normal)
-        } else {
-        rememberMeButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
-        }
+        // called to updateButtonImage
+        updateViews()
     }
     
     @IBAction func logInButtonPressed(_ sender: Any) {
@@ -88,6 +84,15 @@ class LoginScreenViewController: UIViewController {
         segmentedChanged()
     }
     
+    @IBAction func usernameWasEdited(_ sender: UITextField) {
+        updateRememberMeButton()
+    }
+    
+    @IBAction func passwordWasEdited(_ sender: UITextField) {
+        updateRememberMeButton()
+    }
+    
+    
     func UnlockView() {
         let userId = UserDefaults.standard.value(forKey: "userId")
         let token = UserDefaults.standard.value(forKey: "token")
@@ -119,6 +124,18 @@ class LoginScreenViewController: UIViewController {
         logInButton.setTitle("Log In", for: .normal)
         emailLabel.isHidden = true
         logInStatusLabel.isHidden = true
+        
+        updateRememberMeButton()
+    }
+    
+    func updateRememberMeButton() {
+        // should rememberMeButton be selected
+        if usernameTextField.text == UserDefaults.standard.object(forKey: "username") as? String
+            && passwordTextField.text == UserDefaults.standard.object(forKey: "password") as? String {
+            rememberMeButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+        } else {
+            rememberMeButton.setImage(UIImage(systemName: "square"), for: .normal)
+        }
     }
     
     func segmentedChanged() {
