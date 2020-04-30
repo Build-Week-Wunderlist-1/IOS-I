@@ -27,6 +27,7 @@ class TaskController {
     // MARK: - Properties
 
     typealias CompletionHandler = (URLResponse?, Error?) -> Void
+
     let baseURL = URL(string: "https://lambdawunderlist.herokuapp.com/")!
     var tasks: [Task] = []
     static var bearer: Bearer? {
@@ -264,7 +265,7 @@ class TaskController {
                 //Decoding Task Object and Assigning it a ID
                 do {
                     let tempTask = try JSONDecoder().decode([String: [PostTaskRepresentation]].self, from: data)
-                    let otherTask = Array(tempTask.values.map{ $0 })
+                    let otherTask = Array(tempTask.values.map { $0 })
                     
                     print(otherTask[0][0].id)
                     

@@ -28,8 +28,8 @@ class LoginScreenViewController: UIViewController {
     @IBOutlet private weak var rememberMeButton: UIButton!
     @IBOutlet private weak var logInButton: UIButton!
     @IBOutlet private weak var emailTextField: UITextField!
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet private weak var emailLabel: UILabel!
+    @IBOutlet private weak var segmentedControl: UISegmentedControl!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
