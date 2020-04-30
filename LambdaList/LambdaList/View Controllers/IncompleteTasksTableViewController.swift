@@ -103,8 +103,6 @@ class IncompleteTasksTableViewController: UITableViewController {
                 return
             }
             
-            //TODO: Delete Task From Server
-            
             let task = tasks[indexPath.row]
 
             taskController.deleteTask(task)
