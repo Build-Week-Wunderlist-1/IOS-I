@@ -138,6 +138,12 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="uGL-V4-dZp">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh:" destination="51U-QP-nW9" eventType="valueChanged" id="7Dr-q2-VIW"/>
+                        </connections>
+                    </refreshControl>
                     <connections>
                         <outlet property="searchBar" destination="mvI-5P-bP0" id="EtV-Qn-nkY"/>
                         <segue destination="irB-18-J1T" kind="presentation" identifier="LoginScreenSegue" id="g2K-1u-aas"/>
@@ -337,6 +343,12 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="7sx-0o-EfV">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh:" destination="dCQ-xF-e4b" eventType="valueChanged" id="86c-cV-4ea"/>
+                        </connections>
+                    </refreshControl>
                     <connections>
                         <outlet property="searchBar" destination="h6K-Vt-8nl" id="ho2-9Z-eXz"/>
                     </connections>
@@ -484,8 +496,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="qKa-PU-34U"/>
-        <segue reference="Ge3-NO-YXE"/>
+        <segue reference="Vpv-QV-Rc5"/>
+        <segue reference="3ur-6u-EfA"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.down" catalog="system" width="120" height="128"/>

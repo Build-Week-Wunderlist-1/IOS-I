@@ -22,210 +22,218 @@ class CompleteTasksTableViewController: UITableViewController {
     @IBAction func addTaskButtonPressed(_ sender: UIBarButtonItem) {
     }
     
+    @IBAction func refresh(_ sender: UIRefreshControl) {
+        // TODO: taskController.fetchTasksFromServer { _ in
+        DispatchQueue.main.async {
+            self.refreshControl?.endRefreshing()
+        }
+    }
+//}
+
+
+// MARK: - Properties
+let taskController = TaskController()
+var completeTasks: [Task] = []
+//    var sortedByKey: String = "sort"
+
+private lazy var fetchedResultsController: NSFetchedResultsController<Task> = {
+    let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
+    fetchRequest.predicate = NSPredicate(format: "completed == %@", NSNumber(value: true))
+    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: true)]
+    let context = CoreDataStack.shared.mainContext
+    let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                              managedObjectContext: context,
+                                                              sectionNameKeyPath: nil,
+                                                              cacheName: nil)
+    fetchedResultsController.delegate = self
+    // swiftlint:disable force_try
+    try! fetchedResultsController.performFetch()
+    // swiftlint:enable force_try
+    return fetchedResultsController
+}()
+
+// MARK: - Lifecycle
+override func viewDidLoad() {
+    super.viewDidLoad()
+    //        updateViews()
+    searchBar.delegate = self
+}
+
+override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    //        completeTasks = taskController.getIncompleteTasks()
+}
+
+
+// MARK: - Table view data source
+
+//Setting Amount of Rows/Cells for incompleteTasks
+override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    fetchedResultsController.sections![section].numberOfObjects
+}
+
+//Setting the cells properties
+override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier, for: indexPath)
     
-    // MARK: - Properties
-    let taskController = TaskController()
-    var completeTasks: [Task] = []
-    //    var sortedByKey: String = "sort"
-    
-    private lazy var fetchedResultsController: NSFetchedResultsController<Task> = {
-        let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "completed == %@", NSNumber(value: true))
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: true)]
-        let context = CoreDataStack.shared.mainContext
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                  managedObjectContext: context,
-                                                                  sectionNameKeyPath: nil,
-                                                                  cacheName: nil)
-        fetchedResultsController.delegate = self
-        // swiftlint:disable force_try
-        try! fetchedResultsController.performFetch()
-        // swiftlint:enable force_try
-        return fetchedResultsController
-    }()
-    
-    // MARK: - Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //        updateViews()
-        searchBar.delegate = self
+    guard let myCell = cell as? TaskTableViewCell else {
+        return cell
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        //        completeTasks = taskController.getIncompleteTasks()
-    }
+    myCell.task = fetchedResultsController.object(at: indexPath)
     
-    
-    // MARK: - Table view data source
-    
-    //Setting Amount of Rows/Cells for incompleteTasks
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        fetchedResultsController.sections![section].numberOfObjects
-    }
-    
-    //Setting the cells properties
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier, for: indexPath)
-        
-        guard let myCell = cell as? TaskTableViewCell else {
-            return cell
+    //myCell.task
+    return myCell
+}
+
+// Override to support editing the table view.
+override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+        // Delete the row from the data source
+        guard let tasks = fetchedResultsController.fetchedObjects else {
+            return
         }
         
-        myCell.task = fetchedResultsController.object(at: indexPath)
+        //TODO: Delete Task From Server
         
-        //myCell.task
-        return myCell
+        let task = tasks[indexPath.row]
+        CoreDataStack.shared.mainContext.delete(task)
+        
+        do {
+            try CoreDataStack.shared.mainContext.save()
+        } catch {
+            print("Error Saving Delete")
+        }
     }
-    
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            guard let tasks = fetchedResultsController.fetchedObjects else {
+}
+
+//    // Override to support conditional rearranging of the table view.
+//    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+//        // Return false if you do not want the item to be re-orderable.
+//        return true
+//    }
+//
+//    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//
+//        var objects = fetchedResultsController.fetchedObjects!
+//
+//        fetchedResultsController.delegate = nil
+//
+//        let object = objects[sourceIndexPath.row]
+//        objects.remove(at: sourceIndexPath.row)
+//        objects.insert(object, at: destinationIndexPath.row)
+//
+//        var i: Int64 = 1
+//        for object in objects {
+//            object.sort = i
+//            i += 1
+//        }
+//
+//        try! CoreDataStack.shared.mainContext.save()
+//
+//        fetchedResultsController.delegate = self
+//    }
+
+// MARK: - Navigation
+
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "ShowTaskDetailSegue" {
+        
+        //Get Tasks
+        let tasks = fetchedResultsController.fetchedObjects
+        
+        //Unwrapping
+        guard let destination = segue.destination as? TaskDetailViewController,
+            let row = tableView.indexPathForSelectedRow?.row,
+            let tempTasks = tasks else {
                 return
-            }
-            
-            //TODO: Delete Task From Server
-            
-            let task = tasks[indexPath.row]
-            CoreDataStack.shared.mainContext.delete(task)
-            
-            do {
-                try CoreDataStack.shared.mainContext.save()
-            } catch {
-                print("Error Saving Delete")
-            }
         }
+        
+        destination.task = tempTasks[row]
+        
+        // TODO: ? - Get the new view controller using segue.destination.
+        // TODO: ? - Pass the selected object to the new view controller.
+    } else if segue.identifier == "AddTaskModalSegue" {
+        // TODO: ? - Get the new view controller using segue.destination.
+        // TODO: ? - Pass the selected object to the new view controller.
     }
+}
+
+
+// MARK: - Methods
+
+private func allowUserToSort() {
+    // Create the alert
+    let alert = UIAlertController(title: "Sort By:",
+                                  message: "",
+                                  preferredStyle: .alert)
     
-    //    // Override to support conditional rearranging of the table view.
-    //    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-    //        // Return false if you do not want the item to be re-orderable.
-    //        return true
-    //    }
-    //
-    //    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-    //
-    //        var objects = fetchedResultsController.fetchedObjects!
-    //
-    //        fetchedResultsController.delegate = nil
-    //
-    //        let object = objects[sourceIndexPath.row]
-    //        objects.remove(at: sourceIndexPath.row)
-    //        objects.insert(object, at: destinationIndexPath.row)
-    //
-    //        var i: Int64 = 1
-    //        for object in objects {
-    //            object.sort = i
-    //            i += 1
-    //        }
-    //
-    //        try! CoreDataStack.shared.mainContext.save()
-    //
-    //        fetchedResultsController.delegate = self
-    //    }
+    // Add actions
+    alert.addAction(UIAlertAction(title: "A-Z", style: .default, handler: { _ in
+        self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "taskName", ascending: true)]
+        // swiftlint:disable force_try
+        try! self.fetchedResultsController.performFetch()
+        // swiftlint:enable force_try
+        self.tableView.reloadData()
+    }))
     
-    // MARK: - Navigation
+    alert.addAction(UIAlertAction(title: "Z-A", style: .default, handler: { _ in
+        self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "taskName", ascending: false)]
+        // swiftlint:disable force_try
+        try! self.fetchedResultsController.performFetch()
+        // swiftlint:enable force_try
+        self.tableView.reloadData()
+    }))
     
+    alert.addAction(UIAlertAction(title: "Newest First", style: .default, handler: { _ in
+        self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: false)]
+        // swiftlint:disable force_try
+        try! self.fetchedResultsController.performFetch()
+        // swiftlint:enable force_try
+        self.tableView.reloadData()
+    }))
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowTaskDetailSegue" {
-            
-            //Get Tasks
-            let tasks = fetchedResultsController.fetchedObjects
-            
-            //Unwrapping
-            guard let destination = segue.destination as? TaskDetailViewController,
-                let row = tableView.indexPathForSelectedRow?.row,
-                let tempTasks = tasks else {
-                    return
-            }
-            
-            destination.task = tempTasks[row]
-            
-            // TODO: ? - Get the new view controller using segue.destination.
-            // TODO: ? - Pass the selected object to the new view controller.
-        } else if segue.identifier == "AddTaskModalSegue" {
-            // TODO: ? - Get the new view controller using segue.destination.
-            // TODO: ? - Pass the selected object to the new view controller.
-        }
-    }
+    alert.addAction(UIAlertAction(title: "Oldest First", style: .default, handler: { _ in
+        self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: true)]
+        // swiftlint:disable force_try
+        try! self.fetchedResultsController.performFetch()
+        // swiftlint:enable force_try
+        self.tableView.reloadData()
+    }))
     
+    //               alert.addAction(UIAlertAction(title: "Manual", style: .default, handler: { _ in
+    //                   self.sortedByKey = "sort"
+    //                   self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: false)]
+    //                   try! self.fetchedResultsController.performFetch()
+    //                   self.tableView.reloadData()
+    //               }))
     
-    // MARK: - Methods
+    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
     
-    private func allowUserToSort() {
-        // Create the alert
-        let alert = UIAlertController(title: "Sort By:",
-                                      message: "",
-                                      preferredStyle: .alert)
-        
-        // Add actions
-        alert.addAction(UIAlertAction(title: "A-Z", style: .default, handler: { _ in
-            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "taskName", ascending: true)]
-            // swiftlint:disable force_try
-            try! self.fetchedResultsController.performFetch()
-            // swiftlint:enable force_try
-            self.tableView.reloadData()
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Z-A", style: .default, handler: { _ in
-            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "taskName", ascending: false)]
-            // swiftlint:disable force_try
-            try! self.fetchedResultsController.performFetch()
-            // swiftlint:enable force_try
-            self.tableView.reloadData()
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Newest First", style: .default, handler: { _ in
-            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: false)]
-            // swiftlint:disable force_try
-            try! self.fetchedResultsController.performFetch()
-            // swiftlint:enable force_try
-            self.tableView.reloadData()
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Oldest First", style: .default, handler: { _ in
-            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: true)]
-            // swiftlint:disable force_try
-            try! self.fetchedResultsController.performFetch()
-            // swiftlint:enable force_try
-            self.tableView.reloadData()
-        }))
-        
-        //               alert.addAction(UIAlertAction(title: "Manual", style: .default, handler: { _ in
-        //                   self.sortedByKey = "sort"
-        //                   self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: false)]
-        //                   try! self.fetchedResultsController.performFetch()
-        //                   self.tableView.reloadData()
-        //               }))
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        // Present the alert
-        self.present(alert, animated: true) { }
-    }
-    
-    //    private func updateViews() {
-    //        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(showEditing(sender:)))
-    //    }
-    //
-    //    @objc func showEditing(sender: UIBarButtonItem)
-    //    {
-    //        if(self.tableView.isEditing == true)
-    //        {
-    //            self.tableView.isEditing = false
-    //            self.navigationItem.leftBarButtonItem?.title = "Edit"
-    //        }
-    //        else
-    //        {
-    //            self.tableView.isEditing = true
-    //            self.navigationItem.leftBarButtonItem?.title = "Done"
-    //        }
-    //    }
-    //
+    // Present the alert
+    self.present(alert, animated: true) { }
+}
+
+//    private func updateViews() {
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(showEditing(sender:)))
+//    }
+//
+//    @objc func showEditing(sender: UIBarButtonItem)
+//    {
+//        if(self.tableView.isEditing == true)
+//        {
+//            self.tableView.isEditing = false
+//            self.navigationItem.leftBarButtonItem?.title = "Edit"
+//        }
+//        else
+//        {
+//            self.tableView.isEditing = true
+//            self.navigationItem.leftBarButtonItem?.title = "Done"
+//        }
+//    }
+//
 }
 
 extension CompleteTasksTableViewController: NSFetchedResultsControllerDelegate {

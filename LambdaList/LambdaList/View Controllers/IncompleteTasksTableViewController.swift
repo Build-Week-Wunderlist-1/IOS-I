@@ -22,6 +22,15 @@ class IncompleteTasksTableViewController: UITableViewController {
     @IBAction func addTaskButtonPressed(_ sender: UIBarButtonItem) {
     }
     
+    @IBAction func refresh(_ sender: UIRefreshControl) {
+        // TODO: taskController.fetchTasksFromServer { _ in
+        DispatchQueue.main.async {
+            self.refreshControl?.endRefreshing()
+        }
+    }
+//}
+    
+    
     // MARK: - Properties
     let taskController = TaskController()
     var incompleteTasks: [Task] = []
