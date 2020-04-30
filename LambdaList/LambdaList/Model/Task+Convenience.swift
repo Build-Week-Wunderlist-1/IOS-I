@@ -20,7 +20,7 @@ extension Task {
         let completedAsInt = completed == true ? 1 : 0
 
         return TaskRepresentation(taskName: taskName,
-// FIXME:                                 taskID: Int(taskID),
+                                  taskID: Int(taskID),
                                   taskDescription: taskDescription ?? "",
                                   sort: Int(sort),
                                   createdDate: createdDate ?? Date(),
@@ -32,7 +32,7 @@ extension Task {
     /// This is the original init before we added REST API
     @discardableResult convenience init(taskName: String,
                      taskDescription: String,
-                     taskID: Int = 1,
+                     taskID: Int = 0,
                      sort: Int = 1,
                      createdDate: Date = Date(),
                      modifiedDate: Date = Date(),
@@ -61,7 +61,7 @@ extension Task {
 
         self.init(taskName: taskRepresentation.taskName,
                   taskDescription: taskRepresentation.taskDescription,
-// FIXME:                  taskID: taskRepresentation.taskID,
+                  taskID: taskRepresentation.taskID,
                   sort: taskRepresentation.sort,
                   createdDate: taskRepresentation.createdDate,
                   modifiedDate: taskRepresentation.modifiedDate,

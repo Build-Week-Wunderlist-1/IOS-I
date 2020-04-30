@@ -179,9 +179,13 @@ class TaskController {
     // Read
     // Update
     func put(task: Task, completion: @escaping CompletionHandler = { _, _ in }) {
+        if task.taskID <= 0 {
+            print("task.taskID == \(task.taskID). PUT failed. Should this be a create?")
+        }
+
         // FIXME: Pull this value from UserDefaults
         let userId = "4"
-        let taskId = "4" // task.taskID
+        let taskId = "\(task.taskID)"
 
         var requestURL = baseURL.appendingPathComponent("api/lists")
         requestURL = requestURL.appendingPathComponent(userId)

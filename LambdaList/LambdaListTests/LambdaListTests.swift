@@ -42,10 +42,11 @@ class LambdaListTests: XCTestCase {
 
     func testBackendPut() throws {
 
-        let task = Task(taskName: "Mark's First Task v7",
-                        taskDescription: "Hello, world! v7",
+        let task = Task(taskName: "Mark's First Task v8",
+                        taskDescription: "Hello, world! v8",
                         completed: true)
-
+        task.taskID = 4
+        print(task.taskID)
         let tc = TaskController()
 
         tc.put(task: task) { urlResponse, error  in
