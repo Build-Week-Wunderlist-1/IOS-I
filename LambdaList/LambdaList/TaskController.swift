@@ -236,6 +236,7 @@ class TaskController {
     }
 
     // Read
+
     func get(userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
 
         var requestURL = baseURL.appendingPathComponent("api/lists")
@@ -263,14 +264,29 @@ class TaskController {
                 return
             }
 
+            let dateFormatter: DateFormatter = {
+                // TODO: How do I use these instead?
+                // let isoDateFormatter = ISO8601DateFormatter()
+                // isoDateFormatter.formatOptions.insert(.withFractionalSeconds)
+
+                let formatter = DateFormatter()
+                formatter.locale = Locale(identifier: "en_US_POSIX")
+                formatter.timeZone = TimeZone(abbreviation: "GMT")
+                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                return formatter
+            }()
+
             let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .iso8601
+            decoder.dateDecodingStrategy = .formatted(dateFormatter)
 
             // Unwrap the data returned in the closure.
             do {
                 var tasks: [TaskRepresentation] = []
-                tasks = Array(try decoder.decode([TaskRepresentation].self, from: data))
-                print("tasks count = \(tasks)")
+
+                tasks = try decoder.decode([TaskRepresentation].self, from: data)
+
+                print("Found \(tasks.count) tasks.")
+
                 //try self.updateEntries(with: taskRepresentation)
                 completion(nil, nil)
 

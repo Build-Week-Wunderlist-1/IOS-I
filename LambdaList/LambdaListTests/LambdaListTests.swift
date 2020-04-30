@@ -52,8 +52,9 @@ class LambdaListTests: XCTestCase {
         let tc = TaskController()
 
         tc.get(userId: fixedUserId, authToken: fixedAuthToken) { urlResponse, error  in
-            if let error = error {
-                print("⚠️ testBackendGet Error: \(error)")
+            if error != nil {
+                // Error is printed by get
+                print("⚠️ testBackendGet Error: ^^^")
                 XCTAssert(false, "testBackendPost error")
             } else if let urlResponse = urlResponse as? HTTPURLResponse {
                 if urlResponse.statusCode != 200 {
@@ -71,8 +72,8 @@ class LambdaListTests: XCTestCase {
     // Task Create
     func testBackendPost() throws {
 
-        let task = Task(taskName: "Mark's First Task v11",
-                        taskDescription: "Hello, world! v11",
+        let task = Task(taskName: "Mark's First Task v12",
+                        taskDescription: "Hello, world! v12",
                         completed: true)
 
         let tc = TaskController()
@@ -82,7 +83,7 @@ class LambdaListTests: XCTestCase {
                 print("⚠️ testBackendPost Error: \(error)")
                 XCTAssert(false, "testBackendPost error")
             } else if let urlResponse = urlResponse as? HTTPURLResponse {
-                if urlResponse.statusCode != 200 {
+                if urlResponse.statusCode != 201 {
                     print("⚠️ testBackendPost statusCode: \(urlResponse.statusCode)")
                     XCTAssert(false, "testBackendPost urlResponse")
                 }
@@ -97,10 +98,10 @@ class LambdaListTests: XCTestCase {
     // Task Update
     func testBackendPut() throws {
 
-        let task = Task(taskName: "Mark's First Task v10.1",
-                        taskDescription: "Hello, world! v10.1",
+        let task = Task(taskName: "Mark's First Task v12.1",
+                        taskDescription: "Hello, world! v12.1",
                         completed: true)
-        task.taskID = 10
+        task.taskID = 43
         print(task.taskID)
         let tc = TaskController()
 
@@ -126,7 +127,7 @@ class LambdaListTests: XCTestCase {
         let task = Task(taskName: "Mark's First Task v8",
                         taskDescription: "Hello, world! v8",
                         completed: true)
-        task.taskID = 10
+        task.taskID = 43
         print(task.taskID)
         let tc = TaskController()
 
