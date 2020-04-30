@@ -184,13 +184,10 @@ class TaskController {
         
     }
 
-    func post(task: Task, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
+    func post(task: Task, userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
         if task.taskID > 0 {
             print("task.taskID == \(task.taskID). POST failed. Should this be an update?")
         }
-
-        // FIXME: Pull this value from UserDefaults
-        let userId = "4"
 
         var requestURL = baseURL.appendingPathComponent("api/lists")
         requestURL = requestURL.appendingPathComponent(userId)
@@ -238,10 +235,7 @@ class TaskController {
     }
 
     // Read
-    func get(authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
-
-        // FIXME: Pull this value from UserDefaults
-        let userId = "4"
+    func get(authToken: String, userId: String, completion: @escaping CompletionHandler = { _, _ in }) {
 
         var requestURL = baseURL.appendingPathComponent("api/lists")
         requestURL = requestURL.appendingPathComponent(userId)
@@ -271,13 +265,11 @@ class TaskController {
     }
 
     // Update
-    func put(task: Task, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
+    func put(task: Task, userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
         if task.taskID <= 0 {
             print("task.taskID == \(task.taskID). PUT failed. Should this be a create?")
         }
 
-        // FIXME: Pull this value from UserDefaults
-        let userId = "4"
         let taskId = "\(task.taskID)"
 
         var requestURL = baseURL.appendingPathComponent("api/lists")
@@ -327,13 +319,11 @@ class TaskController {
     }
 
     // Delete
-    func delete(task: Task, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
+    func delete(task: Task, userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
         if task.taskID <= 0 {
             print("task.taskID == \(task.taskID). DELETE failed.")
         }
 
-        // FIXME: Pull this value from UserDefaults
-        let userId = "4"
         let taskId = "\(task.taskID)"
 
         var requestURL = baseURL.appendingPathComponent("api/lists")

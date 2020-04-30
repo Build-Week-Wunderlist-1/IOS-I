@@ -12,9 +12,10 @@ import XCTest
 class LambdaListTests: XCTestCase {
 
     // swiftlint:disable line_length
-    // FIXME: Pull this value from UserDefaults
     let fixedAuthToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJuYW1lIjoiZ2VycmlvcjAxIiwidXNlcmVtYWlsIjoiaGVyb2t1YXBwMDFAbS5nZXJyaW9yLmNvbSIsImlhdCI6MTU4ODE3NTM1OSwiZXhwIjoxNTg5Mzg0OTU5fQ.w4pVW9fQT1NmU3rletahQyGvocO_QxvAoBq5qGvD6VY"
     // swiftlint:enable line_length
+
+    let fixedUserId = "4"
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -50,7 +51,7 @@ class LambdaListTests: XCTestCase {
 
         let tc = TaskController()
 
-        tc.get(authToken: fixedAuthToken) { data, error  in
+        tc.get(userId: fixedUserId, authToken: fixedAuthToken) { data, error  in
             if let error = error {
                 print("⚠️ testBackendGet Error: \(error)")
                 XCTAssert(false, "testBackendPost error")
@@ -74,7 +75,7 @@ class LambdaListTests: XCTestCase {
 
         let tc = TaskController()
 
-        tc.post(task: task, authToken: fixedAuthToken) { urlResponse, error  in
+        tc.post(task: task, userId: fixedUserId, authToken: fixedAuthToken) { urlResponse, error  in
             if let error = error {
                 print("⚠️ testBackendPost Error: \(error)")
                 XCTAssert(false, "testBackendPost error")
@@ -101,7 +102,7 @@ class LambdaListTests: XCTestCase {
         print(task.taskID)
         let tc = TaskController()
 
-        tc.put(task: task, authToken: fixedAuthToken) { urlResponse, error  in
+        tc.put(task: task, userId: fixedUserId, authToken: fixedAuthToken) { urlResponse, error  in
             if let error = error {
                 print("⚠️ testBackendPut Error: \(error)")
                 XCTAssert(false, "testBackendPut error")
@@ -127,7 +128,7 @@ class LambdaListTests: XCTestCase {
         print(task.taskID)
         let tc = TaskController()
 
-        tc.delete(task: task, authToken: fixedAuthToken) { urlResponse, error  in
+        tc.delete(task: task, userId: fixedUserId, authToken: fixedAuthToken) { urlResponse, error  in
             if let error = error {
                 print("⚠️ testBackendDelete Error: \(error)")
                 XCTAssert(false, "testBackendDelete error")
