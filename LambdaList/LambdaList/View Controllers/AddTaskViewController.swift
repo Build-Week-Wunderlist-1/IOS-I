@@ -11,7 +11,7 @@ import UIKit
 class AddTaskViewController: UIViewController {
     
     // MARK: - Properties
-    
+    var taskController: TaskController?
     
     // MARK: - Outlets
     @IBOutlet private weak var titleLabel: UILabel!
@@ -25,7 +25,15 @@ class AddTaskViewController: UIViewController {
             let descriptionText = descriptionTextView?.text,
             !titleText.isEmpty else { return }
         
-        _ = Task(taskName: titleText, taskDescription: descriptionText)
+        // Create Task object
+        let task = Task(taskName: titleText, taskDescription: descriptionText)
+        
+        // Save to server
+        if let userID = UserDefaults.standard.object(forKey: "userId") as? String,
+            let authToken = UserDefaults.standard.object(forKey: "token") as? String {
+            
+            taskController?.put(task: task, userId: userID, authToken: authToken) //TODO - Send added task to the WebServer
+        }
         
         //Save Locally
         do {
@@ -33,8 +41,6 @@ class AddTaskViewController: UIViewController {
         } catch {
             print("Error saving task in AddTaskViewController: \(error)")
         }
-        
-        //TODO - Send added task to the WebServer
         
         dismiss(animated: true)
         
