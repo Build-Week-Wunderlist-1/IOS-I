@@ -108,23 +108,23 @@ class IncompleteTasksTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-
+        
         var objects = fetchedResultsController.fetchedObjects!
-
+        
         fetchedResultsController.delegate = nil
-
+        
         let object = objects[sourceIndexPath.row]
         objects.remove(at: sourceIndexPath.row)
         objects.insert(object, at: destinationIndexPath.row)
-
+        
         var i: Int64 = 1
         for object in objects {
             object.sort = i
             i += 1
         }
-
+        
         try! CoreDataStack.shared.mainContext.save()
-
+        
         fetchedResultsController.delegate = self
     }
     
@@ -135,7 +135,7 @@ class IncompleteTasksTableViewController: UITableViewController {
             userIsLoggedIn = true
             
             performSegue(withIdentifier: "LoginScreenSegue", sender: self)
-           // <-- this is sending the user to loginScreen on launch
+            // <-- this is sending the user to loginScreen on launch
         }
     }
     
@@ -278,7 +278,7 @@ extension IncompleteTasksTableViewController: UISearchBarDelegate {
             !searchTerm.isEmpty {
             
             let predicate = NSPredicate(format: "(taskName contains[cd] %@)", searchTerm)
-
+            
             fetchedResultsController.fetchRequest.predicate = predicate
             
             do {
@@ -287,8 +287,22 @@ extension IncompleteTasksTableViewController: UISearchBarDelegate {
             } catch let err {
                 print(err)
             }
-
+            
         }
-    }
+        
+        if searchBar.text == "" {
+                let predicate = NSPredicate(format: "completed == %@", NSNumber(value: false))
+
+                
+                fetchedResultsController.fetchRequest.predicate = predicate
+                
+                do {
+                    try fetchedResultsController.performFetch()
+                    tableView.reloadData()
+                } catch let err {
+                    print(err)
+                }
+            }
+        }
     
 }

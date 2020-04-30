@@ -283,6 +283,20 @@ extension CompleteTasksTableViewController: UISearchBarDelegate {
             }
 
         }
+        
+        if searchBar.text == "" {
+                let predicate = NSPredicate(format: "completed == %@", NSNumber(value: false))
+
+                
+                fetchedResultsController.fetchRequest.predicate = predicate
+                
+                do {
+                    try fetchedResultsController.performFetch()
+                    tableView.reloadData()
+                } catch let err {
+                    print(err)
+                }
+            }
     }
     
 }
