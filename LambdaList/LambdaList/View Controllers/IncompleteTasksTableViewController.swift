@@ -123,8 +123,10 @@ class IncompleteTasksTableViewController: UITableViewController {
             i += 1
         }
         
+        // swiftlint:disable force_try
         try! CoreDataStack.shared.mainContext.save()
-        
+        // swiftlint:enable force_try
+
         fetchedResultsController.delegate = self
     }
     
