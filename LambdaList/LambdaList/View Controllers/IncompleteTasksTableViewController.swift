@@ -31,7 +31,7 @@ class IncompleteTasksTableViewController: UITableViewController {
     private lazy var fetchedResultsController: NSFetchedResultsController<Task> = {
         let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "completed == %@", NSNumber(value: false))
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: sortedByKey, ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: false)]
         let context = CoreDataStack.shared.mainContext
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                   managedObjectContext: context,
@@ -164,8 +164,7 @@ class IncompleteTasksTableViewController: UITableViewController {
         }))
         
         alert.addAction(UIAlertAction(title: "Manual", style: .default, handler: { _ in
-            self.sortedByKey = "sort"
-            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.sortedByKey, ascending: true)]
+            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: false)]
             // swiftlint:disable force_try
             try! self.fetchedResultsController.performFetch()
             // swiftlint:enable force_try
