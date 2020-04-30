@@ -16,7 +16,7 @@ class IncompleteTasksTableViewController: UITableViewController {
     
     // MARK: - Actions
     @IBAction func sortButtonPressed(_ sender: UIBarButtonItem) {
-       allowUserToSort()
+        allowUserToSort()
     }
     
     @IBAction func addTaskButtonPressed(_ sender: UIBarButtonItem) {
@@ -43,23 +43,18 @@ class IncompleteTasksTableViewController: UITableViewController {
         // swiftlint:enable force_try
         return fetchedResultsController
     }()
-        
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         letUserLoginInIfNecessary()
+        updateViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        incompleteTasks = taskController.getIncompleteTasks()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        
+        //        incompleteTasks = taskController.getIncompleteTasks()
     }
     
     
@@ -71,7 +66,7 @@ class IncompleteTasksTableViewController: UITableViewController {
     }
     
     //Setting the cells properties
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier, for: indexPath)
         
         guard let myCell = cell as? TaskTableViewCell else {
@@ -82,14 +77,14 @@ class IncompleteTasksTableViewController: UITableViewController {
         
         //myCell.task
         return myCell
-     }
-     
+    }
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
             guard let tasks = fetchedResultsController.fetchedObjects else {
-                 return
+                return
             }
             
             //TODO: Delete Task From Server
@@ -105,64 +100,77 @@ class IncompleteTasksTableViewController: UITableViewController {
         }
     }
     
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
+    // Override to support rearranging the table view.
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+    }
     
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
+    // Override to support conditional rearranging of the table view.
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the item to be re-orderable.
+        return true
+    }
     
     // MARK: - Methods
     
     private func letUserLoginInIfNecessary() {
         // TODO: check to see if user is logged in or not first. below is temporary code
         if userIsLoggedIn == false {
-           userIsLoggedIn = true
+            userIsLoggedIn = true
             
-        performSegue(withIdentifier: "LoginScreenSegue", sender: self) // <-- this is sending the user to loginScreen on launch
+            performSegue(withIdentifier: "LoginScreenSegue", sender: self) // <-- this is sending the user to loginScreen on launch
         }
     }
     
     private func allowUserToSort() {
         // Create the alert
-               let alert = UIAlertController(title: "Sort By:",
-                                             message: "",
-                                             preferredStyle: .alert)
-               
-               // Add actions
-               alert.addAction(UIAlertAction(title: "Alphabetical", style: .default, handler: { _ in
-                   self.sortedByKey = "taskName"
-                   self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.sortedByKey, ascending: true)]
-                   try! self.fetchedResultsController.performFetch()
-                   self.tableView.reloadData()
-               }))
-               
-               alert.addAction(UIAlertAction(title: "Most Recent", style: .default, handler: { _ in
-                   self.sortedByKey = "createdDate"
-                   self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.sortedByKey, ascending: false)]
-                   try! self.fetchedResultsController.performFetch()
-                   self.tableView.reloadData()
-               }))
-               
-               alert.addAction(UIAlertAction(title: "Manual", style: .default, handler: { _ in
-                   self.sortedByKey = "sort"
-                   self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.sortedByKey, ascending: false)]
-                   try! self.fetchedResultsController.performFetch()
-                   self.tableView.reloadData()
-               }))
-               
-               alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-               
-               // Present the alert
-               self.present(alert, animated: true) { }
+        let alert = UIAlertController(title: "Sort By:",
+                                      message: "",
+                                      preferredStyle: .alert)
+        
+        // Add actions
+        alert.addAction(UIAlertAction(title: "Alphabetical", style: .default, handler: { _ in
+            self.sortedByKey = "taskName"
+            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.sortedByKey, ascending: true)]
+            try! self.fetchedResultsController.performFetch()
+            self.tableView.reloadData()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Most Recent", style: .default, handler: { _ in
+            self.sortedByKey = "createdDate"
+            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.sortedByKey, ascending: false)]
+            try! self.fetchedResultsController.performFetch()
+            self.tableView.reloadData()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Manual", style: .default, handler: { _ in
+            self.sortedByKey = "sort"
+            self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.sortedByKey, ascending: true)]
+            try! self.fetchedResultsController.performFetch()
+            self.tableView.reloadData()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        // Present the alert
+        self.present(alert, animated: true) { }
+    }
+    
+    private func updateViews() {
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(showEditing(sender:)))
+    }
+    
+    @objc func showEditing(sender: UIBarButtonItem)
+    {
+        if(self.tableView.isEditing == true)
+        {
+            self.tableView.isEditing = false
+            self.navigationItem.leftBarButtonItem?.title = "Edit"
+        }
+        else
+        {
+            self.tableView.isEditing = true
+            self.navigationItem.leftBarButtonItem?.title = "Done"
+        }
     }
     
     // MARK: - Navigation
@@ -182,8 +190,6 @@ class IncompleteTasksTableViewController: UITableViewController {
             
             destination.task = tempTasks[row]
             
-            // TODO: ? - Get the new view controller using segue.destination.
-            // TODO: ? - Pass the selected object to the new view controller.
         } else if segue.identifier == "AddTaskModalSegue" {
             // TODO: ? - Get the new view controller using segue.destination.
             // TODO: ? - Pass the selected object to the new view controller.
