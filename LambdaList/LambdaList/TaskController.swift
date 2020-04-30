@@ -180,6 +180,63 @@ class TaskController {
         
     }
 
+    func post(task: Task, completion: @escaping CompletionHandler = { _, _ in }) {
+        if task.taskID > 0 {
+            print("task.taskID == \(task.taskID). POST failed. Should this be an update?")
+        }
+
+        // FIXME: Pull this value from UserDefaults
+        let userId = "4"
+
+        var requestURL = baseURL.appendingPathComponent("api/lists")
+        requestURL = requestURL.appendingPathComponent(userId)
+
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.post.rawValue
+
+        // Tell the server what it's looking at. Won't work without it since it won't "guess"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        // swiftlint:disable line_length
+        // FIXME: Pull this value from UserDefaults
+        request.setValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJuYW1lIjoiZ2VycmlvcjAxIiwidXNlcmVtYWlsIjoiaGVyb2t1YXBwMDFAbS5nZXJyaW9yLmNvbSIsImlhdCI6MTU4ODE3NTM1OSwiZXhwIjoxNTg5Mzg0OTU5fQ.w4pVW9fQT1NmU3rletahQyGvocO_QxvAoBq5qGvD6VY", forHTTPHeaderField: "Authorization")
+        // swiftlint:enable line_length
+
+        do {
+            guard let representation = task.taskRepresentation else {
+                completion(nil, NSError())
+                return
+            }
+
+            let encoder = JSONEncoder()
+            // This will convert Date (really an Int) into a date string at encode time.
+            encoder.dateEncodingStrategy = .iso8601
+
+            request.httpBody = try encoder.encode(representation)
+
+        } catch {
+            NSLog("Error encoding/saving task: \(error)")
+            completion(nil, error)
+        }
+
+        URLSession.shared.dataTask(with: request) { _, urlResponse, error in
+            if let error = error {
+                NSLog("Error PUTing task to server \(error)")
+                completion(nil, error)
+                return
+            }
+
+            if let urlResponse = urlResponse {
+                NSLog("urlResponse PUTing task to server \(urlResponse)")
+                completion(urlResponse, nil)
+                return
+            }
+
+            completion(nil, nil)
+        }.resume()
+        print("put initiated.")
+    }
+
     // Read
     // Update
     func put(task: Task, completion: @escaping CompletionHandler = { _, _ in }) {
