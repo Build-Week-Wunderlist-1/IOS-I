@@ -98,14 +98,31 @@ class CompleteTasksTableViewController: UITableViewController {
         }
     }
     
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-    }
-    
     // Override to support conditional rearranging of the table view.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the item to be re-orderable.
         return true
+    }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+
+        var objects = fetchedResultsController.fetchedObjects!
+
+        fetchedResultsController.delegate = nil
+
+        let object = objects[sourceIndexPath.row]
+        objects.remove(at: sourceIndexPath.row)
+        objects.insert(object, at: destinationIndexPath.row)
+
+        var i: Int64 = 1
+        for object in objects {
+            object.sort = i
+            i += 1
+        }
+
+        try! CoreDataStack.shared.mainContext.save()
+
+        fetchedResultsController.delegate = self
     }
     
     // MARK: - Navigation
