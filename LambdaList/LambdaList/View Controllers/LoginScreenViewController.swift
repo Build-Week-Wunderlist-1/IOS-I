@@ -29,6 +29,7 @@ class LoginScreenViewController: UIViewController {
     @IBOutlet private weak var logInButton: UIButton!
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -68,6 +69,7 @@ class LoginScreenViewController: UIViewController {
             //Logging In
             let user = User(username: username, password: password, email: nil)
             taskController.userSignin(user: user)
+            dismiss(animated: true, completion: nil)
         } else {
             //Signing Up
             guard let email = emailTextField.text else {
@@ -75,28 +77,15 @@ class LoginScreenViewController: UIViewController {
             }
             let user = User(username: username, password: password, email: email)
             taskController.userRegister(user: user)
+            segmentedControl.selectedSegmentIndex = 0
+            loginType = .login
+            segmentedChanged()
+            
         }
-        
-        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
-        
-        //Assign login type
-        //Lock Email TextField if not signing up
-        if sender.selectedSegmentIndex == 0 {
-            loginType = .login
-            emailTextField.isUserInteractionEnabled = false
-            emailTextField.isHidden = true
-            logInButton.setTitle("Log In", for: .normal)
-            emailLabel.isHidden = true
-        } else {
-            loginType = .signup
-            emailTextField.isUserInteractionEnabled = true
-            emailTextField.isHidden = false
-            logInButton.setTitle("Sign Up", for: .normal)
-            emailLabel.isHidden = false
-        }
+        segmentedChanged()
     }
     
     func UnlockView() {
@@ -130,5 +119,23 @@ class LoginScreenViewController: UIViewController {
         logInButton.setTitle("Log In", for: .normal)
         emailLabel.isHidden = true
         logInStatusLabel.isHidden = true
+    }
+    
+    func segmentedChanged() {
+        //Assign login type
+        //Lock Email TextField if not signing up
+        if segmentedControl.selectedSegmentIndex == 0 {
+            loginType = .login
+            emailTextField.isUserInteractionEnabled = false
+            emailTextField.isHidden = true
+            logInButton.setTitle("Log In", for: .normal)
+            emailLabel.isHidden = true
+        } else {
+            loginType = .signup
+            emailTextField.isUserInteractionEnabled = true
+            emailTextField.isHidden = false
+            logInButton.setTitle("Sign Up", for: .normal)
+            emailLabel.isHidden = false
+        }
     }
 }

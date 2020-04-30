@@ -172,6 +172,7 @@
                         <outlet property="logInStatusLabel" destination="EwI-0u-vSZ" id="wmT-hy-HKK"/>
                         <outlet property="passwordTextField" destination="Ez3-um-NMh" id="BXa-b5-PNt"/>
                         <outlet property="rememberMeButton" destination="uk2-7e-AOg" id="jp4-3y-vyX"/>
+                        <outlet property="segmentedControl" destination="L3N-KU-Xfo" id="Rff-rG-m1q"/>
                         <outlet property="usernameTextField" destination="058-m3-zmh" id="r0n-va-FSR"/>
                     </connections>
                 </viewController>
