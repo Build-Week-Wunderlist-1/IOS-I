@@ -208,6 +208,12 @@ class TaskController {
 
         if let bearer = TaskController.self.bearer {
             post(task: task, userId: "\(bearer.userId)", authToken: bearer.token)
+        } else {
+            if let userID = UserDefaults.standard.object(forKey: "userId") as? Int,
+                let authToken = UserDefaults.standard.object(forKey: "token") as? String {
+
+                post(task: task, userId: "\(userID)", authToken: authToken)
+            }
         }
     }
 

@@ -27,21 +27,9 @@ class AddTaskViewController: UIViewController {
         
         // Create Task object
         let task = Task(taskName: titleText, taskDescription: descriptionText)
-        
-        // Save to server
-        if let userID = UserDefaults.standard.object(forKey: "userId") as? Int,
-            let authToken = UserDefaults.standard.object(forKey: "token") as? String {
-            
-            taskController?.put(task: task, userId: String(userID), authToken: authToken) //TODO - Send added task to the WebServer
-        }
-        
-        //Save Locally
-        do {
-            try CoreDataStack.shared.mainContext.save()
-        } catch {
-            print("Error saving task in AddTaskViewController: \(error)")
-        }
-        
+
+        taskController?.createTask(task)
+
         dismiss(animated: true)
         
     }
