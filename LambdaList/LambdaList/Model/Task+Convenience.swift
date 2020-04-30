@@ -20,7 +20,6 @@ extension Task {
         let completedAsInt = completed == true ? 1 : 0
 
         return TaskRepresentation(taskName: taskName,
-                                  taskID: Int(taskID),
                                   taskDescription: taskDescription ?? "",
                                   sort: Int(sort),
                                   createdDate: createdDate ?? Date(),
@@ -28,6 +27,23 @@ extension Task {
                                   completed: completedAsInt
         )
     }
+
+    var updateTaskRepresentation: UpdateTaskRepresentation? {
+        guard let taskName = taskName else { return nil }
+
+        // Backend uses Int for Bool. Convert to Int
+        let completedAsInt = completed == true ? 1 : 0
+
+        return UpdateTaskRepresentation(taskName: taskName,
+                                        taskID: Int(taskID),
+                                        taskDescription: taskDescription ?? "",
+                                        sort: Int(sort),
+                                        createdDate: createdDate ?? Date(),
+                                        modifiedDate: modifiedDate ?? Date(),
+                                        completed: completedAsInt
+        )
+    }
+
 
     /// This is the original init before we added REST API
     @discardableResult convenience init(taskName: String,
@@ -61,10 +77,25 @@ extension Task {
 
         self.init(taskName: taskRepresentation.taskName,
                   taskDescription: taskRepresentation.taskDescription,
-                  taskID: taskRepresentation.taskID,
                   sort: taskRepresentation.sort,
                   createdDate: taskRepresentation.createdDate,
                   modifiedDate: taskRepresentation.modifiedDate,
+                  completed: completed,
+                  context: context)
+    }
+
+    @discardableResult convenience init?(updateTaskRepresentation: UpdateTaskRepresentation,
+                                         context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+
+        // Server is going to give us an Int; convert to Bool
+        let completed = updateTaskRepresentation.completed == 0 ? false : true
+
+        self.init(taskName: updateTaskRepresentation.taskName,
+                  taskDescription: updateTaskRepresentation.taskDescription,
+                  taskID: updateTaskRepresentation.taskID,
+                  sort: updateTaskRepresentation.sort,
+                  createdDate: updateTaskRepresentation.createdDate,
+                  modifiedDate: updateTaskRepresentation.modifiedDate,
                   completed: completed,
                   context: context)
     }

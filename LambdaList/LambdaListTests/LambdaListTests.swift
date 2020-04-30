@@ -40,12 +40,39 @@ class LambdaListTests: XCTestCase {
         sleep(10000) // FIXME: Not the correct way to do this.
     }
 
+    // Task Create
+    func testBackendPost() throws {
+
+        let task = Task(taskName: "Mark's First Task v10",
+                        taskDescription: "Hello, world! v10",
+                        completed: true)
+
+        let tc = TaskController()
+
+        tc.post(task: task) { urlResponse, error  in
+            if let error = error {
+                print("⚠️ testBackendPost Error: \(error)")
+                XCTAssert(false, "testBackendPost error")
+            } else if let urlResponse = urlResponse as? HTTPURLResponse {
+                if urlResponse.statusCode != 200 {
+                    print("⚠️ testBackendPost statusCode: \(urlResponse.statusCode)")
+                    XCTAssert(false, "testBackendPost urlResponse")
+                }
+            } else {
+                print("testBackendPost successful!")
+            }
+        }
+
+        sleep(10000) // FIXME: Not the correct way to do this.
+    }
+
+    // Task Update
     func testBackendPut() throws {
 
-        let task = Task(taskName: "Mark's First Task v8",
-                        taskDescription: "Hello, world! v8",
+        let task = Task(taskName: "Mark's First Task v10.1",
+                        taskDescription: "Hello, world! v10.1",
                         completed: true)
-        task.taskID = 4
+        task.taskID = 7
         print(task.taskID)
         let tc = TaskController()
 
