@@ -129,6 +129,6 @@ class LoginScreenViewController: UIViewController {
         emailTextField.isHidden = true
         logInButton.setTitle("Log In", for: .normal)
         emailLabel.isHidden = true
+        logInStatusLabel.isHidden = true
     }
-    
 }
