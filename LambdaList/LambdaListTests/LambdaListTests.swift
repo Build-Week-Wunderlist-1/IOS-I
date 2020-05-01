@@ -89,6 +89,40 @@ class LambdaListTests: XCTestCase {
     }
 
     // Get List of Tasks
+    func testBackendSignin() throws {
+        let semiphore = expectation(description: "Completed testBackendSignin")
+
+        let tc = TaskController()
+
+        // Note: We are intentionally not including email
+        let creds = User(username: "gerrior01", password: "123456")
+
+        tc.userSignin(user: creds) { urlResponse, error  in
+            semiphore.fulfill()
+            if error != nil {
+                // Error is printed by get
+                XCTAssert(false, "⚠️ testBackendSignin Error: ^^^")
+            } else if let urlResponse = urlResponse as? HTTPURLResponse {
+                if urlResponse.statusCode != 200 {
+                    XCTAssert(false, "⚠️ testBackendSignin statusCode: \(urlResponse.statusCode)")
+                }
+            } else {
+                XCTAssertNotNil(TaskController.getBearer != nil, "⚠️ testBackendSignin bearer wasn't created")
+                XCTAssertEqual(String(TaskController.getBearer!.userId), self.fixedUserId, "⚠️ testBackendSignin bearer is incorrect")
+                XCTAssert(TaskController.getBearer!.token.count == 227, "⚠️ testBackendSignin token incorrect size")
+                print("testBackendSignin successful!")
+            }
+        }
+
+        wait(for: [semiphore], timeout: 5) // blocking sync wait
+
+        // Assertion only happens after the time out, or web request completes
+        // isInverted: Indicates that the expectation is not intended to happen
+        // By adding bang (!) before it, we're testing that it indeed happened!
+        XCTAssertTrue(!semiphore.isInverted, "⚠️ Registering with backend failed.")
+    }
+
+    // Get List of Tasks
     func testBackendGet() throws {
         let semiphore = expectation(description: "Completed testBackendGet")
 
