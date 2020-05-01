@@ -505,6 +505,7 @@ class TaskController {
     func delete(task: Task, userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
         if task.taskID <= 0 {
             print("task.taskID == \(task.taskID). DELETE failed.")
+            completion(nil, NSError(domain: "Invalid Range", code: Int(task.taskID), userInfo: nil))
             return
         }
         

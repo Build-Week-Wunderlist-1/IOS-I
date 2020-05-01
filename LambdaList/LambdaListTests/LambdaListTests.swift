@@ -189,9 +189,8 @@ class LambdaListTests: XCTestCase {
     func testBackendDelete() throws {
         let semiphore = expectation(description: "Completed testBackendDelete")
 
-        let task = Task(taskName: "Mark's First Task v8",
-                        taskDescription: "Hello, world! v8",
-                        completed: true)
+        let task = Task(taskName: "",
+                        taskDescription: "")
         task.taskID = 125
         print(task.taskID)
         let tc = TaskController()
@@ -208,6 +207,39 @@ class LambdaListTests: XCTestCase {
                 }
             } else {
                 print("testBackendDelete successful!")
+            }
+        }
+
+        wait(for: [semiphore], timeout: 5) // blocking sync wait
+
+        // Assertion only happens after the time out, or web request completes
+        // isInverted: Indicates that the expectation is not intended to happen
+        // By adding bang (!) before it, we're testing that it indeed happened!
+        XCTAssertTrue(!semiphore.isInverted, "⚠️ Registering with backend failed.")
+    }
+
+    func testBackendDeleteFailure() throws {
+        let semiphore = expectation(description: "Completed testBackendDeleteFailure")
+
+        let task = Task(taskName: "",
+                        taskDescription: "")
+        task.taskID = 1 // Invalid task ID set on purpose
+        print(task.taskID)
+        let tc = TaskController()
+
+        tc.delete(task: task, userId: fixedUserId, authToken: fixedAuthToken) { urlResponse, error  in
+            semiphore.fulfill()
+            if let error = error {
+                XCTAssert(false, "⚠️ testBackendDeleteFailure Error: \(error)")
+            } else if let urlResponse = urlResponse as? HTTPURLResponse {
+                if urlResponse.statusCode != 200 {
+                    print("⚠️ testBackendDeleteFailure statusCode: \(urlResponse.statusCode)")
+                    XCTAssert(false, "testBackendDeleteFailure urlResponse")
+                }
+            } else {
+                // I consider it a bug the backend returns 200 if you delete any non-zero task.
+                // Should they fix this behavior, we'll notice it and update code as necessary.
+                print("testBackendDeleteFailure successful!")
             }
         }
 
