@@ -8,6 +8,8 @@
 
 import XCTest
 
+let toSelectParagraph = 4 // Select a paragraph: Quadruple-tap with one finger.
+
 class LambdaListUITests: XCTestCase {
 
     override func setUpWithError() throws {
@@ -25,7 +27,7 @@ class LambdaListUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    // Make sure you are logged out of the app before beginning
+    // Make sure you are logged out of the app before beginning (run testLogout)
     // Make sure "Connected Hardware Keyboard" is unchecked.
     func testLogIn() throws {
         let app = XCUIApplication()
@@ -35,15 +37,16 @@ class LambdaListUITests: XCTestCase {
 
         app.segmentedControls.buttons["Log In"].tap()
 
-        app.textFields["ls.username"].tap()
+        app.textFields["ls.username"].tap(withNumberOfTaps: toSelectParagraph, numberOfTouches: 1)
         app.textFields["ls.username"].typeText("gerrior04")
 
         let passwordSecureTextField = app.secureTextFields["ls.password"]
 
-        passwordSecureTextField.tap()
+        passwordSecureTextField.tap(withNumberOfTaps: toSelectParagraph, numberOfTouches: 1)
         passwordSecureTextField.typeText("123456")
 
-        app.buttons["square"].tap()
+        // FIXME: Something weird going on with this toggling back and forth during test.
+//        app.buttons["square"].tap()
 //        app.buttons["ls.RememberMe"].tap()
 
         app.buttons["ls.ActionButton"].tap()
