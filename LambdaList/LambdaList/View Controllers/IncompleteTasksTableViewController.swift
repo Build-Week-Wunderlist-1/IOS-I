@@ -23,13 +23,13 @@ class IncompleteTasksTableViewController: UITableViewController {
     }
     
     @IBAction func refresh(_ sender: UIRefreshControl) {
-        // FIXME: How do I do this in TaskController?
         if let userID = UserDefaults.standard.object(forKey: "userId") as? Int,
             let token = UserDefaults.standard.object(forKey: "token") as? String {
             
             taskController.get(userId: String(userID), authToken: token) { _, _  in
                 DispatchQueue.main.async {
                     self.refreshControl?.endRefreshing()
+                    self.tableView.reloadData()
                 }
             }
         }
@@ -72,8 +72,10 @@ class IncompleteTasksTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //        incompleteTasks = taskController.getIncompleteTasks()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.taskController.fetchTasksFromServer()
+        }
     }
-    
     
     // MARK: - Table view data source
     

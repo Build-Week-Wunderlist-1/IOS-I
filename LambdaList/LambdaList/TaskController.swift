@@ -23,11 +23,11 @@ struct User: Codable {
 }
 
 class TaskController {
-        
+    
     // MARK: - Properties
-
+    
     typealias CompletionHandler = (URLResponse?, Error?) -> Void
-
+    
     let baseURL = URL(string: "https://lambdawunderlist.herokuapp.com/")!
     var tasks: [Task] = []
     static var bearer: Bearer? {
@@ -52,7 +52,7 @@ class TaskController {
             return Bearer(token: tempToken, userId: tempUserId)
         }
     }
-
+    
     // MARK: - Functions
     func getCompletedTasks() -> [Task] {
         
@@ -75,58 +75,58 @@ class TaskController {
         
         return tempTasks
     }
-
+    
     // MARK: - CRUD
-
+    
     // Create
     func postRequest(url: URL) -> URLRequest {
         var request = URLRequest(url: url)
-
+        
         //Setting HTTPMethod to POST
         request.httpMethod = HTTPMethod.post.rawValue
-
+        
         //Header Method
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         return request
     }
-
+    
     func userRegister(user: User, completion: @escaping CompletionHandler = { _, _ in }) {
         //Unwrap URL
         let signupURL = baseURL.appendingPathComponent("api/auth/register/")
-
+        
         //Setting up Post Request URL
         var request = postRequest(url: signupURL)
-
+        
         do {
             //Encoding User Object and getting ready to send it
             let jsonData = try JSONEncoder().encode(user)
             request.httpBody = jsonData
-
+            
             //Sending Data To Server
             URLSession.shared.dataTask(with: request) { data, response, error in
-
+                
                 //Error Checking
                 if let error = error {
                     print("Error sending data when Signing Up: \(error)")
                     completion(nil, error)
                 }
-
+                
                 //Check response status code
                 guard let response = response as? HTTPURLResponse else {
                     print("Bad Response when Signing Up")
                     completion(nil, nil)
                     return
                 }
-
+                
                 print(response.statusCode)
-
+                
                 //Check data
                 guard let data = data else {
                     print("Data was not received")
                     completion(nil, nil)
                     return
                 }
-
+                
                 print("Data: \(data)")
                 //                //Decode Data
                 //                do {
@@ -136,9 +136,9 @@ class TaskController {
                 //                    print("Error decoding data from signup: \(error)")
                 //                }
                 completion(nil, nil)
-
+                
             }.resume()
-
+            
         } catch {
             print("Error Encoding User Object: \(error)")
         }
@@ -158,22 +158,22 @@ class TaskController {
             
             //Sending Data to Server
             URLSession.shared.dataTask(with: request) { data, response, error in
-               
+                
                 //Error Checking
                 if let error = error {
                     print("Error sending data when Signing Up: \(error)")
                     completion(nil, error)
                 }
-
+                
                 //Check response status code
                 guard let response = response as? HTTPURLResponse else {
                     print("Bad Response when Signing Up")
                     completion(nil, nil)
                     return
                 }
-
+                
                 print(response.statusCode)
-
+                
                 //Check data
                 guard let data = data else {
                     print("Data was not received")
@@ -184,7 +184,7 @@ class TaskController {
                 //Try Unwrapping Data
                 do {
                     TaskController.self.bearer = try JSONDecoder().decode(Bearer.self, from: data)
-                
+                    
                     completion(nil, nil)
                 } catch {
                     print("Error unwrapping data received in signin: \(error)")
@@ -197,7 +197,7 @@ class TaskController {
         
         
     }
-
+    
     // Create
     func createTask(_ task: Task) {
         //Save Locally
@@ -206,12 +206,12 @@ class TaskController {
         } catch {
             print("Error saving task in createTask: \(error)")
         }
-
+        
         if let bearer = TaskController.self.getBearer {
             post(task: task, userId: "\(bearer.userId)", authToken: bearer.token)
         }
     }
-
+    
     func post(task: Task,
               userId: String,
               authToken: String,
@@ -219,48 +219,48 @@ class TaskController {
         if task.taskID > 0 {
             print("task.taskID == \(task.taskID). POST failed. Should this be an update?")
         }
-
+        
         var requestURL = baseURL.appendingPathComponent("api/lists")
         requestURL = requestURL.appendingPathComponent(userId)
-
+        
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.post.rawValue
-
+        
         // Tell the server what it's looking at. Won't work without it since it won't "guess"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(authToken, forHTTPHeaderField: "Authorization")
-
+        
         do {
             guard let representation = task.createUpdateTaskRepresentation else {
                 completion(nil, NSError())
                 return
             }
-
+            
             let encoder = JSONEncoder()
             // This will convert Date (really an Int) into a date string at encode time.
             encoder.dateEncodingStrategy = .iso8601
-
+            
             request.httpBody = try encoder.encode(representation)
-
+            
         } catch {
             NSLog("Error encoding/saving task: \(error)")
             completion(nil, error)
         }
-
+        
         URLSession.shared.dataTask(with: request) { data, urlResponse, error in
             if let error = error {
                 NSLog("Error POSTing task to server \(error)")
                 completion(nil, error)
                 return
             }
-
+            
             if let urlResponse = urlResponse as? HTTPURLResponse,
                 urlResponse.statusCode != 201 {
                 NSLog("urlResponse POSTing task to server \(urlResponse)")
                 completion(urlResponse, nil)
                 return
             }
-
+            
             if let data = data {
                 //Decoding Task Object and Assigning it a ID
                 do {
@@ -299,17 +299,17 @@ class TaskController {
     }
     
     func get(userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
-
+        
         var requestURL = baseURL.appendingPathComponent("api/lists")
         requestURL = requestURL.appendingPathComponent(userId)
-
+        
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.get.rawValue
-
+        
         // Tell the server what it's looking at. Won't work without it since it won't "guess"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(authToken, forHTTPHeaderField: "Authorization")
-
+        
         URLSession.shared.dataTask(with: request) { data, _, error in
             // Did the call complete without error?
             if let error = error {
@@ -317,40 +317,42 @@ class TaskController {
                 completion(nil, error)
                 return
             }
-
+            
             // Did we get anything?
             guard let data = data else {
                 NSLog("No data returned by data task")
                 completion(nil, NSError()) // Convert to ResultType
                 return
             }
-
+            
             let dateFormatter: DateFormatter = {
                 // TODO: How do I use these instead?
                 // let isoDateFormatter = ISO8601DateFormatter()
                 // isoDateFormatter.formatOptions.insert(.withFractionalSeconds)
-
+                
                 let formatter = DateFormatter()
                 formatter.locale = Locale(identifier: "en_US_POSIX")
                 formatter.timeZone = TimeZone(abbreviation: "GMT")
                 formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
                 return formatter
             }()
-
+            
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .formatted(dateFormatter)
-
+            
             // Unwrap the data returned in the closure.
             do {
                 var tasks: [TaskRepresentation] = []
-
+                
                 tasks = try decoder.decode([TaskRepresentation].self, from: data)
-
+                
+                try self.updateTasks(with: tasks)
+                
                 print("Found \(tasks.count) tasks.")
-
+                
                 //try self.updateEntries(with: taskRepresentation)
                 completion(nil, nil)
-
+                
             } catch {
                 NSLog("Error decoding data from backend: \(error)")
                 completion(nil, error)
@@ -358,76 +360,124 @@ class TaskController {
         }.resume()
         print("GET initiated.")
     }
-
+    
     // Update
     func updateTask(_ task: Task) {
-
+        
         //Save Changes to CoreData
         do {
             try CoreDataStack.shared.mainContext.save()
         } catch {
             print("Error Saving changes to CoreData: \(error)")
         }
-
+        
         if let bearer = TaskController.self.getBearer {
             put(task: task, userId: "\(bearer.userId)", authToken: bearer.token)
         }
     }
-
+    
+    private func updateTasks(with representations: [TaskRepresentation]) throws {
+        
+        //        for task in representations {
+        //            Task(taskRepresentation: task)
+        //        }
+        //
+        //        try CoreDataStack.shared.mainContext.save()
+        
+        let identifiersToFetch = representations.compactMap { $0.taskID }
+        let representationsByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, representations))
+        var tasksToCreate = representationsByID
+        
+        // create fetch request
+        let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "taskID IN %@", identifiersToFetch)
+        
+        let context = CoreDataStack.shared.mainContext
+        
+        do {
+            let existingTasks = try context.fetch(fetchRequest)
+            
+            for task in existingTasks {
+                let id = Int(task.taskID)
+                guard let representation = representationsByID[id] else { continue }
+                self.update(task: task, with: representation)
+                tasksToCreate.removeValue(forKey: id)
+            }
+            
+            for representation in tasksToCreate.values {
+                Task(taskRepresentation: representation)
+            }
+        } catch {
+            NSLog("Error fetching tasks with taskID's: \(identifiersToFetch), with error: \(error)")
+        }
+        
+        try CoreDataStack.shared.mainContext.save()
+    }
+    
+    private func update(task: Task, with representation: TaskRepresentation) {
+        task.taskName = representation.taskName
+        task.taskDescription = representation.taskDescription
+        task.taskID = Int64(representation.taskID)
+        task.completed = representation.completed
+        task.createdDate = representation.createdDate
+        task.modifiedDate = representation.modifiedDate
+        task.sort = Int64(representation.sort)
+    }
+    
     func put(task: Task, userId: String, authToken: String, completion: @escaping CompletionHandler = { _, _ in }) {
         if task.taskID <= 0 {
             print("task.taskID == \(task.taskID). PUT failed. Should this be a create?")
         }
-
+        
         let taskId = "\(task.taskID)"
-
+        
         var requestURL = baseURL.appendingPathComponent("api/lists")
         requestURL = requestURL.appendingPathComponent(userId)
         requestURL = requestURL.appendingPathComponent(taskId)
         
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.put.rawValue
-
+        
         // Tell the server what it's looking at. Won't work without it since it won't "guess"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(authToken, forHTTPHeaderField: "Authorization")
-
+        
         do {
             guard let representation = task.createUpdateTaskRepresentation else {
                 completion(nil, NSError())
                 return
             }
-
+            
             let encoder = JSONEncoder()
             // This will convert Date (really an Int) into a date string at encode time.
             encoder.dateEncodingStrategy = .iso8601
-
+            
             request.httpBody = try encoder.encode(representation)
-
+            
         } catch {
             NSLog("Error encoding/saving task: \(error)")
             completion(nil, error)
         }
-
+        
         URLSession.shared.dataTask(with: request) { _, urlResponse, error in
             if let error = error {
                 NSLog("Error PUTing task to server \(error)")
                 completion(nil, error)
                 return
             }
-
+            
             if let urlResponse = urlResponse as? HTTPURLResponse,
                 urlResponse.statusCode != 200 {
                 NSLog("urlResponse PUTing task to server \(urlResponse)")
                 completion(urlResponse, nil)
                 return
             }
-
+            
             completion(nil, nil)
         }.resume()
         print("put initiated.")
     }
-
+    
     // Delete
     func deleteTask(_ task: Task) {
         
@@ -438,7 +488,7 @@ class TaskController {
         
         //Delete Locally
         CoreDataStack.shared.mainContext.delete(task)
-
+        
         do {
             try CoreDataStack.shared.mainContext.save()
         } catch {
@@ -451,36 +501,45 @@ class TaskController {
             print("task.taskID == \(task.taskID). DELETE failed.")
             return
         }
-
+        
         let taskId = "\(task.taskID)"
-
+        
         var requestURL = baseURL.appendingPathComponent("api/lists")
         requestURL = requestURL.appendingPathComponent(userId)
         requestURL = requestURL.appendingPathComponent(taskId)
-
+        
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.delete.rawValue
-
+        
         // Tell the server what it's looking at. Won't work without it since it won't "guess"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(authToken, forHTTPHeaderField: "Authorization")
-
+        
         URLSession.shared.dataTask(with: request) { _, urlResponse, error in
             if let error = error {
                 NSLog("Error DELETEing task to server \(error)")
                 completion(nil, error)
                 return
             }
-
+            
             if let urlResponse = urlResponse as? HTTPURLResponse,
                 urlResponse.statusCode != 200 {
                 NSLog("urlResponse DELETEing task to server \(urlResponse)")
                 completion(urlResponse, nil)
                 return
             }
-
+            
             completion(nil, nil)
         }.resume()
         print("DELETE initiated.")
     }
+    
+    func fetchTasksFromServer() {
+        if let bearer = TaskController.self.getBearer {
+            print("bearer exists and get was run")
+            get(userId: String(bearer.userId),
+                authToken: bearer.token)
+        }
+    }
+    
 }
