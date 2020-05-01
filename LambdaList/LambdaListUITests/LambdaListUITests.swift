@@ -26,10 +26,9 @@ class LambdaListUITests: XCTestCase {
     }
 
     func testLogIn() throws {
-        // UI tests must launch the application that they test.
         let app = XCUIApplication()
 
-        XCTAssert(!app.navigationBars["Lambda List"].buttons["Logout"].exists, "⚠️ Not on Login Screen")
+        XCTAssert(!app.buttons["Logout"].exists, "⚠️ Not on Login Screen")
 
         app.segmentedControls.buttons["Log In"].tap()
         app.textFields["Username:"].tap()
@@ -52,8 +51,12 @@ class LambdaListUITests: XCTestCase {
 
     }
 
-    func testLogOut() throws {
-        XCTAssert(!app.navigationBars["Lambda List"].buttons["Logout"].exists, "⚠️ Not on Login Screen")
+    func testLogout() throws {
+        let app = XCUIApplication()
+        sleep(1)
+        XCTAssert(!app.buttons["Log In"].exists, "⚠️ Not on Logout Screen")
+        app.buttons["Logout"].tap()
+        XCTAssert(app.buttons["Log In"].exists, "⚠️ Not on Log In Screen")
     }
 
     func testLaunchPerformance() throws {
