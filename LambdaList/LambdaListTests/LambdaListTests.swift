@@ -11,11 +11,13 @@ import XCTest
 
 class LambdaListTests: XCTestCase {
 
+    // username = gerrior01
+    // password = 123456
+    // auth token is good for 8 days
+    let fixedUserId = "4"
     // swiftlint:disable line_length
     let fixedAuthToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJuYW1lIjoiZ2VycmlvcjAxIiwidXNlcmVtYWlsIjoiaGVyb2t1YXBwMDFAbS5nZXJyaW9yLmNvbSIsImlhdCI6MTU4ODE3NTM1OSwiZXhwIjoxNTg5Mzg0OTU5fQ.w4pVW9fQT1NmU3rletahQyGvocO_QxvAoBq5qGvD6VY"
     // swiftlint:enable line_length
-
-    let fixedUserId = "4"
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -115,6 +117,7 @@ class LambdaListTests: XCTestCase {
     }
 
     // Task Create
+    // Look for New Task ID in output for following tasks
     func testBackendPost() throws {
         let semiphore = expectation(description: "Completed testBackendPost")
 
@@ -148,13 +151,14 @@ class LambdaListTests: XCTestCase {
     }
 
     // Task Update
+    // Look for New Task ID in output from testBackendPost and set taskID to it.
     func testBackendPut() throws {
         let semiphore = expectation(description: "Completed testBackendPut")
 
         let task = Task(taskName: "Mark's First Task v12.1",
                         taskDescription: "Hello, world! v12.1",
                         completed: true)
-        task.taskID = 44
+        task.taskID = 125
         print(task.taskID)
         let tc = TaskController()
 
@@ -181,13 +185,14 @@ class LambdaListTests: XCTestCase {
         XCTAssertTrue(!semiphore.isInverted, "⚠️ Registering with backend failed.")
     }
 
+    // Look for New Task ID in output from testBackendPost and set taskID to it.
     func testBackendDelete() throws {
         let semiphore = expectation(description: "Completed testBackendDelete")
 
         let task = Task(taskName: "Mark's First Task v8",
                         taskDescription: "Hello, world! v8",
                         completed: true)
-        task.taskID = 44
+        task.taskID = 125
         print(task.taskID)
         let tc = TaskController()
 
