@@ -461,6 +461,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WTq-l3-alB">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -508,9 +509,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="g2K-1u-aas"/>
-        <segue reference="qKa-PU-34U"/>
-        <segue reference="Ge3-NO-YXE"/>
+        <segue reference="qz5-QJ-10H"/>
+        <segue reference="Vpv-QV-Rc5"/>
+        <segue reference="3ur-6u-EfA"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.down" catalog="system" width="120" height="128"/>
