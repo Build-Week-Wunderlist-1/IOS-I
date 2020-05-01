@@ -42,7 +42,7 @@ class CompleteTasksTableViewController: UITableViewController {
     
     private lazy var fetchedResultsController: NSFetchedResultsController<Task> = {
         let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "completed == %@", NSNumber(value: true))
+        fetchRequest.predicate = NSPredicate(format: "completed = %d", true)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: true)]
         let context = CoreDataStack.shared.mainContext
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,

@@ -430,16 +430,19 @@ class TaskController {
 
     // Delete
     func deleteTask(_ task: Task) {
+        
+        //Delete from server
+        if let bearer = TaskController.self.getBearer {
+            delete(task: task, userId: "\(bearer.userId)", authToken: bearer.token)
+        }
+        
+        //Delete Locally
         CoreDataStack.shared.mainContext.delete(task)
 
         do {
             try CoreDataStack.shared.mainContext.save()
         } catch {
             print("Error Saving Delete")
-        }
-
-        if let bearer = TaskController.self.getBearer {
-            delete(task: task, userId: "\(bearer.userId)", authToken: bearer.token)
         }
     }
     
