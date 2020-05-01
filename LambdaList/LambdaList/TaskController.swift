@@ -449,7 +449,7 @@ class TaskController {
             completion(nil, error)
         }
         
-        URLSession.shared.dataTask(with: request) { _, urlResponse, error in
+        URLSession.shared.dataTask(with: request) { data, urlResponse, error in
             if let error = error {
                 NSLog("Error PUTing task to server \(error)")
                 completion(nil, error)
@@ -462,7 +462,15 @@ class TaskController {
                 completion(urlResponse, nil)
                 return
             }
-            
+
+            if let data = data {
+                // TODO: I think it's messed up that failure is defined by receiving and empty object: {}
+                if data.count == 2 {
+                    completion(nil, NSError(domain: "Update failed", code: data.count, userInfo: nil))
+                    return
+                }
+            }
+
             completion(nil, nil)
         }.resume()
         print("put initiated.")
