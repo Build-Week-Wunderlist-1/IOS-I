@@ -96,6 +96,32 @@ class LambdaListUITests: XCTestCase {
         XCTAssert(app.buttons["ls.ActionButton"].exists, "⚠️ Not on Log In Screen")
     }
 
+    // Make sure you are logged in before beginning
+    // Make sure "Connected Hardware Keyboard" is unchecked.
+    func testAddTask() throws {
+        let app = XCUIApplication()
+
+        // Login Screen appears for a moment. Wait for it to go away.
+        sleep(1)
+
+        // We should land on the table view with the logout button.
+        XCTAssert(app.buttons["Logout"].exists, "⚠️ Not on main screen")
+
+        app.navigationBars["Lambda List"].buttons["Add"].tap()
+
+        app.textFields["at.Title"].tap()
+        app.textFields["at.Title"].typeText("New Task")
+
+        app.textViews["at.Description"].tap()
+        app.textViews["at.Description"].typeText("Hello, world!")
+
+        // Create task button
+        app.buttons["at.Button"].tap()
+
+        // We should land on the table view with the logout button.
+        XCTAssert(app.buttons["Logout"].exists, "⚠️ Was not able add task")
+    }
+
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
             // This measures how long it takes to launch your application.
