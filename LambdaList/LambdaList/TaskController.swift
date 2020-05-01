@@ -126,7 +126,9 @@ class TaskController {
     }
     
     func userSignin(user: User, completion: @escaping CompletionHandler = { _, _ in }) {
-        
+
+        TaskController.bearer = Bearer(token: "", userId: 0)
+
         //Unwrap URL
         let signinURL = baseURL.appendingPathComponent("api/auth/login/")
         var request = postRequest(url: signinURL)
@@ -149,10 +151,15 @@ class TaskController {
                 //Check response status code
                 guard let response = response as? HTTPURLResponse else {
                     print("Bad Response when Signing Up")
-                    completion(nil, nil)
+                    completion(nil, NSError(domain: "Invalid HTTP Response", code: 0, userInfo: nil))
                     return
                 }
                 
+                if response.statusCode != 200 {
+                    completion(response, nil)
+                    return
+                }
+
                 print(response.statusCode)
                 
                 //Check data
