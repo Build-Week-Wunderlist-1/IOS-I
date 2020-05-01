@@ -31,8 +31,9 @@ class LambdaListUITests: XCTestCase {
         XCTAssert(!app.buttons["Logout"].exists, "⚠️ Not on Login Screen")
 
         app.segmentedControls.buttons["Log In"].tap()
-        app.textFields["Username:"].tap()
-        app.textFields["Username:"].typeText("gerrior04")
+
+        app.textFields["Username"].tap()
+        app.textFields["Username"].typeText("gerrior04")
 
         let passwordSecureTextField = app.secureTextFields["Password"]
 
@@ -42,13 +43,33 @@ class LambdaListUITests: XCTestCase {
         app.buttons["Log In"].tap()
 
         XCTAssert(app.navigationBars["Lambda List"].staticTexts["Lambda List"].exists, "⚠️ Was not able to login")
+    }
 
-//        app.navigationBars["Lambda List"].buttons["Logout"].tap()
-//        app/*@START_MENU_TOKEN@*/.buttons["Sign Up"]/*[[".segmentedControls.buttons[\"Sign Up\"]",".buttons[\"Sign Up\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-//        app.segmentedControls.buttons["Sign Up"].tap()
-//        app.buttons["square"].tap()
+    // Make sure you are logged out of the app before beginning
+    // Make sure "Connected Hardware Keyboard" is unchecked.
+    func testSignUp() throws {
+        let app = XCUIApplication()
 
+        // We should not be on the Logout screen
+        XCTAssert(!app.buttons["Logout"].exists, "⚠️ Not on Login Screen")
 
+        app.segmentedControls.buttons["Sign Up"].tap()
+
+        app.textFields["ls.email"].tap()
+        app.textFields["ls.email"].typeText("gerrior04@m.gerrior.com")
+
+        app.textFields["ls.username"].tap()
+        app.textFields["ls.username"].tap()
+        app.textFields["ls.username"].typeText("gerrior04")
+
+        let passwordSecureTextField = app.secureTextFields["ls.password"]
+        passwordSecureTextField.tap()
+        passwordSecureTextField.typeText("123456")
+
+        app.buttons["ls.ActionButton"].tap()
+
+        // We should land on Login Screen
+        XCTAssert(!app.textFields["ls.email"].exists, "⚠️ Was not bounce to login screen")
     }
 
     func testLogout() throws {
