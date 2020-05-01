@@ -27,6 +27,8 @@ class LambdaListTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    // MARK: - Production Tests
+
     // Increase number on username and email for sucessful test.
     func testBackendRegisterSuccess() {
         let semiphore = expectation(description: "Completed testBackendRegisterSuccess")

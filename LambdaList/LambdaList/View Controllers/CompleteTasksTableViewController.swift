@@ -67,7 +67,6 @@ class CompleteTasksTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        completeTasks = taskController.getIncompleteTasks()
     }
     
     

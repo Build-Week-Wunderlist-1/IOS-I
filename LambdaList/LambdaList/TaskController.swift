@@ -53,29 +53,6 @@ class TaskController {
         }
     }
     
-    // MARK: - Functions
-    func getCompletedTasks() -> [Task] {
-        
-        var tempTasks: [Task] = []
-        
-        for i in tasks where i.completed == true {
-            tempTasks.append(i)
-        }
-        
-        return tempTasks
-    }
-    
-    func getIncompleteTasks() -> [Task] {
-        
-        var tempTasks: [Task] = []
-        
-        for i in tasks where i.completed == false {
-            tempTasks.append(i)
-        }
-        
-        return tempTasks
-    }
-    
     // MARK: - CRUD
     
     // Create

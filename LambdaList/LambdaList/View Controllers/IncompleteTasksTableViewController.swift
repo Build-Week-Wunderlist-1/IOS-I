@@ -71,7 +71,7 @@ class IncompleteTasksTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        incompleteTasks = taskController.getIncompleteTasks()
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.taskController.fetchTasksFromServer()
         }
