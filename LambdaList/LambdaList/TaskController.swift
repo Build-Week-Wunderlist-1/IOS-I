@@ -117,7 +117,11 @@ class TaskController {
                     completion(nil, nil)
                     return
                 }
-                
+
+                if response.statusCode != 201 {
+                    completion(response, nil)
+                    return
+                }
                 print(response.statusCode)
                 
                 //Check data

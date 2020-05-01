@@ -25,24 +25,54 @@ class LambdaListTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testBackendRegister() {
-        let semiphore = expectation(description: "Completed testBackendRegister")
+    // Increase number on username and email for sucessful test.
+    func testBackendRegisterSuccess() {
+        let semiphore = expectation(description: "Completed testBackendRegisterSuccess")
 
-        let tempUser = User(username: "Cameron01", password: "Collins", email: "dummyemail01@yahoo.com")
+        let tempUser = User(username: "gerrior04", password: "123456", email: "herokuapp04@m.gerrior.com")
 
         let tc = TaskController()
         tc.userRegister(user: tempUser) { urlResponse, error  in
             semiphore.fulfill()
             if let error = error {
-                print("⚠️ testBackendRegister Error: \(error)")
-                XCTAssert(false, "testBackendRegister error")
+                print("⚠️ testBackendRegisterSuccess Error: \(error)")
+                XCTAssert(false, "testBackendRegisterSuccess error")
             } else if let urlResponse = urlResponse as? HTTPURLResponse {
                 if urlResponse.statusCode != 200 {
-                    print("⚠️ testBackendRegister statusCode: \(urlResponse.statusCode)")
-                    XCTAssert(false, "testBackendRegister urlResponse")
+                    print("⚠️ testBackendRegisterSuccess statusCode: \(urlResponse.statusCode)")
+                    XCTAssert(false, "testBackendRegisterSuccess urlResponse")
+                } else {
+                    print("testBackendRegisterSuccess successful!")
                 }
-            } else {
-                print("testBackendRegister successful!")
+            }
+        }
+
+        wait(for: [semiphore], timeout: 5) // blocking sync wait
+
+        // Assertion only happens after the time out, or web request completes
+        // isInverted: Indicates that the expectation is not intended to happen
+        // By adding bang (!) before it, we're testing that it indeed happened!
+        XCTAssertTrue(!semiphore.isInverted, "⚠️ Registering with backend failed.")
+    }
+
+    // Verify we get the expected result when you try and re-register
+    func testBackendRegisterFailure() {
+        let semiphore = expectation(description: "Completed testBackendRegisterFailure")
+
+        // This user has already been created. Going to verify this scenario.
+        let tempUser = User(username: "gerrior02", password: "123456", email: "herokuapp02@m.gerrior.com")
+
+        let tc = TaskController()
+        tc.userRegister(user: tempUser) { urlResponse, error  in
+            semiphore.fulfill()
+            if let error = error {
+                XCTAssert(false, "⚠️ testBackendRegisterFailure unexpected Error: \(error)")
+            } else if let urlResponse = urlResponse as? HTTPURLResponse {
+                if urlResponse.statusCode == 500 {
+                    print("testBackendRegisterFailure successful! Received 500 when re-registering")
+                } else {
+                    XCTAssert(false, "⚠️ testBackendRegisterFailure statusCode: \(urlResponse.statusCode)")
+                }
             }
         }
 
