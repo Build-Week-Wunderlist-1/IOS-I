@@ -14,9 +14,9 @@ class LambdaListTests: XCTestCase {
     // username = gerrior01
     // password = 123456
     // auth token is good for 8 days. Use testBackendSignin to refresh
-    let fixedUserId = "4"
+    let fixedUserId = "41" // Username: gerrior02
     // swiftlint:disable line_length
-    let fixedAuthToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJuYW1lIjoiZ2VycmlvcjAxIiwidXNlcmVtYWlsIjoiaGVyb2t1YXBwMDFAbS5nZXJyaW9yLmNvbSIsImlhdCI6MTU4ODE3NTM1OSwiZXhwIjoxNTg5Mzg0OTU5fQ.w4pVW9fQT1NmU3rletahQyGvocO_QxvAoBq5qGvD6VY"
+    let fixedAuthToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQxLCJ1c2VybmFtZSI6ImdlcnJpb3IwMiIsInVzZXJlbWFpbCI6Imhlcm9rdWFwcDAyQG0uZ2Vycmlvci5jb20iLCJpYXQiOjE1ODgzNTg5NDgsImV4cCI6MTU4OTU2ODU0OH0.gy8clZ30B5LQWV1YzDdaViT03qPKRsuLhHlZGWP492U"
     // swiftlint:enable line_length
 
     override func setUpWithError() throws {
@@ -185,9 +185,9 @@ class LambdaListTests: XCTestCase {
     func testBackendPost() throws {
         let semiphore = expectation(description: "Completed testBackendPost")
 
-        let task = Task(taskName: "Mark's First Task v12",
-                        taskDescription: "Hello, world! v12",
-                        completed: true)
+        let task = Task(taskName: "Class Demo",
+                        taskDescription: "Hello, Build Week!",
+                        completed: false)
 
         let tc = TaskController()
 
@@ -217,10 +217,10 @@ class LambdaListTests: XCTestCase {
     func testBackendPut() throws {
         let semiphore = expectation(description: "Completed testBackendPut")
 
-        let task = Task(taskName: "Mark's First Task v12.1",
-                        taskDescription: "Hello, world! v12.1",
+        let task = Task(taskName: "blank",
+                        taskDescription: "blank",
                         completed: true)
-        task.taskID = 126
+        task.taskID = 142
         print(task.taskID)
         let tc = TaskController()
 
@@ -281,7 +281,7 @@ class LambdaListTests: XCTestCase {
 
         let task = Task(taskName: "",
                         taskDescription: "")
-        task.taskID = 125
+        task.taskID = 141
         print(task.taskID)
         let tc = TaskController()
 

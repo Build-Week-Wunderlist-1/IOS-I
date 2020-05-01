@@ -8,6 +8,8 @@
 
 import XCTest
 
+let toSelectWord = 2 // Select a word: Double-tap the word with one finger.
+let toSelectSentence = 3 // Select a sentence: Triple-tap the sentence with one finger.
 let toSelectParagraph = 4 // Select a paragraph: Quadruple-tap with one finger.
 
 class LambdaListUITests: XCTestCase {
@@ -139,9 +141,11 @@ class LambdaListUITests: XCTestCase {
         showDetailsNavigationBar.buttons["Edit"].tap()
 
         app.textFields["sd.Title"].tap()
+        app.textFields["sd.Title"].tap(withNumberOfTaps: toSelectParagraph, numberOfTouches: 1)
         app.textFields["sd.Title"].typeText("Old Task")
 
         app.textViews["sd.Description"].tap()
+        app.textViews["sd.Description"].tap(withNumberOfTaps: toSelectParagraph, numberOfTouches: 1)
         app.textViews["sd.Description"].typeText("Bye, world!")
 
         showDetailsNavigationBar.buttons["Done"].tap()
