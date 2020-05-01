@@ -39,12 +39,10 @@ class LambdaListTests: XCTestCase {
         tc.userRegister(user: tempUser) { urlResponse, error  in
             semiphore.fulfill()
             if let error = error {
-                print("⚠️ testBackendRegisterSuccess Error: \(error)")
-                XCTAssert(false, "testBackendRegisterSuccess error")
+                XCTAssert(false, "⚠️ testBackendRegisterSuccess Error: \(error)")
             } else if let urlResponse = urlResponse as? HTTPURLResponse {
                 if urlResponse.statusCode != 200 {
-                    print("⚠️ testBackendRegisterSuccess statusCode: \(urlResponse.statusCode)")
-                    XCTAssert(false, "testBackendRegisterSuccess urlResponse")
+                    XCTAssert(false, "⚠️ testBackendRegisterSuccess statusCode: \(urlResponse.statusCode)")
                 } else {
                     print("testBackendRegisterSuccess successful!")
                 }
@@ -164,12 +162,10 @@ class LambdaListTests: XCTestCase {
             semiphore.fulfill()
             if error != nil {
                 // Error is printed by get
-                print("⚠️ testBackendGet Error: ^^^")
-                XCTAssert(false, "testBackendPost error")
+                XCTAssert(false, "⚠️ testBackendGet Error: ^^^")
             } else if let urlResponse = urlResponse as? HTTPURLResponse {
                 if urlResponse.statusCode != 200 {
-                    print("⚠️ testBackendGet statusCode: \(urlResponse.statusCode)")
-                    XCTAssert(false, "testBackendGet urlResponse")
+                    XCTAssert(false, "⚠️ testBackendGet statusCode: \(urlResponse.statusCode)")
                 }
             } else {
                 print("testBackendGet successful!")
@@ -198,12 +194,10 @@ class LambdaListTests: XCTestCase {
         tc.post(task: task, userId: fixedUserId, authToken: fixedAuthToken) { urlResponse, error  in
             semiphore.fulfill()
             if let error = error {
-                print("⚠️ testBackendPost Error: \(error)")
-                XCTAssert(false, "testBackendPost error")
+                XCTAssert(false, "⚠️ testBackendPost Error: \(error)")
             } else if let urlResponse = urlResponse as? HTTPURLResponse {
                 if urlResponse.statusCode != 201 {
-                    print("⚠️ testBackendPost statusCode: \(urlResponse.statusCode)")
-                    XCTAssert(false, "testBackendPost urlResponse")
+                    XCTAssert(false, "⚠️ testBackendPost statusCode: \(urlResponse.statusCode)")
                 }
             } else {
                 print("testBackendPost successful!")
@@ -233,12 +227,10 @@ class LambdaListTests: XCTestCase {
         tc.put(task: task, userId: fixedUserId, authToken: fixedAuthToken) { urlResponse, error  in
             semiphore.fulfill()
             if let error = error {
-                print("⚠️ testBackendPut Error: \(error)")
-                XCTAssert(false, "testBackendPut error")
+                XCTAssert(false, "⚠️ testBackendPut Error: \(error)")
             } else if let urlResponse = urlResponse as? HTTPURLResponse {
                 if urlResponse.statusCode != 200 {
-                    print("⚠️ testBackendPut statusCode: \(urlResponse.statusCode)")
-                    XCTAssert(false, "testBackendPut urlResponse")
+                    XCTAssert(false, "⚠️ testBackendPut statusCode: \(urlResponse.statusCode)")
                 }
             } else {
                 print("testBackendPut successful!")
@@ -266,12 +258,10 @@ class LambdaListTests: XCTestCase {
         tc.delete(task: task, userId: fixedUserId, authToken: fixedAuthToken) { urlResponse, error  in
             semiphore.fulfill()
             if let error = error {
-                print("⚠️ testBackendDelete Error: \(error)")
-                XCTAssert(false, "testBackendDelete error")
+                XCTAssert(false, "⚠️ testBackendDelete Error: \(error)")
             } else if let urlResponse = urlResponse as? HTTPURLResponse {
                 if urlResponse.statusCode != 200 {
-                    print("⚠️ testBackendDelete statusCode: \(urlResponse.statusCode)")
-                    XCTAssert(false, "testBackendDelete urlResponse")
+                    XCTAssert(false, "⚠️ testBackendDelete statusCode: \(urlResponse.statusCode)")
                 }
             } else {
                 print("testBackendDelete successful!")
@@ -301,8 +291,7 @@ class LambdaListTests: XCTestCase {
                 XCTAssert(false, "⚠️ testBackendDeleteFailure Error: \(error)")
             } else if let urlResponse = urlResponse as? HTTPURLResponse {
                 if urlResponse.statusCode != 200 {
-                    print("⚠️ testBackendDeleteFailure statusCode: \(urlResponse.statusCode)")
-                    XCTAssert(false, "testBackendDeleteFailure urlResponse")
+                    XCTAssert(false, "⚠️ testBackendDeleteFailure statusCode: \(urlResponse.statusCode)")
                 }
             } else {
                 // I consider it a bug the backend returns 200 if you delete any non-zero task.
