@@ -26,8 +26,8 @@ class TaskDetailViewController: UIViewController {
         //Then Allow editing
         if editTask == true {
             editTask = false
-            previousTitle = titleTextField.text
-            previousDescription = descriptionTextView.text
+            previousTitle = task?.taskName
+            previousDescription = task?.taskDescription
             titleTextField.isUserInteractionEnabled = false
             descriptionTextView.isUserInteractionEnabled = false
             editButton?.title = "Edit"
@@ -36,7 +36,12 @@ class TaskDetailViewController: UIViewController {
             
             task?.taskName = titleTextField.text
             task?.taskDescription = descriptionTextView.text
-            
+
+//            print("previousTitle \(previousTitle!)")
+//            print("titleTextField.text \(titleTextField.text!)")
+//            print("previousDescription \(previousDescription!)")
+//            print("descriptionTextView.text \(descriptionTextView.text!)")
+
             //Did the user change the task?
             if previousTitle != titleTextField.text || previousDescription != descriptionTextView.text {
 
