@@ -13,7 +13,7 @@ class LambdaListTests: XCTestCase {
 
     // username = gerrior01
     // password = 123456
-    // auth token is good for 8 days
+    // auth token is good for 8 days. Use testBackendSignin to refresh
     let fixedUserId = "4"
     // swiftlint:disable line_length
     let fixedAuthToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJuYW1lIjoiZ2VycmlvcjAxIiwidXNlcmVtYWlsIjoiaGVyb2t1YXBwMDFAbS5nZXJyaW9yLmNvbSIsImlhdCI6MTU4ODE3NTM1OSwiZXhwIjoxNTg5Mzg0OTU5fQ.w4pVW9fQT1NmU3rletahQyGvocO_QxvAoBq5qGvD6VY"
@@ -88,7 +88,6 @@ class LambdaListTests: XCTestCase {
         XCTAssertTrue(!semiphore.isInverted, "⚠️ Registering with backend failed.")
     }
 
-    // Get List of Tasks
     func testBackendSignin() throws {
         let semiphore = expectation(description: "Completed testBackendSignin")
 
@@ -107,10 +106,43 @@ class LambdaListTests: XCTestCase {
                     XCTAssert(false, "⚠️ testBackendSignin statusCode: \(urlResponse.statusCode)")
                 }
             } else {
-                XCTAssertNotNil(TaskController.getBearer != nil, "⚠️ testBackendSignin bearer wasn't created")
+                XCTAssertNotNil(TaskController.getBearer, "⚠️ testBackendSignin bearer wasn't created")
                 XCTAssertEqual(String(TaskController.getBearer!.userId), self.fixedUserId, "⚠️ testBackendSignin bearer is incorrect")
                 XCTAssert(TaskController.getBearer!.token.count == 227, "⚠️ testBackendSignin token incorrect size")
                 print("testBackendSignin successful!")
+            }
+        }
+
+        wait(for: [semiphore], timeout: 5) // blocking sync wait
+
+        // Assertion only happens after the time out, or web request completes
+        // isInverted: Indicates that the expectation is not intended to happen
+        // By adding bang (!) before it, we're testing that it indeed happened!
+        XCTAssertTrue(!semiphore.isInverted, "⚠️ Registering with backend failed.")
+    }
+
+    func testBackendSigninFailure() throws {
+        let semiphore = expectation(description: "Completed testBackendSigninFailure")
+
+        let tc = TaskController()
+
+        // Note: We are intentionally not including email
+        let creds = User(username: "gerrior", password: "123456")
+
+        tc.userSignin(user: creds) { urlResponse, error  in
+            semiphore.fulfill()
+            if error != nil {
+                // Error is printed by get
+                XCTAssert(false, "⚠️ testBackendSigninFailure Error: ^^^")
+            } else if let urlResponse = urlResponse as? HTTPURLResponse {
+                if urlResponse.statusCode == 401 /* Unauthrized */ {
+                    XCTAssert(TaskController.getBearer!.token.isEmpty, "⚠️ testBackendSigninFailure token should be reset")
+                    print("testBackendSigninFailure successful! We're not authorized as expected")
+                } else {
+                    XCTAssert(false, "⚠️ testBackendSigninFailure statusCode: \(urlResponse.statusCode)")
+                }
+            } else {
+                XCTAssert(false, "⚠️ testBackendSigninFailure how did we get here?")
             }
         }
 
