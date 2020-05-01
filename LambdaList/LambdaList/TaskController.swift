@@ -363,6 +363,8 @@ class TaskController {
     
     // Update
     func updateTask(_ task: Task) {
+
+        task.modifiedDate = Date()
         
         //Save Changes to CoreData
         do {
