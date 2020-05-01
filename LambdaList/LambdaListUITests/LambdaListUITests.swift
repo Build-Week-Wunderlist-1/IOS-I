@@ -25,24 +25,28 @@ class LambdaListUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    // Make sure you are logged out of the app before beginning
+    // Make sure "Connected Hardware Keyboard" is unchecked.
     func testLogIn() throws {
         let app = XCUIApplication()
 
+        // We should not be on the logout screen
         XCTAssert(!app.buttons["Logout"].exists, "⚠️ Not on Login Screen")
 
         app.segmentedControls.buttons["Log In"].tap()
 
-        app.textFields["Username"].tap()
-        app.textFields["Username"].typeText("gerrior04")
+        app.textFields["ls.username"].tap()
+        app.textFields["ls.username"].typeText("gerrior04")
 
-        let passwordSecureTextField = app.secureTextFields["Password"]
+        let passwordSecureTextField = app.secureTextFields["ls.password"]
 
         passwordSecureTextField.tap()
         passwordSecureTextField.typeText("123456")
 
-        app.buttons["Log In"].tap()
+        app.buttons["ls.ActionButton"].tap()
 
-        XCTAssert(app.navigationBars["Lambda List"].staticTexts["Lambda List"].exists, "⚠️ Was not able to login")
+        // We should land on the table view with the logout button.
+        XCTAssert(app.buttons["Logout"].exists, "⚠️ Was not able to login")
     }
 
     // Make sure you are logged out of the app before beginning
