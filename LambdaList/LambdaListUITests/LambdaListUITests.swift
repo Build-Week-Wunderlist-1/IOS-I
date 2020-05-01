@@ -43,6 +43,9 @@ class LambdaListUITests: XCTestCase {
         passwordSecureTextField.tap()
         passwordSecureTextField.typeText("123456")
 
+        app.buttons["square"].tap()
+//        app.buttons["ls.RememberMe"].tap()
+
         app.buttons["ls.ActionButton"].tap()
 
         // We should land on the table view with the logout button.
@@ -76,12 +79,21 @@ class LambdaListUITests: XCTestCase {
         XCTAssert(!app.textFields["ls.email"].exists, "⚠️ Was not bounce to login screen")
     }
 
+    // Make sure you are logged in before beginning
+    // Make sure "Connected Hardware Keyboard" is unchecked.
     func testLogout() throws {
         let app = XCUIApplication()
+
+        // Login Screen appears for a moment. Wait for it to go away.
         sleep(1)
-        XCTAssert(!app.buttons["Log In"].exists, "⚠️ Not on Logout Screen")
+
+        // Confirm we are not on Log In screen
+        XCTAssert(!app.buttons["ls.ActionButton"].exists, "⚠️ Not on Logout Screen")
+
         app.buttons["Logout"].tap()
-        XCTAssert(app.buttons["Log In"].exists, "⚠️ Not on Log In Screen")
+
+        // Confirm we returned to Log In screen
+        XCTAssert(app.buttons["ls.ActionButton"].exists, "⚠️ Not on Log In Screen")
     }
 
     func testLaunchPerformance() throws {
