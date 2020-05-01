@@ -220,7 +220,7 @@ class LambdaListTests: XCTestCase {
         let task = Task(taskName: "Mark's First Task v12.1",
                         taskDescription: "Hello, world! v12.1",
                         completed: true)
-        task.taskID = 125
+        task.taskID = 126
         print(task.taskID)
         let tc = TaskController()
 
@@ -234,6 +234,36 @@ class LambdaListTests: XCTestCase {
                 }
             } else {
                 print("testBackendPut successful!")
+            }
+        }
+
+        wait(for: [semiphore], timeout: 5) // blocking sync wait
+
+        // Assertion only happens after the time out, or web request completes
+        // isInverted: Indicates that the expectation is not intended to happen
+        // By adding bang (!) before it, we're testing that it indeed happened!
+        XCTAssertTrue(!semiphore.isInverted, "⚠️ Registering with backend failed.")
+    }
+
+    func testBackendPutFailure() throws {
+        let semiphore = expectation(description: "Completed testBackendPutFailure")
+
+        let task = Task(taskName: "",
+                        taskDescription: "")
+        task.taskID = 1
+        print(task.taskID)
+        let tc = TaskController()
+
+        tc.put(task: task, userId: fixedUserId, authToken: fixedAuthToken) { urlResponse, error  in
+            semiphore.fulfill()
+            if let error = error {
+                print("testBackendPutFailure successful! put throws an error when bogus object \(error)")
+            } else if let urlResponse = urlResponse as? HTTPURLResponse {
+                if urlResponse.statusCode != 200 {
+                    XCTAssert(false, "⚠️ testBackendPutFailure statusCode: \(urlResponse.statusCode)")
+                }
+            } else {
+                XCTAssert(false, "⚠️ testBackendPutFailure unreachable code")
             }
         }
 
